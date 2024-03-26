@@ -1,19 +1,17 @@
 // App.js
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
+    <BrowserRouter>
         <Routes>
-          <Route exact path="/" component={Home} />
+          <Route path="/" element={<Home />} />
           {/* Add more routes here */}
         </Routes>
-      </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
