@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function Offline() {
     return (
         <div>
-            <img src={HorsCnx}/>
+            <img src={HorsCnx} alt=""/>
             <h3>Oh non!</h3>
             <p>Pas de connexion</p>
             <Button variant="outline-success">Ressayer</Button>{' '}

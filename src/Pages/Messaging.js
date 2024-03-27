@@ -1,8 +1,12 @@
 import React from 'react';
-import SearchBar from '../Components/SearchBar';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Chat from '../Components/Chat';
+import ContactIcons from '../Components/ContactIcons';
+import Contacts from '../Components/Contacts';
+import SearchBar from '../Components/SearchBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Messaging() {
@@ -14,13 +18,14 @@ function Messaging() {
                     <SearchBar placeholderText={MessagingPlaceholder}/>
                 </Col>
                 <Col>
+                    <Contacts />
                 </Col>
             </Row>
             <Row>
                 <Col>
+                    <ContactIcons />
                 </Col>
-                <Col>
-                </Col>
+                
             </Row>
         </Form>
     );

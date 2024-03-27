@@ -47,10 +47,10 @@ function BasicExample() {
             </NavDropdown>
             <SearchBar placeholderText={ProductsPlaceholder}/>
             <Nav.Link>
-              <img src={Cart} style={{ width: '30px'}} />
+              <img src={Cart} alt="Cart" style={{ width: '30px'}} />
             </Nav.Link>
             <Nav.Link>
-              <img src={Call} style={{ width: '30px'}} />
+              <img src={Call} alt="Call" style={{ width: '30px'}} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

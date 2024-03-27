@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import BasicExample from '../Components/BasicExample';
 import Forms from '../Components/Forms';
 import farmers from '../Images/farmrs.jpg';
-import Messaging from './Messaging';
 
 function Home() {
   return (
@@ -24,7 +23,6 @@ function Home() {
         </Col>
       </Row>
     </Form>
-    <Messaging />
     </div>
   );
 }
