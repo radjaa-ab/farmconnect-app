@@ -4,19 +4,22 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import BasicExample from '../Components/BasicExample';
 import Forms from '../Components/Forms';
-import farmers from '../farmrs.jpg';
+import farmers from '../Images/farmrs.jpg';
 
 function Home() {
   return (
     <div>
-    <BasicExample />
     <Form>
+      <Row>
+        <BasicExample />
+      </Row>
       <Row>
         <Col>
         <Forms />
         </Col>
         <Col>
-        <img src={farmers} alt="image" style={{ width: "700px", height: "300px" }} />
+          <h3>Atteignez vos clients plus rapidement, <br /> Avec nous.</h3>
+          <img src={farmers} alt="image" style={{ width: "700px", height: "300px" }} />
         </Col>
       </Row>
     </Form>

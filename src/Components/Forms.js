@@ -31,6 +31,7 @@ function Forms() {
   
   return (
     <div>
+      <h1>Commencez maintenant</h1>
     {showSignUp ? (
       <SignUpForm
         initialValues={userDetails}
@@ -42,8 +43,6 @@ function Forms() {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-        </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
