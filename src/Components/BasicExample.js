@@ -10,6 +10,9 @@ import Call from '../Images/service-client.png'
 
 
 function BasicExample() {
+  const ProductsPlaceholder = 'Search for products'; // Specific placeholder text
+
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -42,7 +45,7 @@ function BasicExample() {
                 Terrains
               </NavDropdown.Item>
             </NavDropdown>
-            <SearchBar />
+            <SearchBar placeholderText={ProductsPlaceholder}/>
             <Nav.Link>
               <img src={Cart} style={{ width: '30px'}} />
             </Nav.Link>
