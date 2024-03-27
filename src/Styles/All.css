@@ -1,0 +1,27 @@
+.messaging-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  
+  .search-row {
+    height: 70px; /* Adjust height for shorter first row */
+  }
+
+  .Searchbar{
+    margin-top: 20px; /* Adjust the value as needed */
+  }
+  
+  .search-col {
+    background-color: #90EE90; /* Light green for search bar */
+  }
+  
+  .contacts-col {
+    background-color: #00C78C; /* Medium green for contacts */
+
+  }
+  
+  .chat-col {
+    background-color: #2ECC71; /* Dark green for chat */
+    height: 600px;
+  }
+}
