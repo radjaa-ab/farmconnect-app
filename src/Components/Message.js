@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import classNames from 'classnames';
+import '../Styles/All.css';
 
-function Message() {
+function Message({ message, isUserMessage, timestamp }) {
+  const messageClassNames = classNames(
+    'message',
+    isUserMessage ? 'message-user' : 'message-other'
+  );
+
   return (
-    <div className="App">
-      <div className="chat-container">
-        <div className="chat-messages">
-        </div>
-        <div className="chat-input">
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={messageInput}
-          />
-          <button onClick={sendMessage}>Send</button>
-        </div>
-      </div>
+    <div className={messageClassNames}>
+      <p>{message}</p>
+      {timestamp && <span className="message-timestamp">{timestamp}</span>}
     </div>
   );
 }

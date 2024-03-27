@@ -5,29 +5,32 @@ import Row from 'react-bootstrap/Row';
 import SearchBar from '../Components/SearchBar';
 import Contacts from '../Components/Contacts';
 import ContactIcons from '../Components/ContactIcons';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import Chat from '../Components/Chat'; // Assuming Chat component is imported correctly
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles/All.css';
 import classNames from 'classnames';
 
-
-
 function Messaging() {
-  const MessagingPlaceholder = 'Search for people'; // Specific placeholder text
+  const MessagingPlaceholder = 'Search for people';
 
   return (
     <div className="messaging-container">
       <Form>
         <Row className="search-row">
-          <Col xs={12} className="search-col"> {/* Search bar takes full width on all screens */}
-            <SearchBar placeholderText={MessagingPlaceholder} className="Searchbar"/>
+          <Col xs={4} className={classNames('search-col', 'centered-search')}>
+            {/* Use classNames for conditional styling if needed */}
+            <SearchBar placeholderText={MessagingPlaceholder} className="Searchbar" />
+          </Col>
+          <Col>
+            <ContactIcons />
           </Col>
         </Row>
         <Row>
-          <Col xs={4} className="contacts-col"> {/* Contacts pane takes 4 columns on all screens */}
+          <Col xs={4} className="contacts-col">
             <Contacts />
           </Col>
-          <Col xs={8} className="chat-col"> {/* ContactIcon pane takes remaining 8 columns on all screens */}
-            <ContactIcons />
+          <Col xs={8} className="chat-col">
+            <Chat />
           </Col>
         </Row>
       </Form>
