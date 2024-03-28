@@ -14,4 +14,4 @@ const Maain = () => {
     )
 }
 
-export default Maain
+export default Maain;
