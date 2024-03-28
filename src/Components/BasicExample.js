@@ -17,7 +17,7 @@ function BasicExample() {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="#home">
-          <img src={Image} alt="image" thumbnail />
+          <img src={Image} alt="image" />
           FarmConnect
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

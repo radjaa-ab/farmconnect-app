@@ -6,7 +6,7 @@ import Messages from "./Messages";
 import Input from "./Input";
 
 const Chat = () => {
-
+  const [user] = useAuthState(auth);
   return (
     <div className="chat">
       <div className="chatInfo">

@@ -5,11 +5,11 @@ import Row from 'react-bootstrap/Row';
 import BasicExample from '../Components/BasicExample';
 import Forms from '../Components/Forms';
 import farmers from '../Images/farmrs.jpg';
+import ChatBox from '../Components/ChatBox';
 
 function Home() {
   return (
     <div>
-    <Form>
       <Row>
         <BasicExample />
       </Row>
@@ -22,7 +22,7 @@ function Home() {
           <img src={farmers} alt="image" style={{ width: "700px", height: "300px" }} />
         </Col>
       </Row>
-    </Form>
+      <ChatBox />
     </div>
   );
 }
