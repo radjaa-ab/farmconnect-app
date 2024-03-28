@@ -1,19 +1,39 @@
-import React from 'react';
-import classNames from 'classnames';
-import '../Styles/All.css';
+import React, { useContext, useEffect, useRef } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
 
-function Message({ message, isUserMessage, timestamp }) {
-  const messageClassNames = classNames(
-    'message',
-    isUserMessage ? 'message-user' : 'message-other'
-  );
+const Message = ({ message }) => {
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
 
   return (
-    <div className={messageClassNames}>
-      <p>{message}</p>
-      {timestamp && <span className="message-timestamp">{timestamp}</span>}
+    <div
+      ref={ref}
+      className={`message ${message.senderId === currentUser.uid && "owner"}`}
+    >
+      <div className="messageInfo">
+        <img
+          src={
+            message.senderId === currentUser.uid
+              ? currentUser.photoURL
+              : data.user.photoURL
+          }
+          alt=""
+        />
+        <span>just now</span>
+      </div>
+      <div className="messageContent">
+        <p>{message.text}</p>
+        {message.img && <img src={message.img} alt="" />}
+      </div>
     </div>
   );
-}
+};
 
 export default Message;

@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import SearchBar from '../Components/SearchBar';
 import Contacts from '../Components/Contacts';
 import ContactIcons from '../Components/ContactIcons';
-import Chat from '../Components/Chat'; // Assuming Chat component is imported correctly
+import Chat from '../Components/Chatt'; // Assuming Chat component is imported correctly
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles/All.css';
 import classNames from 'classnames';

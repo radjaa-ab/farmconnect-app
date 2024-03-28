@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import Message from './Message';
-import SendMessage from './SendMessage'; 
-import '../Styles/All.css';
+import React, { useContext } from "react";
+import Cam from "../img/cam.png";
+import Add from "../img/add.png";
+import More from "../img/more.png";
+import Messages from "./Messages";
+import Input from "./Input";
+import { ChatContext } from "../context/ChatContext";
 
-function Chat({ messages, onSendMessage }) { 
+const Chat = () => {
+  const { data } = useContext(ChatContext);
 
-    const [chatHistory, setChatHistory] = useState([]);
-
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      const newMessage = {
-        message: 'This is a new message!',
-        isUserMessage: false,
-        timestamp: new Date().toLocaleTimeString(),
-      };
-      setChatHistory([...chatHistory, newMessage]);
-    }, 5000);
-    return () => clearInterval(timerId);
-  }, [chatHistory]);
-  
-  
   return (
-    <div className="chat-container">
-      {chatHistory.map((message) => (
-        <Message key={message.message} {...message} />
-      ))}
-      <SendMessage onSendMessage={onSendMessage} /> {/* bach yktab messages */}
+    <div className="chat">
+      <div className="chatInfo">
+        <span>{data.user?.displayName}</span>
+        <div className="chatIcons">
+          <img src={Cam} alt="" />
+          <img src={Add} alt="" />
+          <img src={More} alt="" />
+        </div>
+      </div>
+      <Messages />
+      <Input/>
     </div>
   );
-}
+};
 
 export default Chat;
