@@ -1,22 +1,39 @@
-import React from "react";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useContext, useEffect, useRef } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
+
 const Message = ({ message }) => {
-  const [user] = useAuthState(auth);
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
 
   return (
     <div
-      className={`chat-bubble ${message.uid === user.uid ? "right" : ""}`}>
-      <img
-        className="chat-bubble__left"
-        src={message.avatar}
-        alt="user avatar"
-      />
-      <div className="chat-bubble__right">
-        <p className="user-name">{message.name}</p>
-        <p className="user-message">{message.text}</p>
+      ref={ref}
+      className={`message ${message.senderId === currentUser.uid && "owner"}`}
+    >
+      <div className="messageInfo">
+        <img
+          src={
+            message.senderId === currentUser.uid
+              ? currentUser.photoURL
+              : data.user.photoURL
+          }
+          alt=""
+        />
+        <span>just now</span>
+      </div>
+      <div className="messageContent">
+        <p>{message.text}</p>
+        {message.img && <img src={message.img} alt="" />}
       </div>
     </div>
   );
 };
+
 export default Message;
