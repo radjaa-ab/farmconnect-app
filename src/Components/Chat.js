@@ -4,14 +4,15 @@ import Add from "../img/add.png";
 import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
+import { ChatContext } from "../context/ChatContext";
 
 const Chat = () => {
-const [user] = useAuthState(auth);
+  const { data } = useContext(ChatContext);
 
   return (
     <div className="chat">
       <div className="chatInfo">
-        <span>Name</span>
+        <span>{data.user?.displayName}</span>
         <div className="chatIcons">
           <img src={Cam} alt="" />
           <img src={Add} alt="" />
