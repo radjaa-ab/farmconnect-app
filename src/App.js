@@ -30,11 +30,8 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="login/" element={<Login />} />
-          <Route path="register/" element={<Register />} />
           <Route path="Home/" element={<Home />} />
           <Route path="Offline/" element={<Offline />} />
-
         </Route>
       </Routes>
     </BrowserRouter>
