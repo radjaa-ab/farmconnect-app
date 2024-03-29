@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import GoogleSignin from "../img/google-removebg-preview.png";
+import SignUpForms from "./Register"; // Assuming SignUpForms is in the same directory
 
-const Login = () => {
-  const [err, setErr] = useState(false);
+function Login({ initialValues, onChange }) {
+  const [user] = useAuthState(auth);
+  const [showSignUpForm, setShowSignUpForm] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -14,24 +20,52 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/")
+      navigate("/");
     } catch (err) {
-      setErr(true);
+      console.error(err);
+      // Handle login errors (optional)
     }
   };
+
+  const handleRegisterClick = () => {
+    setShowSignUpForm(true);
+  };
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    console.log("connecting...");
+    signInWithPopup(auth, provider)
+      .then(() => {
+        alert("connected");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="formContainer">
-      <div className="formWrapper">
-        <span className="logo">Lama Chat</span>
-        <span className="title">Login</span>
-        <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="email" />
-          <input type="password" placeholder="password" />
-          <button>Sign in</button>
-          {err && <span>Something went wrong</span>}
-        </form>
-        <p>You don't have an account? <Link to="/register">Register</Link></p>
-      </div>
+      {showSignUpForm ? (
+        <SignUpForms />
+      ) : (
+        <div className="formWrapper">
+          <span className="logo">Commencez maintenant</span>
+          <span className="title">Login</span>
+          <form onSubmit={handleSubmit}>
+            <input type="email" placeholder="email" />
+            <input type="password" placeholder="password" />
+            <button>Sign in</button>
+            {user && <span>Something went wrong</span>}
+          </form>
+          <p>
+            You don't have an account?{" "}
+            <button onClick={handleRegisterClick}>Register</button>
+          </p>
+          <p>Or sign in with Google</p> <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
+            <img src={GoogleSignin} alt="sign in with google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
