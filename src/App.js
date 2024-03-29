@@ -1,6 +1,8 @@
 import Maain from "./Pages/Maain";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import Offline from "./Pages/Offline";
+import Home from "./Pages/Home";
 import './Styles/Style.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -30,6 +32,9 @@ function App() {
           />
           <Route path="login/" element={<Login />} />
           <Route path="register/" element={<Register />} />
+          <Route path="Home/" element={<Home />} />
+          <Route path="Offline/" element={<Offline />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
