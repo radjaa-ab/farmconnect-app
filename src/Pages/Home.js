@@ -2,27 +2,26 @@ import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import BasicExample from '../Components/BasicExample';
-import Forms from '../Components/Forms';
-import farmers from '../Images/farmrs.jpg';
-import ChatBox from '../Components/ChatBox';
+import BasicExample from '../Components/Navigation';
+import Forms from '../Components/SignUpForms';
+import farmers from '../Images/farmrs-removebg-preview.png';
+import '../Styles/All.css'; 
 
 function Home() {
   return (
-    <div>
-      <Row>
+    <div className="Home">
+      <Row className="nav-home">
         <BasicExample />
       </Row>
       <Row>
-        <Col>
-        <Forms />
+        <Col md={5} className='forms-container'> 
+          <Forms />
         </Col>
-        <Col>
+        <Col md={5}  className="forms-farmers">
           <h3>Atteignez vos clients plus rapidement, <br /> Avec nous.</h3>
-          <img src={farmers} alt="image" style={{ width: "700px", height: "300px" }} />
+          <img src={farmers} alt="image" style={{ width: "600px", height: "300px" }} />
         </Col>
       </Row>
-      <ChatBox />
     </div>
   );
 }

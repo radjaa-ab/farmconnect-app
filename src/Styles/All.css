@@ -38,6 +38,47 @@
   color: #333;
 }
 
+.forms-farmers{
+  margin-left: 100px;
+}
+
+.nav-home{
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .brand {
+    width: 50%; /* Adjust width as needed */
+  }
+}
+
+/* Adjust input width for smaller screens */
+@media (max-width: 768px) {
+  .custom-input {
+    width: 50px; /* Adjust width as needed */
+  }
+}
+
+
+.Home{
+  background-color: #90EE90;
+  height: 100vh;
+}
+
+
+.brand-text {
+  font-weight: bold; 
+}
+
+
+.forms-container {
+  margin-left: 40px;
+}
+
+.custom-input {
+  width: 50px; /* Adjust the width as needed */
+}
+
 .message-other {
   background-color: #fff;
   color: #666;

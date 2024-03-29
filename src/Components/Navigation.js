@@ -1,3 +1,4 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -5,26 +6,26 @@ import SearchBar from './SearchBar';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from '../Images/logo.jpg';
-import Cart from '../Images/chariot-de-chariot.png'
-import Call from '../Images/service-client.png'
+import Cart from '../Images/chariot-de-chariot.png';
+import Call from '../Images/service-client.png';
+import '../Styles/All.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
-
-function BasicExample() {
-  const ProductsPlaceholder = 'Search for products'; // Specific placeholder text
-
+function Navigation() {
+  const ProductsPlaceholder = 'Search for products';
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">
+    <Navbar expand="lg" className='bg-body-tertiary'>
+      <Container style={{ padding: "0%" }}>
+        <Navbar.Brand href="#home" className="d-flex align-items-center brand">
           <img src={Image} alt="image" />
-          FarmConnect
+          <span className="brand-text">FarmConnect</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
-            <Nav.Link href="#home" className="ms-3" style={{ marginRight: '1rem' }}>Accueil</Nav.Link>  {/* Add ms-3 class for margin-left */}
-            <Nav.Link href="#link" className="ms-3" style={{ marginRight: '1rem' }}>Apropos</Nav.Link>  {/* Add ms-3 class for margin-left */}
+            <Nav.Link href="#home" className="ms-3" style={{ marginRight: '1rem' }}>Accueil</Nav.Link>
+            <Nav.Link href="#link" className="ms-3" style={{ marginRight: '1rem' }}>Apropos</Nav.Link>
             <NavDropdown title="Produits" id="basic-nav-dropdown" style={{ marginRight: '1rem' }}>
               <NavDropdown.Item href="#action/3.1">
                 Fruits
@@ -45,12 +46,12 @@ function BasicExample() {
                 Terrains
               </NavDropdown.Item>
             </NavDropdown>
-            <SearchBar placeholderText={ProductsPlaceholder}/>
+            <SearchBar placeholderText={ProductsPlaceholder} />
             <Nav.Link>
-              <img src={Cart} alt="Cart" style={{ width: '30px'}} />
+              <img src={Cart} alt="Cart" style={{ width: '30px' }} />
             </Nav.Link>
             <Nav.Link>
-              <img src={Call} alt="Call" style={{ width: '30px'}} />
+              <img src={Call} alt="Call" style={{ width: '30px' }} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -59,4 +60,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default Navigation;
