@@ -1,6 +1,4 @@
 import Maain from "./Pages/Maain";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
 import Offline from "./Pages/Offline";
 import Home from "./Pages/Home";
 import './Styles/Style.css';

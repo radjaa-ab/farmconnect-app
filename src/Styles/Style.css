@@ -96,7 +96,7 @@
 
 .home {
   background-color: #77a883;
-  height: auto;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
