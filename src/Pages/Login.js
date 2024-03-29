@@ -6,6 +6,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import GoogleSignin from "../img/google-removebg-preview.png";
 import SignUpForms from "./Register"; // Assuming SignUpForms is in the same directory
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 function Login({ initialValues, onChange }) {
   const [user] = useAuthState(auth);
@@ -61,9 +63,17 @@ function Login({ initialValues, onChange }) {
             You don't have an account?{" "}
             <button onClick={handleRegisterClick}>Register</button>
           </p>
-          <p>Or sign in with Google</p> <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-            <img src={GoogleSignin} alt="sign in with google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
-          </button>
+
+          <Row>
+            <Col>
+            <p style={{marginLeft: '10px'}}>Or sign in with Google</p>
+            </Col>
+            <Col>
+              <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
+                <img src={GoogleSignin} alt="sign in with google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+              </button>
+            </Col>
+          </Row>
         </div>
       )}
     </div>
