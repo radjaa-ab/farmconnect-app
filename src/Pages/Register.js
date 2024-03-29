@@ -7,6 +7,10 @@ import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import LoginComponent from "./Login";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import GoogleSignin from "../img/google-removebg-preview.png";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -17,6 +21,18 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [userDetails, setUserDetails] = useState({ profession: "", proof: null });
   const navigate = useNavigate();
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    console.log("connecting...");
+    signInWithPopup(auth, provider)
+      .then(() => {
+        alert("connected");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -136,6 +152,17 @@ const Register = () => {
             {loading && "Uploading and compressing the image please wait..."}
             {err && <span>Something went wrong</span>}
           </form>
+          
+          <Row>
+            <Col>
+            <p style={{marginLeft: '10px'}}>Or sign in with Google</p>
+            </Col>
+            <Col>
+              <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
+                <img src={GoogleSignin} alt="sign in with google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+              </button>
+            </Col>
+          </Row>
           <p>
             Already have an account?{" "}
             <button onClick={() => setShowLoginForm(true)}>Sign in</button>

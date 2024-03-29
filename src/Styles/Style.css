@@ -39,13 +39,13 @@
 }
 
 .formContainer .formWrapper .logo {
-  color: #5d5b8d;
+  color: #537a5d;
   font-weight: bold;
   font-size: 24px;
 }
 
 .formContainer .formWrapper .title {
-  color: #5d5b8d;
+  color: #324838;
   font-size: 12px;
 }
 
@@ -59,7 +59,7 @@
   padding: 15px;
   border: none;
   width: 250px;
-  border-bottom: 1px solid #a7bcff;
+  border-bottom: 1px solid #77a883;
 }
 
 .formContainer .formWrapper form input::placeholder {
@@ -67,7 +67,7 @@
 }
 
 .formContainer .formWrapper form button {
-  background-color: #7b96ec;
+  background-color: #60b877;
   color: white;
   padding: 10px;
   font-weight: bold;
@@ -79,7 +79,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #8da4f1;
+  color: #77a883;
   font-size: 12px;
   cursor: pointer;
 }
@@ -89,14 +89,14 @@
 }
 
 .formContainer .formWrapper p {
-  color: #5d5b8d;
+  color: #537a5d;
   font-size: 12px;
   margin-top: 10px;
 }
 
 .home {
   background-color: #77a883;
-  height: 100vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
