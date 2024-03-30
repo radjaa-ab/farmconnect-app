@@ -88,7 +88,7 @@ const Input = () => {
     <div className="input">
       <input
         type="text"
-        placeholder="Type something..."
+        placeholder="Ecrire..."
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
@@ -103,7 +103,7 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button onClick={handleSend}>Envoyer</button>
       </div>
     </div>
   );

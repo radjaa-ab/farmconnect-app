@@ -9,12 +9,12 @@ import SignUpForms from "./Register";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
-
-
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 function Login({ initialValues, onChange }) {
   const [user] = useAuthState(auth);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const [password, setPassword] = useState(""); // Initialisation de la variable password avec une chaîne vide
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -32,22 +32,25 @@ function Login({ initialValues, onChange }) {
     };
   }, []);
 
-  
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target[0].value;
-    const password = e.target[1].value;
+    const enteredPassword = e.target[1].value;
+    setPassword(enteredPassword); // Mise à jour de la valeur du mot de passe
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, enteredPassword);
       navigate("/");
     } catch (err) {
       console.error(err);
-      // Handle login errors (optional)
+      // Gérer les erreurs de connexion (optionnel)
     }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value); // Mise à jour de la valeur du mot de passe lorsqu'il est modifié
   };
 
   const handleRegisterClick = () => {
@@ -56,10 +59,10 @@ function Login({ initialValues, onChange }) {
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    console.log("connecting...");
+    console.log("Connexion en cours...");
     signInWithPopup(auth, provider)
       .then(() => {
-        alert("connected");
+        alert("Connecté");
       })
       .catch((error) => {
         console.log(error);
@@ -74,25 +77,26 @@ function Login({ initialValues, onChange }) {
       ) : (
         <div className="formWrapper">
           <span className="logo">Commencez maintenant</span>
-          <span className="title">Login</span>
+          <span className="title">Connexion</span>
           <form onSubmit={handleSubmit}>
             <input type="email" placeholder="email" />
-            <input type="password" placeholder="password" />
-            <button>Sign in</button>
-            {user && <span>Something went wrong</span>}
+            <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
+            <PasswordStrengthBar password={password} />
+            <button>Se connecter</button>
+            {user && <span>Quelque chose s'est mal passé</span>}
           </form>
           <p>
-            You don't have an account?{" "}
-            <button onClick={handleRegisterClick}>Register</button>
+            Vous n'avez pas de compte ?{" "}
+            <button onClick={handleRegisterClick}>S'inscrire</button>
           </p>
 
           <Row>
             <Col>
-            <p style={{marginLeft: '10px'}}>Or sign in with Google</p>
+            <p style={{marginLeft: '10px'}}>Ou connectez-vous avec Google</p>
             </Col>
             <Col>
               <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                <img src={GoogleSignin} alt="sign in with google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+                <img src={GoogleSignin} alt="Connectez-vous avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
               </button>
             </Col>
           </Row>

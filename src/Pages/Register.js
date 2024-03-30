@@ -12,6 +12,7 @@ import GoogleSignin from "../img/google-removebg-preview.png";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 
 const Register = () => {
@@ -44,10 +45,10 @@ const Register = () => {
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    console.log("connecting...");
+    console.log("Connexion en cours...");
     signInWithPopup(auth, provider)
       .then(() => {
-        alert("connected");
+        alert("Connecté");
       })
       .catch((error) => {
         console.log(error);
@@ -119,33 +120,34 @@ const Register = () => {
     <div className="formContainer">
       {!isOnline && <Offline />} 
       {showLoginForm ? (
-        <LoginComponent /> // Render LoginComponent if showLoginForm is true
+        <LoginComponent /> // Afficher le composant LoginComponent si showLoginForm est vrai
       ) : (
         <div className="formWrapper">
           <span className="logo">Commencez maintenant</span>
-          <span className="title">Register</span>
+          <span className="title">Inscription</span>
           <form onSubmit={handleSubmit}>
             <input
               required
               type="text"
-              placeholder="display name"
+              placeholder="Nom affiché"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
             />
             <input
               required
               type="email"
-              placeholder="email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               required
               type="password"
-              placeholder="password"
+              placeholder="Mot de passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <PasswordStrengthBar password={password} />
             <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProfession">
               <Form.Label>Profession</Form.Label>
               <Form.Select name="profession" value={userDetails.profession} onChange={handleChange} className="custom-input">
@@ -178,26 +180,26 @@ const Register = () => {
             />
             <label htmlFor="file">
               <img src={Add} alt="" />
-              <span>Add an avatar</span>
+              <span>Ajouter un avatar</span>
             </label>
-            <button disabled={loading}>Sign up</button>
-            {loading && "Uploading and compressing the image please wait..."}
-            {err && <span>Something went wrong</span>}
+            <button disabled={loading}>S'inscrire</button>
+            {loading && "Téléchargement et compression de l'image en cours, veuillez patienter..."}
+            {err && <span>Quelque chose s'est mal passé</span>}
           </form>
           
           <Row>
             <Col>
-            <p style={{marginLeft: '10px'}}>Or sign in with Google</p>
+            <p style={{marginLeft: '10px'}}>Ou connectez-vous avec Google</p>
             </Col>
             <Col>
               <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                <img src={GoogleSignin} alt="sign in with google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+                <img src={GoogleSignin} alt="Se connecter avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
               </button>
             </Col>
           </Row>
           <p>
-            Already have an account?{" "}
-            <button onClick={() => setShowLoginForm(true)}>Sign in</button>
+            Vous avez déjà un compte ?{" "}
+            <button onClick={() => setShowLoginForm(true)}>Se connecter</button>
           </p>
         </div>
       )}
