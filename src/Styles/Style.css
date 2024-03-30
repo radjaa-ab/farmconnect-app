@@ -176,7 +176,7 @@
 }
 
 .home .container .sidebar .userChat:hover {
-  background-color: #2f2d52;
+  background-color: #3e8952;
 }
 
 .home .container .sidebar .userChat img {
@@ -219,11 +219,47 @@
   overflow: scroll;
 }
 
-.home .container .chat .messages .message {
+.container .chat .messages .message {
   display: flex;
+  justify-content: flex-end;
   gap: 20px;
   margin-bottom: 20px;
 }
+
+
+
+
+
+.hide-placeholder-on-focus input::-webkit-input-placeholder {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out; 
+}
+
+.hide-placeholder-on-focus input:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.loading-text,
+.no-chats-message {
+  padding: 1%;
+  font-weight: bold;
+  font-size: 13px;
+  color: #324838;
+}
+
+.chat-name {
+  font-weight: bold;
+}
+
+.last-message {
+  color: #ccc;
+}
+
+
+
+
+
+
 
 .home .container .chat .messages .message .messageInfo img {
   width: 40px;
@@ -247,7 +283,7 @@
 }
 
 .home .container .chat .messages .message.owner .messageContent p {
-  background-color: #8da4f1;
+  background-color: #64ae78;
   color: white;
   border-radius: 10px 0px 10px 10px;
 }
@@ -264,12 +300,12 @@
   width: calc(100% - 130px); /* Adjust based on the width of other elements */
   border: none;
   outline: none;
-  color: #2f2d52;
+  color: #324838;
   font-size: 18px;
 }
 
 .home .container .chat .input input[type="text"]::placeholder {
-  color: lightgray;
+  color: rgb(123, 119, 119);
 }
 .home .container .chat .input .send {
   display: flex;

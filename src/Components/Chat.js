@@ -7,7 +7,13 @@ import Input from "./Input";
 import { ChatContext } from "../context/ChatContext";
 
 const Chat = () => {
-  const { data } = useContext(ChatContext);
+  const { currentUser, data } = useContext(ChatContext);
+
+  if (!data.chatId) {
+    return <div>Please select a chat to start messaging</div>;
+  }
+
+  console.log("Chat component mounted");
 
   return (
     <div className="chat">

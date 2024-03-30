@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import GoogleSignin from "../img/google-removebg-preview.png";
-import SignUpForms from "./Register"; // Assuming SignUpForms is in the same directory
+import SignUpForms from "./Register";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Offline from '../Pages/Offline';
+
+
 
 function Login({ initialValues, onChange }) {
   const [user] = useAuthState(auth);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
+
+  
 
   const navigate = useNavigate();
 
@@ -47,6 +68,7 @@ function Login({ initialValues, onChange }) {
 
   return (
     <div className="formContainer">
+      {!isOnline && <Offline />}
       {showSignUpForm ? (
         <SignUpForms />
       ) : (

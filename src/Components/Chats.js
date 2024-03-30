@@ -11,17 +11,20 @@ const Chats = () => {
   const { dispatch } = useContext(ChatContext);
 
   useEffect(() => {
-    const getChats = () => {
-      const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-        setChats(doc.data());
-      });
+    if (currentUser.uid) {
+      const getChats = async () => {
+        const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
+          console.log("Chats: doc.data(): ", doc.data());
+          setChats(doc.data());
+        });
 
-      return () => {
-        unsub();
+        return () => {
+          unsub();
+        };
       };
-    };
 
-    currentUser.uid && getChats();
+      getChats();
+    }
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
@@ -30,7 +33,10 @@ const Chats = () => {
 
   return (
     <div className="chats">
-      {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
+      {Object.entries(chats)?.length === 0 && (
+        <p className="no-chats-message">No chats to display yet.</p>
+      )}
+      {Object.entries(chats)?.sort((a, b) => b[1].date - a[1].date).map((chat) => (
         <div
           className="userChat"
           key={chat[0]}

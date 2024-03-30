@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Form } from "react-bootstrap"; // Import Form from react-bootstrap
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState, useEffect } from "react";
+import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Add from "../img/addAvatar.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
@@ -11,6 +11,8 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import GoogleSignin from "../img/google-removebg-preview.png";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Offline from '../Pages/Offline';
+
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -21,6 +23,24 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [userDetails, setUserDetails] = useState({ profession: "", proof: null });
   const navigate = useNavigate();
+
+
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
+
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -97,6 +117,7 @@ const Register = () => {
 
   return (
     <div className="formContainer">
+      {!isOnline && <Offline />} 
       {showLoginForm ? (
         <LoginComponent /> // Render LoginComponent if showLoginForm is true
       ) : (
@@ -127,23 +148,34 @@ const Register = () => {
             />
             <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProfession">
               <Form.Label>Profession</Form.Label>
-              <Form.Select name="profession" value={userDetails.profession} onChange={handleChange} className="custom-input"> {/* Added custom class name */}
+              <Form.Select name="profession" value={userDetails.profession} onChange={handleChange} className="custom-input">
                 <option value="">Sélectionnez une profession</option>
                 <option value="commerçant">Commerçant</option>
                 <option value="consommateur">Consommateur</option>
-                <option value="ingenieur_agriculteur">Ingénieur Agricole</option>
+                <option value="ingénieur_agriculteur">Ingénieur Agricole</option>
                 <option value="agriculteur">Agriculteur</option>
               </Form.Select>
             </Form.Group>
             {userDetails.profession === 'commerçant' ||
-              userDetails.profession === 'ingenieur_agriculteur' ||
+              userDetails.profession === 'ingénieur_agriculteur' ||
               userDetails.profession === 'agriculteur' ? (
               <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProof">
                 <Form.Label>Justificatif (facultatif pour consommateur)</Form.Label>
-                <Form.Control type="file" name="proof" onChange={handleChange} className="custom-input" /> {/* Added custom class name */}
+                <Form.Control
+                  required
+                  type="file"
+                  name="proof"
+                  onChange={handleChange}
+                  className="custom-input"
+                />
               </Form.Group>
             ) : null}
-            <input required style={{ display: "none" }} type="file" id="file" />
+            <input
+              required
+              style={{ display: "none" }}
+              type="file"
+              id="file"
+            />
             <label htmlFor="file">
               <img src={Add} alt="" />
               <span>Add an avatar</span>

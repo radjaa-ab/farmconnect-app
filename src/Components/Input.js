@@ -22,6 +22,9 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
+    if (data.chatId) {
+      console.log("data.chatId: ", data.chatId);
+
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -72,7 +75,15 @@ const Input = () => {
 
     setText("");
     setImg(null);
-  };
+  }
+  
+  
+  
+  else {
+    console.error("chatId is not available");
+  }};
+
+
   return (
     <div className="input">
       <input
