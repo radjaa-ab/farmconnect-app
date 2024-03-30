@@ -1,18 +1,47 @@
 import React from 'react';
 import HorsCnx from '../Images/HorsCnx.png';
 import Button from 'react-bootstrap/Button';
-import styles from '../Styles/All.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 function Offline() {
+    const offlineContainer = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        background: '#f0f0f0',
+    };
+
+    const offlineImage = {
+        width: '300px',
+    };
+
+    const offlineTitle = {
+        color: '#333',
+        fontSize: '2rem',
+        textAlign: 'center',
+        marginTop: '1rem',
+    };
+
+    const offlineMessage = {
+        color: '#666',
+        fontSize: '1.2rem',
+        textAlign: 'center',
+        marginTop: '1rem',
+    };
+
+    const retryButton = {
+        marginTop: '1rem',
+    };
+
     return (
-      <div className={styles.offlineContainer}>
-        <img src={HorsCnx} alt="No connection" className={styles.offlineImage} />
-        <h3 className={styles.offlineTitle}>Oh non!</h3>
-        <p className={styles.offlineMessage}>Pas de connexion</p>
-        <Button variant="outline-success" className={styles.retryButton}>Ressayer</Button>
+      <div style={offlineContainer}>
+        <img src={HorsCnx} alt="No connection" style={offlineImage} />
+        <h3 style={offlineTitle}>Oh non!</h3>
+        <p style={offlineMessage}>Pas de connexion</p>
+        <Button variant="outline-success" style={retryButton}>Ressayer</Button>
       </div>
     );
-  }
+}
+
 export default Offline;
