@@ -31,7 +31,7 @@ const InfoPersonnelles = () => {
           <Form.Control type="tel" placeholder="Entrez votre numéro de téléphone" />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Enregistrer
+          Modifier
         </Button>
       </Form>
     </div>
