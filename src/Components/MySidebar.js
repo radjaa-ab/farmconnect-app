@@ -8,34 +8,39 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
-
+import Logo from '../Images/logo-removebg-preview.png'
 const MySidebar = () => {
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Sidebar
+            Settings
           </a>
+          <img src={Logo} alt= "Logo" />
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="columns">Mes informations personnelles</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="table">Coupons</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">Mon panier</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="chart-line">Support</CDBSidebarMenuItem>
             </NavLink>
 
             <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="exclamation-circle">Termes et conditions</CDBSidebarMenuItem>
+            </NavLink>
+
+            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="exclamation-circle">Langue</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
@@ -46,7 +51,7 @@ const MySidebar = () => {
               padding: '20px 5px',
             }}
           >
-            Sidebar Footer
+            FarmConnect
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
