@@ -7,9 +7,15 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
-import Logo from '../Images/logo-removebg-preview.png'
-const MySidebar = () => {
+import Logo from '../Images/logo-removebg-preview.png';
+
+
+
+const MySidebar = ({ onItemClick }) => {
+  const handleItemClick = (component) => {
+    onItemClick(component);
+  };
+
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">
@@ -17,31 +23,17 @@ const MySidebar = () => {
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
             Settings
           </a>
-          <img src={Logo} alt= "Logo" />
+          <img src={Logo} alt="Logo" />
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Mes informations personnelles</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Coupons</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Mon panier</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Support</CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">Termes et conditions</CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">Langue</CDBSidebarMenuItem>
-            </NavLink>
+          <CDBSidebarMenuItem onClick={() => handleItemClick('InfoPersonnelles')} icon="columns">Mes informations personnelles</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem onClick={() => handleItemClick('Coupons')} icon="table">Coupons</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem onClick={() => handleItemClick('Panier')} icon="user">Mon panier</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem onClick={() => handleItemClick('Support')} icon="chart-line">Support</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem onClick={() => handleItemClick('Termes')} icon="exclamation-circle">Termes et conditions</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem onClick={() => handleItemClick('Langue')} icon="exclamation-circle">Langue</CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
