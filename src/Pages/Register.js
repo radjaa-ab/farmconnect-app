@@ -162,7 +162,7 @@ const Register = () => {
               userDetails.profession === 'ingénieur_agriculteur' ||
               userDetails.profession === 'agriculteur' ? (
               <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProof">
-                <Form.Label>Justificatif (facultatif pour consommateur)</Form.Label>
+                <Form.Label>Justificatif (carte d'agriculteur, diplome d'ingenieur, registre de commerce)</Form.Label>
                 <Form.Control
                   required
                   type="file"
