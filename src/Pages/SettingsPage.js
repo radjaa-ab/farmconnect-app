@@ -7,7 +7,6 @@ import Coupons from '../Components/Coupons';
 import Panier from '../Components/Panier';
 import Support from '../Components/Support';
 import Termes from '../Components/Termes';
-import Langue from '../Components/Langue';
 
 const SettingsPage = () => {
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -28,7 +27,6 @@ const SettingsPage = () => {
           {selectedComponent === 'Panier' && <Panier />}
           {selectedComponent === 'Support' && <Support />}
           {selectedComponent === 'Termes' && <Termes />}
-          {selectedComponent === 'Langue' && <Langue />}
         </Col>
       </Row>
     </div>

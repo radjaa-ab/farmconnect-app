@@ -33,7 +33,6 @@ const MySidebar = ({ onItemClick }) => {
             <CDBSidebarMenuItem onClick={() => handleItemClick('Panier')} icon="user">Mon panier</CDBSidebarMenuItem>
             <CDBSidebarMenuItem onClick={() => handleItemClick('Support')} icon="chart-line">Support</CDBSidebarMenuItem>
             <CDBSidebarMenuItem onClick={() => handleItemClick('Termes')} icon="exclamation-circle">Termes et conditions</CDBSidebarMenuItem>
-            <CDBSidebarMenuItem onClick={() => handleItemClick('Langue')} icon="exclamation-circle">Langue</CDBSidebarMenuItem>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
