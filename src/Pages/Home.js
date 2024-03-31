@@ -5,6 +5,8 @@ import BasicExample from '../Components/Navigation';
 import Login from '../Pages/Login';
 import farmers from '../Images/farmrs-removebg-preview.png';
 import '../Styles/All.css'; 
+import LanguageSelector from '../Components/test';
+
 
 function Home() {
   return (
@@ -19,6 +21,7 @@ function Home() {
         <Col md={5}  className="forms-farmers">
           <h3>Atteignez vos clients plus rapidement, <br /> Avec nous.</h3>
           <img src={farmers} alt="image" style={{ width: "600px", height: "300px" }} />
+          <LanguageSelector />
         </Col>
       </Row>
     </div>
