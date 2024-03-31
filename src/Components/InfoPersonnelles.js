@@ -1,30 +1,39 @@
 import React from 'react';
-
-
+import { Form, Button } from 'react-bootstrap';
 
 const InfoPersonnelles = () => {
   return (
     <div>
       <h2>Informations Personnelles</h2>
-      <form>
-        <div>
-          <label htmlFor="nom">Nom :</label>
-          <input type="text" id="nom" name="nom" />
-        </div>
-        <div>
-          <label htmlFor="prenom">Prénom :</label>
-          <input type="text" id="prenom" name="prenom" />
-        </div>
-        <div>
-          <label htmlFor="email">Email :</label>
-          <input type="email" id="email" name="email" />
-        </div>
-        <div>
-          <label htmlFor="telephone">Téléphone :</label>
-          <input type="tel" id="telephone" name="telephone" />
-        </div>
-        <button type="submit">Enregistrer</button>
-      </form>
+      <Form>
+        <Form.Group controlId="avatar">
+          <Form.Label>Avatar :</Form.Label>
+          <Form.File id="avatar" label="Choisir un fichier" custom />
+        </Form.Group>
+        <Form.Group controlId="certificat">
+          <Form.Label>Certificat :</Form.Label>
+          <Form.File id="certificat" label="Choisir un fichier" custom />
+        </Form.Group>
+        <Form.Group controlId="nom">
+          <Form.Label>Nom :</Form.Label>
+          <Form.Control type="text" placeholder="Entrez votre nom" />
+        </Form.Group>
+        <Form.Group controlId="prenom">
+          <Form.Label>Prénom :</Form.Label>
+          <Form.Control type="text" placeholder="Entrez votre prénom" />
+        </Form.Group>
+        <Form.Group controlId="email">
+          <Form.Label>Email :</Form.Label>
+          <Form.Control type="email" placeholder="Entrez votre email" />
+        </Form.Group>
+        <Form.Group controlId="telephone">
+          <Form.Label>Téléphone :</Form.Label>
+          <Form.Control type="tel" placeholder="Entrez votre numéro de téléphone" />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Enregistrer
+        </Button>
+      </Form>
     </div>
   );
 };
