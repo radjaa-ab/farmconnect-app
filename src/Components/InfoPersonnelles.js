@@ -1,30 +1,30 @@
 import React from 'react';
-
+import { Form, Button } from 'react-bootstrap';
 
 
 const InfoPersonnelles = () => {
   return (
     <div>
       <h2>Informations Personnelles</h2>
-      <form>
-        <div>
-          <label htmlFor="nom">Nom :</label>
-          <input type="text" id="nom" name="nom" />
-        </div>
-        <div>
-          <label htmlFor="prenom">Prénom :</label>
-          <input type="text" id="prenom" name="prenom" />
-        </div>
-        <div>
-          <label htmlFor="email">Email :</label>
-          <input type="email" id="email" name="email" />
-        </div>
-        <div>
-          <label htmlFor="telephone">Téléphone :</label>
-          <input type="tel" id="telephone" name="telephone" />
-        </div>
-        <button type="submit">Enregistrer</button>
-      </form>
+      <Form>
+        <Form.Group>
+          <Form.Label htmlFor="nom">Nom :</Form.Label>
+          <Form.Control type="text" id="nom" name="nom" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="prenom">Prénom :</Form.Label>
+          <Form.Control type="text" id="prenom" name="prenom" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="email">Email :</Form.Label>
+          <Form.Control type="email" id="email" name="email" />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="telephone">Téléphone :</Form.Label>
+          <Form.Control type="tel" id="telephone" name="telephone" />
+        </Form.Group>
+        <Button type="submit">Enregistrer</Button>
+      </Form>
     </div>
   );
 };
