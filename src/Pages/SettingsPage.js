@@ -19,7 +19,7 @@ const SettingsPage = () => {
   return (
     <div>
       <Row>
-        <Col>
+        <Col sm={3}>
           <MySidebar onItemClick={handleSidebarItemClick} />
         </Col>
         <Col>
