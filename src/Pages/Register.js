@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Add from "../img/addAvatar.png";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
@@ -14,7 +14,6 @@ import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
 import PasswordStrengthBar from 'react-password-strength-bar';
 
-
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,7 +23,6 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [userDetails, setUserDetails] = useState({ profession: "", proof: null });
   const navigate = useNavigate();
-
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -41,7 +39,6 @@ const Register = () => {
       window.removeEventListener("offline", handleOnlineStatusChange);
     };
   }, []);
-
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -64,29 +61,32 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
-
-    const file = userDetails.proof;
+    setLoading(true);
 
     try {
-      // Create user
+      // Créer l'utilisateur
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Create a unique image name
+      // Envoyer la vérification par e-mail
+      await sendEmailVerification(auth.currentUser);
+
+      // Créer un nom d'image unique
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
 
-      await uploadBytesResumable(storageRef, file).then(() => {
+      // Télécharger l'image vers le stockage
+      await uploadBytesResumable(storageRef, userDetails.proof).then(() => {
+        // Obtenir l'URL de téléchargement de l'image
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            // Update profile
+            // Mettre à jour le profil de l'utilisateur
             await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
             });
 
-            // Create user on firestore
+            // Créer l'utilisateur dans Firestore
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
@@ -94,13 +94,13 @@ const Register = () => {
               photoURL: downloadURL,
             });
 
-            // Create empty user chats on firestore
+            // Créer des conversations utilisateur vides dans Firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
 
-            // Navigate to "/"
+            // Naviguer vers "/"
             navigate("/");
 
-            // Show Login Component upon successful registration
+            // Afficher le composant de connexion après une inscription réussie
             setShowLoginForm(true);
           } catch (err) {
             console.error(err);
@@ -120,7 +120,7 @@ const Register = () => {
     <div className="formContainer">
       {!isOnline && <Offline />} 
       {showLoginForm ? (
-        <LoginComponent /> // Afficher le composant LoginComponent si showLoginForm est vrai
+        <LoginComponent />
       ) : (
         <div className="formWrapper">
           <span className="logo">Commencez maintenant</span>

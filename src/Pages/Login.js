@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -55,6 +55,25 @@ function Login({ initialValues, onChange }) {
 
   const handleRegisterClick = () => {
     setShowSignUpForm(true);
+  };
+
+  const handleSignUp = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(auth.currentUser);
+      // Naviguer ou effectuer d'autres actions après l'inscription réussie
+      // Exemple : navigate("/");
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error);
+      // Gérer les erreurs d'inscription (optionnel)
+    }
+  };
+
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    const enteredPassword = e.target[1].value;
+    handleSignUp(email, enteredPassword);
   };
 
   const googleSignIn = () => {

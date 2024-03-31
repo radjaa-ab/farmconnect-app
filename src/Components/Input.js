@@ -25,17 +25,17 @@ const Input = () => {
     if (data.chatId) {
       console.log("data.chatId: ", data.chatId);
 
-    if (img) {
-      const storageRef = ref(storage, uuid());
+      if (img) {
+        const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
+        const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+        uploadTask.on(
+          (error) => {
+            //TODO:Handle Error
+          },
+          async () => {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
@@ -45,44 +45,49 @@ const Input = () => {
                 img: downloadURL,
               }),
             });
-          });
-        }
-      );
-    } else {
-      await updateDoc(doc(db, "chats", data.chatId), {
-        messages: arrayUnion({
-          id: uuid(),
+
+            // Envoyer la notification
+            const notification = new Notification("Nouveau message", {
+              body: "Vous avez reçu un nouveau message.",
+            });
+          }
+        );
+      } else {
+        await updateDoc(doc(db, "chats", data.chatId), {
+          messages: arrayUnion({
+            id: uuid(),
+            text,
+            senderId: currentUser.uid,
+            date: Timestamp.now(),
+          }),
+        });
+
+        // Envoyer la notification
+        const notification = new Notification("Nouveau message", {
+          body: "Vous avez reçu un nouveau message.",
+        });
+      }
+
+      await updateDoc(doc(db, "userChats", currentUser.uid), {
+        [data.chatId + ".lastMessage"]: {
           text,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-        }),
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
       });
+
+      await updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      });
+
+      setText("");
+      setImg(null);
+    } else {
+      console.error("chatId is not available");
     }
-
-    await updateDoc(doc(db, "userChats", currentUser.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
-
-    await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
-
-    setText("");
-    setImg(null);
-  }
-  
-  
-  
-  else {
-    console.error("chatId is not available");
-  }};
-
+  };
 
   return (
     <div className="input">
