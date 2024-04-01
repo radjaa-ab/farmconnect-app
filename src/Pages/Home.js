@@ -56,9 +56,9 @@ function Home() {
             left: 0,
             width: '100%',
             height: '100vh',
-            objectFit: 'cover', // Ajuster le dimensionnement de la vidéo selon les besoins
-            zIndex: -1, // Assurer que la vidéo reste derrière les autres contenus
-            background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/1560989-hd_1280_720_30fps.mp4")', // Ajouter le dégradé linéaire sombre
+            objectFit: 'cover', 
+            zIndex: -1, 
+            background: 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../img/1560989-hd_1280_720_30fps.mp4")', 
             backgroundBlendMode: 'multiply', // Mélanger le dégradé avec la vidéo pour l'assombrir
            }}
         />
