@@ -54,11 +54,12 @@ function Home() {
             top: 0,
             left: 0,
             width: '100%',
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
             height: '700px',
-            objectFit: 'cover', // Adjust video scaling as needed
-            zIndex: -1, // Ensure video stays behind other content
-          }}
+            objectFit: 'cover', // Ajuster le dimensionnement de la vidéo selon les besoins
+            zIndex: -1, // Assurer que la vidéo reste derrière les autres contenus
+            background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/1560989-hd_1280_720_30fps.mp4")', // Ajouter le dégradé linéaire sombre
+            backgroundBlendMode: 'multiply', // Mélanger le dégradé avec la vidéo pour l'assombrir
+           }}
         />
         <Row style={{ position: 'relative', zIndex: 1 }}>
         <Col md={4} className='forms-container' style={{ borderRadius: '20px', marginTop: '10px', Width: '100px' }}>
