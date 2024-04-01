@@ -55,17 +55,31 @@
 .formContainer .formWrapper form {
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  height: '100px';
   gap: 15px;
 }
 
 .formContainer .formWrapper form input {
-  padding: 5px;
+  padding: 15px;
   border: none;
   width: 250px;
   border-radius: 10px;
-  background-color: #99b2a0cf;
-  border-bottom: 1px solid #435e4a;
+  background-color: #3d6f4a;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  color: #77a883;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.formContainer .formWrapper form label img {
+  color: white;
+  background-color: #60b877;
+  cursor: pointer;
 }
 
 .formContainer .formWrapper form input::placeholder {
