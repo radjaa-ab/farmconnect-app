@@ -31,7 +31,7 @@
 .formContainer .formWrapper {
   background-color: transparent;
   font-family: 'Roboto', sans-serif;
-  padding: 20px 60px;
+  padding: 0px 60px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
