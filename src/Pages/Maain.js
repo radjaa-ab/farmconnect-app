@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
 import Chat from '../Components/Chat'
-import '../Styles/Style.css';
+import '../Styles/Messagerie.css';
 
 const Maain = () => {
   return (
