@@ -30,12 +30,14 @@
 
 .formContainer .formWrapper {
   background-color: transparent;
+  font-family: 'Roboto', sans-serif;
   padding: 20px 60px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  font-weight: bold;
 }
 
 .formContainer .formWrapper .logo {
@@ -46,7 +48,7 @@
 
 .formContainer .formWrapper .title {
   color: #324838;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .formContainer .formWrapper form {
@@ -59,16 +61,26 @@
   padding: 15px;
   border: none;
   width: 250px;
-  border-bottom: 1px solid #77a883;
+  border-radius: 10px;
+  background-color: #99b2a0cf;
+  border-bottom: 1px solid #435e4a;
 }
 
 .formContainer .formWrapper form input::placeholder {
-  color: rgb(175, 175, 175);
+  color: rgb(255, 255, 255);
+  font-weight: bold;
 }
 
+.formContainer .formWrapper form input::placeholder:focus {
+  color: transparent;
+}
+
+
+
 .formContainer .formWrapper form button {
-  background-color: #60b877;
+  background-color: #3d6f4a;
   color: white;
+  border-radius: 10px;
   padding: 10px;
   font-weight: bold;
   border: none;
@@ -89,8 +101,8 @@
 }
 
 .formContainer .formWrapper p {
-  color: #537a5d;
-  font-size: 12px;
+  color: #ffffff;
+  font-size: 14px;
   margin-top: 10px;
 }
 
@@ -99,6 +111,7 @@
   height: 100vh;
   display: flex;
   align-items: center;
+  font-family: 'Roboto', sans-serif;
   justify-content: center;
 }
 

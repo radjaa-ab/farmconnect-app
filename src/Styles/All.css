@@ -7,7 +7,6 @@
   }
 
   .Searchbar{
-    margin-top: 20px; /* Adjust the value as needed */
   }
   
   .search-col {
@@ -38,13 +37,18 @@
   color: #333;
 }
 
-.forms-farmers{
-  margin-left: 100px;
+#backgroundVideo {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/1560989-hd_1280_720_30fps.mp4');
+  background-blend-mode: multiply;
 }
 
-.nav-home{
-  margin-bottom: 20px;
+
+.forms-farmers{
+  font-family: 'Roboto', sans-serif;
+  margin-left: 100px;
+  font-weight: bold;
 }
+
 
 @media (max-width: 768px) {
   .brand {
@@ -61,8 +65,9 @@
 
 
 .Home{
-  background-color: #90EE90;
-  height: auto;
+  height: 777px;
+  font-family: 'Roboto', sans-serif;
+
 }
 
 

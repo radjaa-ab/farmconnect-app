@@ -33,10 +33,6 @@ function Navigation() {
               <NavDropdown.Item href="#action/3.2">
                 Legumes
               </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Plantes
-              </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Autres" id="basic-nav-dropdown" style={{ marginRight: '1rem' }}>
               <NavDropdown.Item href="#action/3.1">

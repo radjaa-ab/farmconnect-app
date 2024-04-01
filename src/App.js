@@ -1,5 +1,5 @@
 import Maain from "./Pages/Maain";
-import SettingsPage from "./Pages/SettingsPage";
+import Offline from "./Pages/Offline";
 import Home from "./Pages/Home";
 import './Styles/Style.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -29,7 +29,7 @@ function App() {
             }
           />
           <Route path="Home/" element={<Home />} />
-          <Route path="SettingsPage/" element={<SettingsPage />} />
+          <Route path="Offline/" element={<Offline />} />
         </Route>
       </Routes>
     </BrowserRouter>
