@@ -54,7 +54,7 @@ function Home() {
             top: 0,
             left: 0,
             width: '100%',
-            height: '700px',
+            height: 'device-width',
             objectFit: 'cover', // Ajuster le dimensionnement de la vidéo selon les besoins
             zIndex: -1, // Assurer que la vidéo reste derrière les autres contenus
             background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/1560989-hd_1280_720_30fps.mp4")', // Ajouter le dégradé linéaire sombre

@@ -124,7 +124,6 @@ const Register = () => {
       ) : (
         <div className="formWrapper">
           <span className="logo">Commencez maintenant</span>
-          <span className="title">Inscription</span>
           <form onSubmit={handleSubmit}>
             <input
               required
@@ -178,28 +177,25 @@ const Register = () => {
               type="file"
               id="file"
             />
+            <Row>
+            <Col>
             <label htmlFor="file">
               <img src={Add} alt="" />
               <span>Ajouter un avatar</span>
-            </label>
-            <button disabled={loading}>S'inscrire</button>
-            {loading && "Téléchargement et compression de l'image en cours, veuillez patienter..."}
-            {err && <span>Quelque chose s'est mal passé</span>}
-          </form>
-          
-          <Row>
-            <Col>
-            <p style={{marginLeft: '10px'}}>Ou connectez-vous avec Google</p>
-            </Col>
+            </label>            </Col>
             <Col>
               <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
                 <img src={GoogleSignin} alt="Se connecter avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
               </button>
             </Col>
           </Row>
+            <button disabled={loading}>S'inscrire</button>
+            {loading && "Téléchargement et compression de l'image en cours, veuillez patienter..."}
+            {err && <span>Quelque chose s'est mal passé</span>}
+          </form>
           <p>
             Vous avez déjà un compte ?{" "}
-            <button onClick={() => setShowLoginForm(true)}>Se connecter</button>
+            <button onClick={() => setShowLoginForm(true)} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px'}}>Se connecter</button>
           </p>
         </div>
       )}
