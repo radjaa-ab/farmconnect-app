@@ -5,6 +5,7 @@ import './Styles/Style.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import "./i18n";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
