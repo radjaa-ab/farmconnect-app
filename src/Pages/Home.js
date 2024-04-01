@@ -5,7 +5,7 @@ import BasicExample from '../Components/Navigation';
 import Login from '../Pages/Login';
 import farmers from '../Images/farmrs-removebg-preview.png';
 import '../Styles/All.css';
-import Video from '../img/2758322-hd_1920_1080_30fps.mp4'
+import Video from '../img/2758322-hd_1920_1080_30fps.mov'
 
 function Home() {
   const [isPlaying, setIsPlaying] = useState(false); // State to control video playback
