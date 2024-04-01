@@ -1,5 +1,12 @@
 # Getting Started with Create React App
 
+
+
+languages
+https://medium.com/@shubham3480/adding-multi-lingual-support-in-react-44fa34a9500c
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
