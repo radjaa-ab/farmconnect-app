@@ -10,6 +10,8 @@ import Cart from '../Images/chariot-de-chariot.png';
 import Call from '../Images/service-client.png';
 import '../Styles/All.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import LanguageSelector from './test';
+
 
 function Navigation() {
   const ProductsPlaceholder = 'Search for products';
@@ -43,6 +45,7 @@ function Navigation() {
               </NavDropdown.Item>
             </NavDropdown>
             <SearchBar placeholderText={ProductsPlaceholder} />
+            <LanguageSelector />
             <Nav.Link>
               <img src={Cart} alt="Cart" style={{ width: '30px' }} />
             </Nav.Link>
