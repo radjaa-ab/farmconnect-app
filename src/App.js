@@ -1,7 +1,7 @@
 import Maain from "./Pages/Maain";
 import SettingsPage from "./Pages/SettingsPage";
 import Home from "./Pages/Home";
-import './Styles/Style.css';
+import './Styles/Messagerie.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";

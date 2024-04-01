@@ -8,7 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from '../Images/logo.jpg';
 import Cart from '../Images/chariot-de-chariot.png';
 import Call from '../Images/service-client.png';
-import '../Styles/All.css';
+import '../Styles/Home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import LanguageSelector from './test';
 
