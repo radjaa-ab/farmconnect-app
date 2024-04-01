@@ -1,12 +1,11 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
-import { FormControl, FormLabel, Button } from 'react-bootstrap';
+import '../Styles/Settings.css';
 
 const Avatar = ({ imageSource, onChange }) => {
   return (
     <div>
       <img src={imageSource} alt="Avatar" />
-      <input type="file" accept="image/*" onChange={onChange} />
+      <input type="file" accept="image/*" onChange={onChange} style={{backgroundColor: 'transparent', border: 'none'}} />
     </div>
   );
 };
@@ -14,39 +13,39 @@ const Avatar = ({ imageSource, onChange }) => {
 const FileInput = ({ onChange }) => {
   return (
     <div>
-      <input type="file" accept=".pdf" onChange={onChange} />
+      <input type="file" accept=".pdf" onChange={onChange} style={{backgroundColor: 'transparent', border: 'none'}} />
     </div>
   );
 };
+
 const InfoPersonnelles = ({ imageSource, onImageChange, onFileChange }) => {
   return (
-    <div>
-      <h2>Informations Personnelles</h2>
-      <Form>
-        <Form.Group>
+    <div className="info-personnelles">
+      <form className="form">
+        <div className="form-group">
           <Avatar imageSource={imageSource} onChange={onImageChange} />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="nom">Nom :</Form.Label>
-          <Form.Control type="text" id="nom" name="nom" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="prenom">Prénom :</Form.Label>
-          <Form.Control type="text" id="prenom" name="prenom" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="email">Email :</Form.Label>
-          <Form.Control type="email" id="email" name="email" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="telephone">Téléphone :</Form.Label>
-          <Form.Control type="tel" id="telephone" name="telephone" />
-        </Form.Group>
-        <Form.Group>
+        </div>
+        <div className="form-group">
+          <label htmlFor="nom">Nom :</label>
+          <input type="text" id="nom" name="nom" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="prenom">Prénom :</label>
+          <input type="text" id="prenom" name="prenom" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email :</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="telephone">Téléphone :</label>
+          <input type="tel" id="telephone" name="telephone" />
+        </div>
+        <div className="form-group">
           <FileInput onChange={onFileChange} />
-        </Form.Group>
-        <Button type="submit">Enregistrer</Button>
-      </Form>
+        </div>
+        <button type="submit">Enregistrer</button>
+      </form>
     </div>
   );
 };
