@@ -36,6 +36,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 0px;
   align-items: center;
   font-weight: bold;
 }
@@ -54,6 +55,7 @@
 .formContainer .formWrapper form {
   display: flex;
   flex-direction: column;
+  height: '100px';
   gap: 15px;
 }
 

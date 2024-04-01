@@ -96,7 +96,6 @@ function Login({ initialValues, onChange }) {
       ) : (
         <div className="formWrapper">
           <span className="logo">Commencez maintenant</span>
-          <span className="title">Connexion</span>
           <form onSubmit={handleSubmit}>
             <input type="email" placeholder="email" />
             <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
@@ -106,7 +105,7 @@ function Login({ initialValues, onChange }) {
           </form>
           <p>
             Vous n'avez pas de compte ?{" "}
-            <button onClick={handleRegisterClick}>S'inscrire</button>
+            <button onClick={handleRegisterClick} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '17px'}}>S'inscrire</button>
           </p>
 
           <Row>
