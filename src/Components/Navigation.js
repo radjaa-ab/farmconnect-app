@@ -45,7 +45,9 @@ function Navigation() {
               </NavDropdown.Item>
             </NavDropdown>
             <SearchBar placeholderText={ProductsPlaceholder} />
-            <LanguageSelector />
+            <div style={{ padding: '7px'}}>
+              <LanguageSelector />
+            </div>
             <Nav.Link>
               <img src={Cart} alt="Cart" style={{ width: '30px' }} />
             </Nav.Link>

@@ -1,8 +1,14 @@
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
 .info-personnelles {
   width: 100%;
   margin: 0 auto;
+
   height: device-width;
-  background-color: white;
+  background-color: white ;
   display: flex;
   justify-content: center;
   align-items: center;

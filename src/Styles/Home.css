@@ -6,6 +6,11 @@
     height: 70px; /* Adjust height for shorter first row */
   }
 
+
+  
+*{
+  font-family: 'Roboto', sans-serif;
+}
   
   .search-col {
     background-color: #90EE90; /* Light green for search bar */

@@ -28,15 +28,19 @@
   }
 }
 
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+
 .formContainer .formWrapper {
   background-color: transparent;
-  font-family: 'Roboto', sans-serif;
   padding: 0px 60px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 0px;
+  margin-top: -40px;
   align-items: center;
   font-weight: bold;
 }
@@ -48,32 +52,28 @@
 }
 
 .formContainer .formWrapper .title {
-  color: #324838;
+  color: white;
   font-size: 15px;
 }
 
 .formContainer .formWrapper form {
   display: flex;
+  align-items: center;
   flex-direction: column;
-  height: '100px';
   gap: 15px;
 }
 
 .formContainer .formWrapper form input {
-  padding: 15px;
   border: none;
-  width: 250px;
-  border-radius: 10px;
-  background-color: #3d6f4a;
-  color: white;
+  width: 300px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.631);
+  color: #324838;
   border-radius: 10px;
   padding: 10px;
   font-weight: bold;
-  border: none;
   cursor: pointer;
-  color: #77a883;
   font-size: 12px;
-  cursor: pointer;
 }
 
 .formContainer .formWrapper form label img {
@@ -83,7 +83,7 @@
 }
 
 .formContainer .formWrapper form input::placeholder {
-  color: rgb(255, 255, 255);
+  color: #324838;
   font-weight: bold;
 }
 
@@ -94,14 +94,34 @@
 
 
 .formContainer .formWrapper form button {
-  background-color: #3d6f4a;
-  color: white;
+  background-color: #288f43;
+  color: rgba(0, 0, 0, 0.791);
+  width: 111px;
   border-radius: 10px;
   padding: 5px;
   font-weight: bold;
-  border: none;
+  font-size: 15px;
+  border-color: white;
   cursor: pointer;
+  transition: all;
+
 }
+
+.formContainer .formWrapper form div {
+  display: flex;
+  width: 100%;
+}
+
+.formContainer .formWrapper form span {
+  color: rgba(255, 255, 255, 0.806);
+}
+
+
+.formContainer .formWrapper form button:hover {
+  background-color: rgb(12, 73, 38);
+  border: none;
+}
+
 
 .formContainer .formWrapper form label {
   display: flex;
