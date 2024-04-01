@@ -50,11 +50,12 @@ function Home() {
           muted // Mute the video by default (optional)
           loop
           style={{
-            position: 'absolute', // Make video fill the container
+            position: 'fixed',
+            right: 0,
             top: 0,
             left: 0,
             width: '100%',
-            height: 'device-width',
+            height: '100vh',
             objectFit: 'cover', // Ajuster le dimensionnement de la vidéo selon les besoins
             zIndex: -1, // Assurer que la vidéo reste derrière les autres contenus
             background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/1560989-hd_1280_720_30fps.mp4")', // Ajouter le dégradé linéaire sombre
@@ -67,12 +68,12 @@ function Home() {
           </Col>
           <Col md={5} className="forms-farmers" style={{marginTop: '30px', fontFamily: 'sans-serif',  fontWeight: 'bold', color: '#324834'}}>
             <h3>Atteignez vos clients plus rapidement, <br /> Avec nous.</h3>
+            <button onClick={handlePlayPause} style ={{ border: 'none',  borderRadius : '5px', backgroundColor: 'transparent', fontWeight : 'bold', color: 'white'}}> 
+              {isPlaying ? 'Pause' : 'Play'}
+            </button>
           </Col>
         </Row>
       </div>
-      <button onClick={handlePlayPause} style ={{ border: 'none',  borderRadius : '5px', backgroundColor: 'transparent', fontWeight : 'bold', color: 'white'}}> 
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
     </div>
   );
 }
