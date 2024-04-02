@@ -1,23 +1,46 @@
+import React, { useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import FAQ from './FAQ';
+import AssistanceTelephonique from './AssistanceTelephonique'; // Importez le composant d'assistance téléphonique
+import DiscussionDirecte from './DiscussionDirecte'; // Importez le composant de discussion directe
 
 function Support() {
+  const [selectedComponent, setSelectedComponent] = useState('FAQ'); // État local pour suivre le composant sélectionné
+
+  // Fonction pour changer le composant sélectionné
+  const handleSelect = (component) => {
+    setSelectedComponent(component);
+  };
+
+  // Rendu conditionnel basé sur le composant sélectionné
+  const renderComponent = () => {
+    switch (selectedComponent) {
+      case 'FAQ':
+        return <FAQ />;
+      case 'AssistanceTelephonique':
+        return <AssistanceTelephonique />;
+      case 'DiscussionDirecte':
+        return <DiscussionDirecte />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <Nav variant="tabs" defaultActiveKey="/home">
-      <Nav.Item>
-        <Nav.Link href="/home">FAQ</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <NavDropdown title="Support" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
-                Assistance Téléphonique
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Discussion Directe
-              </NavDropdown.Item>
-            </NavDropdown>
-      </Nav.Item>
-    </Nav>
+    <div>
+      <Nav variant="tabs" defaultActiveKey="/home">
+        <Nav.Item>
+          <Nav.Link eventKey="FAQ" onSelect={() => handleSelect('FAQ')}>FAQ</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="AssistanceTelephonique" onSelect={() => handleSelect('AssistanceTelephonique')}>Assistance Téléphonique</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="DiscussionDirecte" onSelect={() => handleSelect('DiscussionDirecte')}>Discussion Directe</Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <div className="mt-3">{renderComponent()}</div>
+    </div>
   );
 }
 
