@@ -7,7 +7,6 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import "./i18n";
 
-
 function App() {
   const { currentUser } = useContext(AuthContext);
 
