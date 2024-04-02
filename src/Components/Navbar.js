@@ -4,7 +4,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <span className="logo">Lama Chat</span>
+      <span className="logo">FarmConnect</span>
       <div className="user">
         <img alt="" />
         <span>Name</span>
