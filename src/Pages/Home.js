@@ -84,7 +84,7 @@ function Home() {
              **FarmConnect** connecte les agriculteurs, les consommateurs et les vendeurs au sein d'une communauté agricole dynamique. Trouvez des produits frais, des ressources et un réseau de soutien.
               </p>
 
-              <button onClick={handlePlayPause} class="farmconnect-play-button">
+              <button onClick={handlePlayPause} className="farmconnect-play-button">
                 {isPlaying ? 'Pause' : 'Play'}
               </button>
             </Col>
