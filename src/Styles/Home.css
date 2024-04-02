@@ -136,3 +136,45 @@
   height: 100px;
   object-fit: contain;
 }
+
+/* Overall hero section styles */
+.farmconnect-hero {
+  padding: 5%;
+  border-radius: 5px; /* Subtle rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Gentle shadow for depth */
+  text-align: center;
+  margin: 4%;
+  color: white; /* Base text color */
+  font-family: sans-serif;
+}
+
+
+/* Hero title (h3) styles */
+.farmconnect-hero h3 {
+  color: white;
+  margin-bottom: 20px; /* Spacing between title and button */
+  font-size: 2rem; /* Larger font size for prominence */
+  font-weight: bold;
+  line-height: 1.2; /* Adjust line height for readability */
+}
+
+/* Play/Pause button styles */
+.farmconnect-play-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px; /* Adjust padding for comfort */
+  cursor: pointer; /* Indicate interaction on hover */
+  color: #fff; /* White text */
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out; /* Smooth transition */
+}
+
+.farmconnect-play-button:hover {
+  color: black; /* Subtle hover effect */
+}
+.farmconnect-hero p {
+  font-size: 1em;  /* Use em for font size in description */
+  line-height: 1.5;
+  word-wrap: break-word;  /* Optional: Break long words (consider aesthetics) */
+}

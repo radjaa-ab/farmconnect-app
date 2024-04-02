@@ -58,20 +58,28 @@ function Home() {
             height: '100vh',
             objectFit: 'cover', 
             zIndex: -1, 
-            background: 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("../img/1560989-hd_1280_720_30fps.mp4")', 
-            backgroundBlendMode: 'multiply', // Mélanger le dégradé avec la vidéo pour l'assombrir
+            filter: 'brightness(0.6)',
+
            }}
         />
         <Row style={{ position: 'relative', zIndex: 1 }}>
-        <Col md={4} className='forms-container' style={{ borderRadius: '20px', marginTop: '10px', Width: '100px' }}>
+        <Col md={4} className='forms-container' >
             <Login />
           </Col>
-          <Col md={5} className="forms-farmers" style={{marginTop: '30px', fontFamily: 'sans-serif',  fontWeight: 'bold', color: '#324834'}}>
-            <h3>Atteignez vos clients plus rapidement, <br /> Avec nous.</h3>
-            <button onClick={handlePlayPause} style ={{ border: 'none',  borderRadius : '5px', backgroundColor: 'transparent', fontWeight : 'bold', color: 'white'}}> 
-              {isPlaying ? 'Pause' : 'Play'}
-            </button>
-          </Col>
+          <Col className="farmconnect-hero">
+              <h2 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>FarmConnect</h2>
+
+              <p style={{ fontSize: '1.2rem', lineHeight: '1.5' }}>
+                **FarmConnect** connecte les agriculteurs, les consommateurs et les vendeurs au sein d'une communauté agricole dynamique. Trouvez des produits frais, des ressources et un réseau de soutien.
+              </p>
+
+              <button onClick={handlePlayPause} class="farmconnect-play-button">
+                {isPlaying ? 'Pause' : 'Play'}
+              </button>
+            </Col>
+
+
+
         </Row>
       </div>
     </div>

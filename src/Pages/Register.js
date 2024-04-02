@@ -122,7 +122,7 @@ const Register = () => {
       {showLoginForm ? (
         <LoginComponent />
       ) : (
-        <div className="formWrapper">
+        <div className="formWrapper" style={{ marginTop: '-70px'}}>
           <span className="logo">Commencez maintenant</span>
           <form onSubmit={handleSubmit}>
             <input

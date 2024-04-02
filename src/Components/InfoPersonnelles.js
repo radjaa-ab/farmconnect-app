@@ -18,28 +18,33 @@ const FileInput = ({ onChange }) => {
   );
 };
 
-const InfoPersonnelles = ({ imageSource, onImageChange, onFileChange }) => {
+const InfoPersonnelles = ({ avatar, name, email, password, file, profession, onAvatarChange, onFileChange, onInputChange }) => {
   return (
     <div className="info-personnelles">
       <form className="form">
         <div className="form-group">
-          <Avatar imageSource={imageSource} onChange={onImageChange} />
+          <Avatar imageSource={avatar} onChange={onAvatarChange} />
         </div>
         <div className="form-group">
           <label htmlFor="nom">Nom :</label>
-          <input type="text" id="nom" name="nom" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="prenom">Prénom :</label>
-          <input type="text" id="prenom" name="prenom" />
+          <input type="text" id="nom" name="nom" value={name} onChange={onInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email :</label>
-          <input type="email" id="email" name="email" />
+          <input type="email" id="email" name="email" value={email} onChange={onInputChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="telephone">Téléphone :</label>
-          <input type="tel" id="telephone" name="telephone" />
+          <label htmlFor="password">Mot de passe :</label>
+          <input type="password" id="password" name="password" value={password} onChange={onInputChange} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profession">Profession :</label>
+          <select id="profession" name="profession" value={profession} onChange={onInputChange}>
+            <option value="consommateur">Consommateur</option>
+            <option value="commercant">Commerçant</option>
+            <option value="agriculteur">Agriculteur</option>
+            <option value="ingenieur_agriculteur">Ingénieur Agriculteur</option>
+          </select>
         </div>
         <div className="form-group">
           <FileInput onChange={onFileChange} />

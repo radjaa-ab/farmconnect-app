@@ -89,7 +89,7 @@ function Login({ initialValues, onChange }) {
   };
 
   return (
-    <div className="formContainer" style={{ marginTop: '50px'}}>
+    <div className="formContainer" style={{ marginTop: '100px'}}>
       {!isOnline && <Offline />}
       {showSignUpForm ? (
         <SignUpForms />
