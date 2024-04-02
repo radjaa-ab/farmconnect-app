@@ -13,6 +13,8 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { getMessaging, sendMessage } from "firebase/messaging";
+
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -21,15 +23,19 @@ const Input = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  const handleKeyUp = (event) => {
+    if (event.key === "Enter") {
+      handleSend();
+    }
+  };
+
   const handleSend = async () => {
     if (data.chatId) {
-      console.log("data.chatId: ", data.chatId);
-
       if (img) {
         const storageRef = ref(storage, uuid());
-
+  
         const uploadTask = uploadBytesResumable(storageRef, img);
-
+  
         uploadTask.on(
           (error) => {
             //TODO:Handle Error
@@ -45,10 +51,14 @@ const Input = () => {
                 img: downloadURL,
               }),
             });
-
-            // Envoyer la notification
-            const notification = new Notification("Nouveau message", {
-              body: "Vous avez reçu un nouveau message.",
+  
+            const messaging = getMessaging();
+            sendMessage(messaging, {
+              title: "Nouveau message",
+              body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
+              data: {
+                click_action: "http://localhost:3000/chat/${data.chatId}",
+              },
             });
           }
         );
@@ -61,27 +71,31 @@ const Input = () => {
             date: Timestamp.now(),
           }),
         });
-
-        // Envoyer la notification
-        const notification = new Notification("Nouveau message", {
-          body: "Vous avez reçu un nouveau message.",
+  
+        const messaging = getMessaging();
+        sendMessage(messaging, {
+          title: "Nouveau message",
+          body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
+          data: {
+            click_action: "http://localhost:3000/chat/${data.chatId}",
+          },
         });
       }
-
+  
       await updateDoc(doc(db, "userChats", currentUser.uid), {
         [data.chatId + ".lastMessage"]: {
           text,
         },
         [data.chatId + ".date"]: serverTimestamp(),
       });
-
+  
       await updateDoc(doc(db, "userChats", data.user.uid), {
         [data.chatId + ".lastMessage"]: {
           text,
         },
         [data.chatId + ".date"]: serverTimestamp(),
       });
-
+  
       setText("");
       setImg(null);
     } else {
@@ -89,12 +103,14 @@ const Input = () => {
     }
   };
 
+
   return (
     <div className="input">
       <input
         type="text"
         placeholder="Ecrire..."
         onChange={(e) => setText(e.target.value)}
+        onKeyUp={handleKeyUp}
         value={text}
       />
       <div className="send">
