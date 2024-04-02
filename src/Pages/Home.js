@@ -6,8 +6,18 @@ import Login from '../Pages/Login';
 import farmers from '../Images/farmrs-removebg-preview.png';
 import '../Styles/Home.css';
 import Video from '../img/2758322-hd_1920_1080_30fps.mp4'
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
 
 function Home() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
+
   const [isPlaying, setIsPlaying] = useState(false); // State to control video playback
 
   useEffect(() => {
@@ -70,7 +80,8 @@ function Home() {
               <h2 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>FarmConnect</h2>
 
               <p style={{ fontSize: '1.2rem', lineHeight: '1.5' }}>
-                **FarmConnect** connecte les agriculteurs, les consommateurs et les vendeurs au sein d'une communauté agricole dynamique. Trouvez des produits frais, des ressources et un réseau de soutien.
+{t("hello")}
+             **FarmConnect** connecte les agriculteurs, les consommateurs et les vendeurs au sein d'une communauté agricole dynamique. Trouvez des produits frais, des ressources et un réseau de soutien.
               </p>
 
               <button onClick={handlePlayPause} class="farmconnect-play-button">

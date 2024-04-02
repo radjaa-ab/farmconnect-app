@@ -10,7 +10,7 @@ import Cart from '../Images/chariot-de-chariot.png';
 import Call from '../Images/service-client.png';
 import '../Styles/Home.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import LanguageSelector from './test';
+import LanguageSelector from './LanguageSelector';
 
 
 function Navigation() {

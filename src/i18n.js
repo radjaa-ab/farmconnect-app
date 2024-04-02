@@ -1,27 +1,34 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import Backend from "i18next-xhr-backend";
 import { initReactI18next } from "react-i18next";
+import translationsInAr from './locales/ar/translation.json';
+import translationsInFr from './locales/fr/translation.json';
+import Backend from 'i18next-xhr-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-const fallbackLng = ["en"];
+
+  const resources = {
+  ar: {
+    translation: translationsInAr
+  },
+  fr: {
+    translation: translationsInFr
+  },
+};
+
 
 i18n
-  .use(Backend) // used to load data from othe directory
-  .use(LanguageDetector) // detects the current language
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(Backend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
   .init({
-    backend: {
-      loadPath: "/assets/locale/{{lng}}/translate.json",
-    },
-    
-    fallbackLng, // default language
-    detection: {
-      checkWhitelist: true,
-    },
-    debug: false,
+    resources, // resources are important to load translations for the languages.
+    lng: localStorage.getItem("lang"), // It acts as default language. When the site loads, content is shown in this language.  
+    debug: true,
+    fallbackLng: "fr", // use de if selected language is not available
     interpolation: {
-      escapeValue: false, // no need for react. it escapes by default
+      escapeValue: false
     },
+    ns: "translation", // namespaces help to divide huge translations into multiple small files.
+    defaultNS: "translation"
   });
-
 export default i18n;
