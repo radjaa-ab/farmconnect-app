@@ -1,101 +1,68 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   collection,
   query,
   where,
   getDocs,
-  setDoc,
-  doc,
-  updateDoc,
-  serverTimestamp,
-  getDoc,
+  orderBy,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { AuthContext } from "../context/AuthContext";
+
 const Search = () => {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
-  const [err, setErr] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
 
-  const { currentUser } = useContext(AuthContext);
-
-  const handleSearch = async () => {
-    const q = query(
-      collection(db, "users"),
-      where("displayName", "==", username)
-    );
-
-    try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
-    } catch (err) {
-      setErr(true);
-    }
-  };
-
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
-
-  const handleSelect = async () => {
-    //check whether the group(chats in firestore) exists, if not create
-    const combinedId =
-      currentUser.uid > user.uid
-        ? currentUser.uid + user.uid
-        : user.uid + currentUser.uid;
-    try {
-      const res = await getDoc(doc(db, "chats", combinedId));
-
-      if (!res.exists()) {
-        //create a chat in chats collection
-        await setDoc(doc(db, "chats", combinedId), { messages: [] });
-
-        //create user chats
-        await updateDoc(doc(db, "userChats", currentUser.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-
-        await updateDoc(doc(db, "userChats", user.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: currentUser.uid,
-            displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (username.trim() === "") {
+        setSuggestions([]);
+        return;
       }
-    } catch (err) {}
+      
+      const q = query(
+        collection(db, "users"),
+        where("displayName", ">=", username),
+        where("displayName", "<=", username + "\uf8ff"),
+        orderBy("displayName")
+      );
 
-    setUser(null);
-    setUsername("")
+      try {
+        const querySnapshot = await getDocs(q);
+        const users = querySnapshot.docs.map((doc) => doc.data().displayName);
+        setSuggestions(users);
+      } catch (error) {
+        console.error("Error fetching suggestions: ", error);
+      }
+    };
+
+    fetchSuggestions();
+  }, [username]);
+
+  const handleInputChange = (e) => {
+    setUsername(e.target.value);
   };
+
+  const handleSelect = (selectedUsername) => {
+    setUsername(selectedUsername);
+    setSuggestions([]);
+  };
+
   return (
-    <div className="search">
-      <div className="searchForm">
-        <input
-          type="text"
-          placeholder="Find a user"
-          onKeyDown={handleKey}
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />
-      </div>
-      {err && <span>User not found!</span>}
-      {user && (
-        <div className="userChat" onClick={handleSelect}>
-          <img src={user.photoURL} alt="" />
-          <div className="userChatInfo">
-            <span>{user.displayName}</span>
-          </div>
-        </div>
-      )}
+    <div className="search" >
+      <input style={{ width: '100%', backgroundColor: '#507050'}}
+        type="text"
+        placeholder="Trouver un utilisateur"
+        value={username}
+        onChange={handleInputChange}
+      />
+      <ul>
+        {suggestions.map((username, index) => (
+          <li style={{   listStyleType: 'none', backgroundColor: '#ccc', width: 'auto', Padding: '0%', borderRadius: '5px', textAlign: 'center'
+          }} key={index} onClick={() => handleSelect(username)}>
+            {username}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
