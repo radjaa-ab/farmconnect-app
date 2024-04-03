@@ -9,9 +9,11 @@ import "./i18n";
 import { toast, ToastContainer } from "react-toastify";
 import Message from "./Components/firebase_Messaging.js";
 import "react-toastify/dist/ReactToastify.css";
+import { getMessaging, onMessage } from "firebase/messaging";
 
 
 function App() {
+  const messaging = getMessaging(); 
   onMessage(messaging, (payload) => {
     toast(<Message notification={payload.notification} />);
   });

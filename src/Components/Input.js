@@ -13,10 +13,10 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { getMessaging, sendMessage } from "firebase/messaging";
-
-
+import { getMessaging } from "firebase/messaging";
 const Input = () => {
+  const messaging = getMessaging();
+
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
 
@@ -38,7 +38,7 @@ const Input = () => {
   
         uploadTask.on(
           (error) => {
-            //TODO:Handle Error
+            //TODO: Gérer l'erreur
           },
           async () => {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
@@ -52,12 +52,14 @@ const Input = () => {
               }),
             });
   
-            const messaging = getMessaging();
-            sendMessage(messaging, {
-              title: "Nouveau message",
-              body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
+            // Envoyer le message avec Firebase Cloud Messaging
+            await messaging.send({
+              notification: {
+                title: "Nouveau message",
+                body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
+              },
               data: {
-                click_action: "http://localhost:3000/chat/${data.chatId}",
+                click_action: `http://localhost:3000/chat/${data.chatId}`,
               },
             });
           }
@@ -72,12 +74,14 @@ const Input = () => {
           }),
         });
   
-        const messaging = getMessaging();
-        sendMessage(messaging, {
-          title: "Nouveau message",
-          body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
+        // Envoyer le message avec Firebase Cloud Messaging
+        await messaging.send({
+          notification: {
+            title: "Nouveau message",
+            body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
+          },
           data: {
-            click_action: "http://localhost:3000/chat/${data.chatId}",
+            click_action: `http://localhost:3000/chat/${data.chatId}`,
           },
         });
       }

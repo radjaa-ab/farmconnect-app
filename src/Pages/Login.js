@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -14,9 +14,9 @@ import PasswordStrengthBar from 'react-password-strength-bar';
 function Login({ initialValues, onChange }) {
   const [user] = useAuthState(auth);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
-  const [password, setPassword] = useState(""); // Initialisation de la variable password avec une chaîne vide
-
+  const [password, setPassword] = useState(""); 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleOnlineStatusChange = () => {
@@ -32,25 +32,22 @@ function Login({ initialValues, onChange }) {
     };
   }, []);
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target[0].value;
     const enteredPassword = e.target[1].value;
-    setPassword(enteredPassword); // Mise à jour de la valeur du mot de passe
+    setPassword(enteredPassword);
 
     try {
       await signInWithEmailAndPassword(auth, email, enteredPassword);
       navigate("/");
     } catch (err) {
       console.error(err);
-      // Gérer les erreurs de connexion (optionnel)
     }
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value); // Mise à jour de la valeur du mot de passe lorsqu'il est modifié
+    setPassword(e.target.value);
   };
 
   const handleRegisterClick = () => {
@@ -61,11 +58,8 @@ function Login({ initialValues, onChange }) {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(auth.currentUser);
-      // Naviguer ou effectuer d'autres actions après l'inscription réussie
-      // Exemple : navigate("/");
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
-      // Gérer les erreurs d'inscription (optionnel)
     }
   };
 
@@ -78,7 +72,6 @@ function Login({ initialValues, onChange }) {
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    console.log("Connexion en cours...");
     signInWithPopup(auth, provider)
       .then(() => {
         alert("Connecté");
@@ -86,6 +79,18 @@ function Login({ initialValues, onChange }) {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      // Afficher un message de succès ou rediriger l'utilisateur
+    } catch (error) {
+      console.error("Erreur lors de la réinitialisation du mot de passe :", error);
+    }
   };
 
   return (
@@ -107,10 +112,12 @@ function Login({ initialValues, onChange }) {
             Vous n'avez pas de compte ?{" "}
             <button onClick={handleRegisterClick} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '17px'}}>S'inscrire</button>
           </p>
-
+          <p>
+            <button onClick={handleResetPassword} style={{border: 'none', backgroundColor: 'transparent', color: 'blue'}}>Mot de passe oublié ?</button>
+          </p>
           <Row>
             <Col>
-            <p style={{marginLeft: '10px'}}>Ou connectez-vous avec Google</p>
+              <p style={{marginLeft: '10px'}}>Ou connectez-vous avec Google</p>
             </Col>
             <Col>
               <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
