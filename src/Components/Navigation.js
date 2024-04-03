@@ -11,7 +11,7 @@ import Call from '../Images/service-client.png';
 import '../Styles/Home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import LanguageSelector from './LanguageSelector';
-import Panier from './panier'; 
+import Panier from './Panier'; 
 import AssistanceTelephonique from './AssistanceTelephonique';
 
 function Navigation() {

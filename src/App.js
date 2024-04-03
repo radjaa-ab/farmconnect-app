@@ -9,28 +9,33 @@ import "./i18n";
 import { toast, ToastContainer } from "react-toastify";
 import Message from "./Components/firebase_Messaging.js";
 import "react-toastify/dist/ReactToastify.css";
-import { getMessaging, onMessage } from "firebase/messaging";
-import React, { useEffect } from 'react';
-import { getFCMToken } from './firebase';
+import { getMessaging, onMessage, getToken } from "firebase/messaging";
+import { messaging } from "./firebase";
+async function requestPermission() {
+  //requesting permission using Notification API
+  const permission = await Notification.requestPermission();
 
+  if (permission === "granted") {
+    const token = await getToken(messaging, {
+      vapidKey: "BC67-G050VOgJppPokQibJgmtnxf-W1khP2kUdSegZxYQIfWqCyzbKxqelag7_UjG0z5eEPkJNLo52BfEfB7xYI", 
+    });
+
+    //We can send token to server
+    console.log("Token generated : ", token);
+  } else if (permission === "denied") {
+    //notifications are blocked
+    alert("You denied for the notification");
+  }
+}
 
 function App() {
-  useEffect(() => {
-    const fetchToken = async () => {
-      const token = await getFCMToken();
-      console.log('Token FCM récupéré:', token);
-    };
-
-    fetchToken();
-  }, []);
-
-
-
   const messaging = getMessaging(); 
   onMessage(messaging, (payload) => {
     toast(<Message notification={payload.notification} />);
   });
-
+  getToken(messaging,{
+    vapidKey: "BC67-G050VOgJppPokQibJgmtnxf-W1khP2kUdSegZxYQIfWqCyzbKxqelag7_UjG0z5eEPkJNLo52BfEfB7xYI", 
+  }).then((token) => console.log(token));
 
 
   const { currentUser } = useContext(AuthContext);
@@ -56,7 +61,7 @@ function App() {
           />
           <Route path="Home/" element={<Home />} />
           <Route path="SettingsPage/" element={<SettingsPage />} />
-          <ToastContainer />
+          
         </Route>
       </Routes>
     </BrowserRouter>
