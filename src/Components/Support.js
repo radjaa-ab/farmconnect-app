@@ -7,12 +7,10 @@ import DiscussionDirecte from './DiscussionDirecte'; // Importez le composant de
 function Support() {
   const [selectedComponent, setSelectedComponent] = useState('FAQ'); // État local pour suivre le composant sélectionné
 
-  // Fonction pour changer le composant sélectionné
   const handleSelect = (component) => {
     setSelectedComponent(component);
   };
 
-  // Rendu conditionnel basé sur le composant sélectionné
   const renderComponent = () => {
     switch (selectedComponent) {
       case 'FAQ':
