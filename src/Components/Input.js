@@ -38,7 +38,6 @@ const Input = () => {
   
         uploadTask.on(
           (error) => {
-            //TODO: Gérer l'erreur
           },
           async () => {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
@@ -52,7 +51,6 @@ const Input = () => {
               }),
             });
   
-            // Envoyer le message avec Firebase Cloud Messaging
             await messaging.send({
               notification: {
                 title: "Nouveau message",
@@ -74,7 +72,6 @@ const Input = () => {
           }),
         });
   
-        // Envoyer le message avec Firebase Cloud Messaging
         await messaging.send({
           notification: {
             title: "Nouveau message",

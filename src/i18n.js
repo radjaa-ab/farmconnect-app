@@ -21,14 +21,14 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources, // resources are important to load translations for the languages.
-    lng: localStorage.getItem("lang"), // It acts as default language. When the site loads, content is shown in this language.  
+    resources, 
+    lng: localStorage.getItem("lang"), 
     debug: true,
-    fallbackLng: "fr", // use de if selected language is not available
+    fallbackLng: "fr", 
     interpolation: {
       escapeValue: false
     },
-    ns: "translation", // namespaces help to divide huge translations into multiple small files.
+    ns: "translation", 
     defaultNS: "translation"
   });
 export default i18n;

@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import InfoPersonnelles from '../Components/InfoPersonnelles';
 import Coupons from '../Components/Coupons';
-import Panier from '../Components/Panier';
 import Support from '../Components/Support';
 import Termes from '../Components/Termes';
 
@@ -24,7 +23,6 @@ const SettingsPage = () => {
         <Col>
           {selectedComponent === 'InfoPersonnelles' && <InfoPersonnelles />}
           {selectedComponent === 'Coupons' && <Coupons />}
-          {selectedComponent === 'Panier' && <Panier />}
           {selectedComponent === 'Support' && <Support />}
           {selectedComponent === 'Termes' && <Termes />}
         </Col>

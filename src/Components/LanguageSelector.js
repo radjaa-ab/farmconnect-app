@@ -2,11 +2,10 @@ import React, {useState} from "react";
 import i18n from '../i18n';
 
 const LanguageSelector = () => {
-    const [selectedLanguage, setSelectedLanguage] = useState(i18n.language); // i18n.language contains the language assigned to lng in i18n.js file.
-
+    const [selectedLanguage, setSelectedLanguage] = useState(i18n.language); 
     const chooseLanguage = (e) => {
         e.preventDefault();
-        i18n.changeLanguage(e.target.value);   // i18n.changeLanguage() is used to change the language assigned to lng in i18n.js file.
+        i18n.changeLanguage(e.target.value);  
         setSelectedLanguage(e.target.value);
         localStorage.setItem("lang", e.target.value);
     }

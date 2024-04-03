@@ -87,7 +87,6 @@ function Login({ initialValues, onChange }) {
 
     try {
       await sendPasswordResetEmail(auth, email);
-      // Afficher un message de succès ou rediriger l'utilisateur
     } catch (error) {
       console.error("Erreur lors de la réinitialisation du mot de passe :", error);
     }

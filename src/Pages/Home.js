@@ -18,22 +18,22 @@ function Home() {
   };
 
 
-  const [isPlaying, setIsPlaying] = useState(false); // State to control video playback
+  const [isPlaying, setIsPlaying] = useState(false); 
 
   useEffect(() => {
     const videoElement = document.getElementById('backgroundVideo');
 
     if (videoElement) {
-      videoElement.addEventListener('ended', () => videoElement.play()); // Loop playback
-      setIsPlaying(true); // Set initial playing state
+      videoElement.addEventListener('ended', () => videoElement.play()); 
+      setIsPlaying(true); 
     }
 
     return () => {
       if (videoElement) {
         videoElement.removeEventListener('ended', () => videoElement.play());
       }
-    }; // Cleanup on unmount
-  }, []); // Empty dependency array for one-time effect
+    }; 
+  }, []); 
 
   const handlePlayPause = () => {
     const videoElement = document.getElementById('backgroundVideo');
@@ -56,8 +56,8 @@ function Home() {
         <video
           id="backgroundVideo"
           src={Video}
-          autoPlay={isPlaying} // Control playback with state
-          muted // Mute the video by default (optional)
+          autoPlay={isPlaying} 
+          muted 
           loop
           style={{
             position: 'fixed',

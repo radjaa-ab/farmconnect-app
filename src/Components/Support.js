@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import FAQ from './FAQ';
-import AssistanceTelephonique from './AssistanceTelephonique'; // Importez le composant d'assistance téléphonique
-import DiscussionDirecte from './DiscussionDirecte'; // Importez le composant de discussion directe
+import AssistanceTelephonique from './AssistanceTelephonique'; 
+import DiscussionDirecte from './DiscussionDirecte'; 
 
 function Support() {
-  const [selectedComponent, setSelectedComponent] = useState('FAQ'); // État local pour suivre le composant sélectionné
+  const [selectedComponent, setSelectedComponent] = useState('FAQ');
 
   const handleSelect = (component) => {
     setSelectedComponent(component);

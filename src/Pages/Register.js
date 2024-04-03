@@ -65,28 +65,21 @@ const Register = () => {
     setLoading(true);
 
     try {
-      // Créer l'utilisateur
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Envoyer la vérification par e-mail
       await sendEmailVerification(auth.currentUser);
 
-      // Créer un nom d'image unique
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
 
-      // Télécharger l'image vers le stockage
       await uploadBytesResumable(storageRef, userDetails.proof).then(() => {
-        // Obtenir l'URL de téléchargement de l'image
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            // Mettre à jour le profil de l'utilisateur
             await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
             });
 
-            // Créer l'utilisateur dans Firestore
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
@@ -94,13 +87,10 @@ const Register = () => {
               photoURL: downloadURL,
             });
 
-            // Créer des conversations utilisateur vides dans Firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
 
-            // Naviguer vers "/"
             navigate("/");
 
-            // Afficher le composant de connexion après une inscription réussie
             setShowLoginForm(true);
           } catch (err) {
             console.error(err);

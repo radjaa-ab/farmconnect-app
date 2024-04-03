@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,10 +11,23 @@ import Call from '../Images/service-client.png';
 import '../Styles/Home.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import LanguageSelector from './LanguageSelector';
-
+import Panier from './panier'; 
+import AssistanceTelephonique from './AssistanceTelephonique';
 
 function Navigation() {
-  const ProductsPlaceholder = 'Search for products';
+  const ProductsPlaceholder = 'Rechercher des produits';
+  const [showPanier, setShowPanier] = useState(false);
+  const [showAssistance, setShowAssistance] = useState(false);
+
+  const togglePanier = () => {
+    setShowPanier(!showPanier);
+    setShowAssistance(false);
+  };
+
+  const toggleAssistance = () => {
+    setShowAssistance(!showAssistance);
+    setShowPanier(false);
+  };
 
   return (
     <Navbar expand="lg" className='bg-body-tertiary'>
@@ -27,18 +40,18 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
             <Nav.Link href="#home" className="ms-3" style={{ marginRight: '1rem' }}>Accueil</Nav.Link>
-            <Nav.Link href="#link" className="ms-3" style={{ marginRight: '1rem' }}>Apropos</Nav.Link>
+            <Nav.Link href="#link" className="ms-3" style={{ marginRight: '1rem' }}>A propos</Nav.Link>
             <NavDropdown title="Produits" id="basic-nav-dropdown" style={{ marginRight: '1rem' }}>
               <NavDropdown.Item href="#action/3.1">
                 Fruits
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
-                Legumes
+                Légumes
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Autres" id="basic-nav-dropdown" style={{ marginRight: '1rem' }}>
               <NavDropdown.Item href="#action/3.1">
-                Equipements
+                Équipements
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Terrains
@@ -48,15 +61,17 @@ function Navigation() {
             <div style={{ padding: '7px'}}>
               <LanguageSelector />
             </div>
-            <Nav.Link>
-              <img src={Cart} alt="Cart" style={{ width: '30px' }} />
+            <Nav.Link onClick={togglePanier}>
+              <img src={Cart} alt="Panier" style={{ width: '30px' }} />
             </Nav.Link>
-            <Nav.Link>
-              <img src={Call} alt="Call" style={{ width: '30px' }} />
+            <Nav.Link onClick={toggleAssistance}>
+              <img src={Call} alt="Appel" style={{ width: '30px' }} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
+      {showPanier && <Panier />}
+      {showAssistance && <AssistanceTelephonique />} 
     </Navbar>
   );
 }

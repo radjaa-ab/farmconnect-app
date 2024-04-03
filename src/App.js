@@ -10,9 +10,22 @@ import { toast, ToastContainer } from "react-toastify";
 import Message from "./Components/firebase_Messaging.js";
 import "react-toastify/dist/ReactToastify.css";
 import { getMessaging, onMessage } from "firebase/messaging";
+import React, { useEffect } from 'react';
+import { getFCMToken } from './firebase';
 
 
 function App() {
+  useEffect(() => {
+    const fetchToken = async () => {
+      const token = await getFCMToken();
+      console.log('Token FCM récupéré:', token);
+    };
+
+    fetchToken();
+  }, []);
+
+
+
   const messaging = getMessaging(); 
   onMessage(messaging, (payload) => {
     toast(<Message notification={payload.notification} />);
