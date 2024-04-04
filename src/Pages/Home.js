@@ -81,7 +81,6 @@ function Home() {
 
               <p style={{ fontSize: '1.2rem', lineHeight: '1.5' }}>
 {t("hello")}
-             **FarmConnect** connecte les agriculteurs, les consommateurs et les vendeurs au sein d'une communauté agricole dynamique. Trouvez des produits frais, des ressources et un réseau de soutien.
               </p>
 
               <button onClick={handlePlayPause} className="farmconnect-play-button">
