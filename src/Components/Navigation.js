@@ -39,8 +39,6 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
-            <Nav.Link href="/" className="ms-3" style={{ marginRight: '1rem' }}>Accueil</Nav.Link>
-            {/* Utilisez onClick pour gérer le clic sur le lien Settings */}
             <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleSettingsClick}>Settings</Nav.Link>
             <NavDropdown title="Produits" id="basic-nav-dropdown" style={{ marginRight: '1rem' }}>
               <NavDropdown.Item href="#action/3.1">

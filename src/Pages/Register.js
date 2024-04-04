@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Add from "../img/addAvatar.png";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
@@ -13,6 +12,15 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
 import PasswordStrengthBar from 'react-password-strength-bar';
+import { Modal, Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+const professions = {
+  Consommateur: "Consommateur",
+  Commercant: "Commercant",
+  Agriculteur: "Agriculteur",
+  Agriculteuringenieur: "Agriculteur ingenieur"
+};
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -40,18 +48,50 @@ const Register = () => {
     };
   }, []);
 
+  const [showModal, setShowModal] = useState(false);
+  const [profession, setProfession] = useState("");
+  const [justificatif, setJustificatif] = useState(null);
+
+  const handleCloseModal = () => setShowModal(false);
+  
+  const handleProfessionChange = (e) => {
+    setProfession(e.target.value);
+  };
+
+  const handleJustificatifChange = (e) => {
+    setJustificatif(e.target.files[0]);
+  };
+
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    console.log("Connexion en cours...");
+  
     signInWithPopup(auth, provider)
-      .then(() => {
-        alert("Connecté");
-      })
+    .then(async (result) => {
+      setShowModal(true);
+    
+      // Extraire les informations de l'utilisateur
+      const user = result.user;
+      const displayName = user.displayName;
+      const email = user.email;
+      const photoURL = user.photoURL;
+    
+      // Enregistrer les informations de l'utilisateur dans votre base de données
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayName,
+        email,
+        photoURL: photoURL,
+        profession: userDetails.profession, 
+        documentURL: photoURL,
+      });
+              })
       .catch((error) => {
-        console.log(error);
+        console.error("Erreur lors de la connexion avec Google", error);
       });
   };
 
+
+  
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setUserDetails((prevState) => ({
@@ -60,44 +100,49 @@ const Register = () => {
     }));
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
+  
       await sendEmailVerification(auth.currentUser);
-
+  
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
-
-      await uploadBytesResumable(storageRef, userDetails.proof).then(() => {
-        getDownloadURL(storageRef).then(async (downloadURL) => {
-          try {
-            await updateProfile(res.user, {
-              displayName,
-              photoURL: downloadURL,
-            });
-
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              displayName,
-              email,
-              photoURL: downloadURL,
-            });
-
-            await setDoc(doc(db, "userChats", res.user.uid), {});
-
-            navigate("/");
-
-            setShowLoginForm(true);
-          } catch (err) {
-            console.error(err);
-            setErr(true);
-            setLoading(false);
-          }
-        });
+  
+      await uploadBytesResumable(storageRef, userDetails.proof).then(async () => {
+        const downloadURL = await getDownloadURL(storageRef);
+  
+        try {
+          await updateProfile(res.user, {
+            displayName,
+            photoURL: downloadURL,
+            profession: userDetails.profession,
+            documentURL: downloadURL, 
+          });
+  
+          await setDoc(doc(db, "users", res.user.uid), {
+            uid: res.user.uid,
+            displayName,
+            email,
+            photoURL: downloadURL,
+            profession: userDetails.profession, // Ajout de la profession
+            documentURL: downloadURL, // Utilisation de la même URL pour le document pour cet exemple, vous pouvez modifier cela en conséquence
+          });
+  
+          await setDoc(doc(db, "userChats", res.user.uid), {});
+  
+          navigate("/");
+  
+          setShowLoginForm(true);
+        } catch (err) {
+          console.error(err);
+          setErr(true);
+          setLoading(false);
+        }
       });
     } catch (err) {
       console.error(err);
@@ -105,9 +150,48 @@ const Register = () => {
       setLoading(false);
     }
   };
+  
+  
 
   return (
     <div className="formContainer">
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Compléter votre profil</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group controlId="profession">
+            <Form.Label>Profession</Form.Label>
+            <Form.Select name="profession" value={profession} onChange={handleProfessionChange}>
+              <option value="">Sélectionnez une profession</option>
+              {Object.entries(professions).map(([key, value]) => {
+                return (
+                  <option key={key} value={key}>
+                    {value}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+          {profession && (
+            <Form.Group controlId="justificatif">
+              <Form.Label>Justificatif (fichier)</Form.Label>
+              <Form.Control type="file" onChange={handleJustificatifChange} />
+            </Form.Group>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Fermer
+          </Button>
+          <Link to="/SettingsPage">
+            <Button variant="primary">
+              Accéder aux paramètres
+            </Button>
+          </Link>
+        </Modal.Footer>
+      </Modal>
+
       {!isOnline && <Offline />} 
       {showLoginForm ? (
         <LoginComponent />

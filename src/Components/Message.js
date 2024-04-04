@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 
-
 const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -22,7 +21,7 @@ const Message = ({ message }) => {
   }, [message]);
 
   return (
-    <div className={`message ${message.senderId === currentUser.uid? "owner" : ""}`} ref={ref}>
+    <div className={`message ${message.senderId === currentUser.uid ? "owner" : ""}`} ref={ref}>
       <div className="messageInfo">
         <img
           src={
@@ -34,8 +33,8 @@ const Message = ({ message }) => {
         />
         <span>just now</span>
       </div>
-      <div className={`messageContent ${message.img? "has-image" : ""}`}>
-        {message.img && <img src={message.img} alt="" />}
+      <div className={`messageContent ${message.img ? "has-image" : ""}`}>
+        {message.img && <img src={message.img} alt="" style={{width: '100px'}} />} {/* Affichage de l'image si elle existe */}
         <p>{message.text}</p>
       </div>
     </div>

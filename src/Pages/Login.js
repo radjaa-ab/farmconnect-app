@@ -80,7 +80,7 @@ function Login({ initialValues, onChange }) {
         console.log(error);
       });
   };
-  
+
   const handleResetPassword = async (e) => {
     e.preventDefault();
     const emailInput = document.getElementById("reset-email");
@@ -119,7 +119,7 @@ function Login({ initialValues, onChange }) {
             <button onClick={handleRegisterClick} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '17px'}}>S'inscrire</button>
           </p>
           <p>
-            <button onClick={handleResetPassword} style={{border: 'none', backgroundColor: 'transparent', color: 'blue'}}>Mot de passe oublié ?</button>
+            <button onClick={handleResetPassword} style={{border: 'none', backgroundColor: 'transparent', color: 'white', fontWeight : 'bold'}}>Mot de passe oublié ?</button>
           </p>
           <Row>
             <Col>

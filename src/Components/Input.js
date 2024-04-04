@@ -16,7 +16,8 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const Input = () => {
   const [text, setText] = useState("");
-  const [img, setImg] = useState(null);
+  const [file, setFile] = useState(null);
+  const [image, setImage] = useState(null); // Nouveau state pour gérer l'image sélectionnée
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -29,32 +30,59 @@ const Input = () => {
     }
   };
 
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+  };
+
+  const handleImageChange = (event) => { 
+    const selectedImage = event.target.files[0];
+    setImage(selectedImage);
+  };
+
   const handleSend = async () => {
     if (data.chatId) {
-      // Envoyer le message
-      if (text.trim() !== "") {
+      if (text.trim() !== "" || file || image) {
+        const messageData = {
+          id: uuid(),
+          text: text.trim(),
+          senderId: currentUser.uid,
+          date: Timestamp.now(),
+        };
+  
+        if (file) {
+          const fileRef = ref(storage, `files/${file.name}`);
+          await uploadBytesResumable(fileRef, file);
+          const downloadURL = await getDownloadURL(fileRef);
+          messageData.fileURL = downloadURL;
+        }
+  
+        if (image) {
+          const imageRef = ref(storage, `images/${image.name}`);
+          await uploadBytesResumable(imageRef, image);
+          const downloadURL = await getDownloadURL(imageRef);
+          messageData.imageURL = downloadURL;
+        }
+  
         await updateDoc(doc(db, "chats", data.chatId), {
-          messages: arrayUnion({
-            id: uuid(),
-            text: text.trim(),
-            senderId: currentUser.uid,
-            date: Timestamp.now(),
-          }),
+          messages: arrayUnion(messageData),
         });
-
-        setText(""); // Effacer le champ de texte après l'envoi du message
+  
+        setText("");
+        setFile(null);
+        setImage(null);
       }
     } else {
       console.error("chatId is not available");
     }
   };
+  
 
   useEffect(() => {
-    // Faire défiler automatiquement vers le haut
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [data.messages]); // Déclencher l'effet chaque fois que les messages changent
+  }, [data.messages]);
 
   return (
     <div className="input">
@@ -62,23 +90,31 @@ const Input = () => {
         type="text"
         placeholder="Ecrire..."
         onChange={(e) => setText(e.target.value)}
-        onKeyUp={handleKeyUp} // Gérer l'événement onKeyUp pour détecter la touche "Entrée"
+        onKeyUp={handleKeyUp}
         value={text}
       />
       <div className="send">
-        <img src={Attach} alt="" />
+        <label htmlFor="fileInput">
+          <img src={Attach} alt="Attacher" />
+        </label>
         <input
           type="file"
+          id="fileInput"
           style={{ display: "none" }}
-          id="file"
-          onChange={(e) => setImg(e.target.files[0])}
+          onChange={handleFileChange}
         />
-        <label htmlFor="file">
-          <img src={Img} alt="" />
+        <label htmlFor="imageInput">
+          <img src={Img} alt="Image" />
         </label>
+        <input
+          type="file"
+          id="imageInput"
+          style={{ display: "none" }}
+          onChange={handleImageChange}
+        />
         <button onClick={handleSend}>Envoyer</button>
       </div>
-      <div ref={messagesEndRef} /> {/* Référence pour faire défiler vers le haut */}
+      <div ref={messagesEndRef} />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import BasicExample from '../Components/Navigation';
 import Login from '../Pages/Login';
 import farmers from '../Images/farmrs-removebg-preview.png';
 import '../Styles/Home.css';
-import Video from '../img/2758322-hd_1920_1080_30fps.mp4'
+import Video from '../img/vid.mp4'
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
 
@@ -65,10 +65,10 @@ function Home() {
             top: 0,
             left: 0,
             width: '100%',
-            height: '100vh',
+            height: 'auto',
             objectFit: 'cover', 
             zIndex: -1, 
-            filter: 'brightness(0.6)',
+            filter: 'brightness(0.4)',
 
            }}
         />
@@ -76,7 +76,7 @@ function Home() {
         <Col md={4} className='forms-container' >
             <Login />
           </Col>
-          <Col className="farmconnect-hero">
+          <Col className="farmconnect-hero" >
               <h2 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>FarmConnect</h2>
 
               <p style={{ fontSize: '1.2rem', lineHeight: '1.5' }}>

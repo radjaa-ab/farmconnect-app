@@ -22,7 +22,6 @@ const Messages = () => {
   }, [data.chatId]);
 
   useEffect(() => {
-    // Faire défiler vers le haut lorsque les messages sont mis à jour
     messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
   }, [messages]);
 
