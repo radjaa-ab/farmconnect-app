@@ -34,7 +34,7 @@ const Message = ({ message }) => {
         <span>just now</span>
       </div>
       <div className={`messageContent ${message.img ? "has-image" : ""}`}>
-        {message.img && <img src={message.img} alt="" style={{width: '100px'}} />} {/* Affichage de l'image si elle existe */}
+        {message.img && <img src={message.img} alt="" style={{width: '100px'}} />}
         <p>{message.text}</p>
       </div>
     </div>

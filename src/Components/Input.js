@@ -14,10 +14,14 @@ import { db, storage, messaging } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
+
+
 const Input = () => {
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
-  const [image, setImage] = useState(null); // Nouveau state pour gérer l'image sélectionnée
+  const [image, setImage] = useState(null);
+  const [fileSelected, setFileSelected] = useState(false);
+  const [imageSelected, setImageSelected] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -33,11 +37,13 @@ const Input = () => {
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
+    setFileSelected(true);
   };
 
   const handleImageChange = (event) => { 
     const selectedImage = event.target.files[0];
     setImage(selectedImage);
+    setImageSelected(true);
   };
 
   const handleSend = async () => {
@@ -71,12 +77,13 @@ const Input = () => {
         setText("");
         setFile(null);
         setImage(null);
+        setFileSelected(false);
+        setImageSelected(false);
       }
     } else {
       console.error("chatId is not available");
     }
   };
-  
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -93,7 +100,7 @@ const Input = () => {
         onKeyUp={handleKeyUp}
         value={text}
       />
-      <div className="send">
+      <div className={`send ${fileSelected ? 'file-selected' : ''} ${imageSelected ? 'image-selected' : ''}`}>
         <label htmlFor="fileInput">
           <img src={Attach} alt="Attacher" />
         </label>

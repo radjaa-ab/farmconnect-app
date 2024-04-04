@@ -51,6 +51,13 @@ const Register = () => {
   const [showModal, setShowModal] = useState(false);
   const [profession, setProfession] = useState("");
   const [justificatif, setJustificatif] = useState(null);
+  const [selectedProfession, setSelectedProfession] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleModalButtonClick = () => {
+    setSelectedProfession(profession);
+    setSelectedFile(justificatif);
+    handleCloseModal();
+  };
 
   const handleCloseModal = () => setShowModal(false);
   
@@ -66,41 +73,53 @@ const Register = () => {
     const provider = new GoogleAuthProvider();
   
     signInWithPopup(auth, provider)
-    .then(async (result) => {
-      setShowModal(true);
-    
-      // Extraire les informations de l'utilisateur
-      const user = result.user;
-      const displayName = user.displayName;
-      const email = user.email;
-      const photoURL = user.photoURL;
-    
-      // Enregistrer les informations de l'utilisateur dans votre base de données
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        displayName,
-        email,
-        photoURL: photoURL,
-        profession: userDetails.profession, 
-        documentURL: photoURL,
-      });
-              })
+      .then(async (result) => {
+        setShowModal(true);
+  
+        const user = result.user;
+        const displayName = user.displayName;
+        const email = user.email;
+        const photoURL = user.photoURL;
+        const { profession } = userDetails;
+        const document = userDetails.proof; 
+
+        setUserDetails({
+          ...userDetails,
+          displayName,
+          email,
+          photoURL,
+        });
+  
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          displayName,
+          email,
+          photoURL,
+          profession, 
+          documentURL: photoURL, 
+        });
+      })
       .catch((error) => {
         console.error("Erreur lors de la connexion avec Google", error);
       });
   };
-
-
   
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setUserDetails((prevState) => ({
-      ...prevState,
-      [name]: name === "proof" ? files[0] : value,
-    }));
+
+    if (name === "profession" || name === "proof") {
+      setUserDetails((prevState) => ({
+        ...prevState,
+        [name]: name === "proof" ? files[0] : value,
+      }));
+    } else {
+      setUserDetails((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -129,8 +148,8 @@ const Register = () => {
             displayName,
             email,
             photoURL: downloadURL,
-            profession: userDetails.profession, // Ajout de la profession
-            documentURL: downloadURL, // Utilisation de la même URL pour le document pour cet exemple, vous pouvez modifier cela en conséquence
+            profession: userDetails.profession, 
+            documentURL: downloadURL,
           });
   
           await setDoc(doc(db, "userChats", res.user.uid), {});
@@ -150,8 +169,6 @@ const Register = () => {
       setLoading(false);
     }
   };
-  
-  
 
   return (
     <div className="formContainer">
@@ -173,7 +190,7 @@ const Register = () => {
               })}
             </Form.Select>
           </Form.Group>
-          {profession && (
+          {profession && profession !== "Consommateur" && (
             <Form.Group controlId="justificatif">
               <Form.Label>Justificatif (fichier)</Form.Label>
               <Form.Control type="file" onChange={handleJustificatifChange} />
@@ -185,7 +202,7 @@ const Register = () => {
             Fermer
           </Button>
           <Link to="/SettingsPage">
-            <Button variant="primary">
+            <Button variant="primary" onClick={handleModalButtonClick}>
               Accéder aux paramètres
             </Button>
           </Link>
@@ -252,17 +269,18 @@ const Register = () => {
               id="file"
             />
             <Row>
-            <Col>
-            <label htmlFor="file">
-              <img src={Add} alt="" />
-              <span>Ajouter un avatar</span>
-            </label>            </Col>
-            <Col>
-              <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                <img src={GoogleSignin} alt="Se connecter avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
-              </button>
-            </Col>
-          </Row>
+              <Col>
+                <label htmlFor="file">
+                  <img src={Add} alt="" />
+                  <span>Ajouter un avatar</span>
+                </label>
+              </Col>
+              <Col>
+                <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
+                  <img src={GoogleSignin} alt="Se connecter avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+                </button>
+              </Col>
+            </Row>
             <button disabled={loading}>S'inscrire</button>
             {loading && "Téléchargement et compression de l'image en cours, veuillez patienter..."}
             {err && <span>Quelque chose s'est mal passé</span>}

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase"; // Assurez-vous d'importer correctement votre instance de firebase
-import { AuthContext } from "../context/AuthContext"; // Assurez-vous d'importer correctement le contexte d'authentification
-import { Form, FloatingLabel, Button } from 'react-bootstrap'; // Import des composants de formulaire de React Bootstrap
+import { db } from "../firebase"; 
+import { AuthContext } from "../context/AuthContext"; 
+import { Form, FloatingLabel, Button } from 'react-bootstrap';
 
 function InfoPersonnelles() {
-  const authContext = useContext(AuthContext); // Utilisation du contexte d'authentification
-  const currentUser = authContext.currentUser; // Récupération de l'utilisateur actuellement connecté
+  const authContext = useContext(AuthContext); 
+  const currentUser = authContext.currentUser; 
 
   const [userInformation, setUserInformation] = useState({
     displayName: "",
@@ -19,8 +19,8 @@ function InfoPersonnelles() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (currentUser) { // Vérification que currentUser est défini
-          const userDoc = await getDoc(doc(db, "users", currentUser.uid)); // Utilisation de l'ID de l'utilisateur actuellement connecté
+        if (currentUser) { 
+          const userDoc = await getDoc(doc(db, "users", currentUser.uid)); 
           if (userDoc.exists()) {
             const userData = userDoc.data();
             setUserInformation({
