@@ -6,7 +6,7 @@ import InfoPersonnelles from '../Components/InfoPersonnelles';
 import Coupons from '../Components/Coupons';
 import Support from '../Components/Support';
 import Termes from '../Components/Termes';
-
+import Panier from '../Components/Panier';
 const SettingsPage = () => {
   const [selectedComponent, setSelectedComponent] = useState(null);
 
@@ -23,8 +23,10 @@ const SettingsPage = () => {
         <Col>
           {selectedComponent === 'InfoPersonnelles' && <InfoPersonnelles />}
           {selectedComponent === 'Coupons' && <Coupons />}
+          {selectedComponent === 'Panier' && <Panier />}
           {selectedComponent === 'Support' && <Support />}
           {selectedComponent === 'Termes' && <Termes />}
+
         </Col>
       </Row>
     </div>

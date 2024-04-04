@@ -11,8 +11,13 @@ import Message from "./Components/firebase_Messaging.js";
 import "react-toastify/dist/ReactToastify.css";
 import { getMessaging, onMessage, getToken } from "firebase/messaging";
 import { messaging } from "./firebase";
+import Panier from './Components/Panier';
+import AssistanceTelephonique from './Components/AssistanceTelephonique';
+
+
+
+
 async function requestPermission() {
-  //requesting permission using Notification API
   const permission = await Notification.requestPermission();
 
   if (permission === "granted") {
@@ -61,7 +66,7 @@ function App() {
           />
           <Route path="Home/" element={<Home />} />
           <Route path="SettingsPage/" element={<SettingsPage />} />
-          
+          <Route path="/Panier" element={< Panier />} />
         </Route>
       </Routes>
     </BrowserRouter>

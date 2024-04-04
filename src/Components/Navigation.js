@@ -1,46 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchBar from './SearchBar';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from '../Images/logo.jpg';
 import Cart from '../Images/chariot-de-chariot.png';
 import Call from '../Images/service-client.png';
-import '../Styles/Home.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import { useNavigate } from 'react-router-dom'; // Importez useNavigate depuis react-router-dom
+import SearchBar from './SearchBar';
 import LanguageSelector from './LanguageSelector';
-import Panier from './Panier'; 
-import AssistanceTelephonique from './AssistanceTelephonique';
+import '../Styles/Home.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navigation() {
   const ProductsPlaceholder = 'Rechercher des produits';
-  const [showPanier, setShowPanier] = useState(false);
-  const [showAssistance, setShowAssistance] = useState(false);
+  const navigate = useNavigate(); // Initialisez useNavigate
 
-  const togglePanier = () => {
-    setShowPanier(!showPanier);
-    setShowAssistance(false);
+  // Fonction de gestion du clic sur le lien des paramètres
+  const handleSettingsClick = () => {
+    navigate('/SettingsPage'); // Redirigez l'utilisateur vers la page des paramètres
   };
 
-  const toggleAssistance = () => {
-    setShowAssistance(!showAssistance);
-    setShowPanier(false);
+  const handlePClick =  () => {
+    navigate('/Panier') ;// Redirigez l
+  }
+  // Fonction de gestion du clic sur l'image d'appel
+  const handleCallClick = () => {
+    window.location.href = 'tel:0657783698'; // Appel vers le numéro 0657783698
   };
 
   return (
     <Navbar expand="lg" className='bg-body-tertiary'>
       <Container style={{ padding: "0%" }}>
-        <Navbar.Brand href="#home" className="d-flex align-items-center brand">
+        <Navbar.Brand href="/" className="d-flex align-items-center brand">
           <img src={Image} alt="image" />
           <span className="brand-text">FarmConnect</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
-            <Nav.Link href="#home" className="ms-3" style={{ marginRight: '1rem' }}>Accueil</Nav.Link>
-            <Nav.Link href="#link" className="ms-3" style={{ marginRight: '1rem' }}>A propos</Nav.Link>
+            <Nav.Link href="/" className="ms-3" style={{ marginRight: '1rem' }}>Accueil</Nav.Link>
+            {/* Utilisez onClick pour gérer le clic sur le lien Settings */}
+            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleSettingsClick}>Settings</Nav.Link>
             <NavDropdown title="Produits" id="basic-nav-dropdown" style={{ marginRight: '1rem' }}>
               <NavDropdown.Item href="#action/3.1">
                 Fruits
@@ -61,17 +62,16 @@ function Navigation() {
             <div style={{ padding: '7px'}}>
               <LanguageSelector />
             </div>
-            <Nav.Link onClick={togglePanier}>
-              <img src={Cart} alt="Panier" style={{ width: '30px' }} />
+            <Nav.Link  onClick={handlePClick}>
+              <img src={Cart} alt="Panier" style={{ width: '25px' }} />
             </Nav.Link>
-            <Nav.Link onClick={toggleAssistance}>
-              <img src={Call} alt="Appel" style={{ width: '30px' }} />
+            {/* Ajoutez le gestionnaire d'événements onClick à l'image d'appel */}
+            <Nav.Link onClick={handleCallClick}>
+              <img src={Call} alt="Appel" style={{ width: '25px' }} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
-      {showPanier && <Panier />}
-      {showAssistance && <AssistanceTelephonique />} 
     </Navbar>
   );
 }

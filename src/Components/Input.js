@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import Img from "../img/img.png";
 import Attach from "../img/attach.png";
 import { AuthContext } from "../context/AuthContext";
@@ -10,18 +10,18 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { db, storage, messaging } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { getMessaging } from "firebase/messaging";
-const Input = () => {
-  const messaging = getMessaging();
 
+const Input = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+
+  const messagesEndRef = useRef(null);
 
   const handleKeyUp = (event) => {
     if (event.key === "Enter") {
@@ -31,79 +31,30 @@ const Input = () => {
 
   const handleSend = async () => {
     if (data.chatId) {
-      if (img) {
-        const storageRef = ref(storage, uuid());
-  
-        const uploadTask = uploadBytesResumable(storageRef, img);
-  
-        uploadTask.on(
-          (error) => {
-          },
-          async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: currentUser.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
-            });
-  
-            await messaging.send({
-              notification: {
-                title: "Nouveau message",
-                body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
-              },
-              data: {
-                click_action: `http://localhost:3000/chat/${data.chatId}`,
-              },
-            });
-          }
-        );
-      } else {
+      // Envoyer le message
+      if (text.trim() !== "") {
         await updateDoc(doc(db, "chats", data.chatId), {
           messages: arrayUnion({
             id: uuid(),
-            text,
+            text: text.trim(),
             senderId: currentUser.uid,
             date: Timestamp.now(),
           }),
         });
-  
-        await messaging.send({
-          notification: {
-            title: "Nouveau message",
-            body: `Vous avez reçu un nouveau message de ${currentUser.displayName}`,
-          },
-          data: {
-            click_action: `http://localhost:3000/chat/${data.chatId}`,
-          },
-        });
+
+        setText(""); // Effacer le champ de texte après l'envoi du message
       }
-  
-      await updateDoc(doc(db, "userChats", currentUser.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-  
-      await updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-  
-      setText("");
-      setImg(null);
     } else {
       console.error("chatId is not available");
     }
   };
 
+  useEffect(() => {
+    // Faire défiler automatiquement vers le haut
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [data.messages]); // Déclencher l'effet chaque fois que les messages changent
 
   return (
     <div className="input">
@@ -111,7 +62,7 @@ const Input = () => {
         type="text"
         placeholder="Ecrire..."
         onChange={(e) => setText(e.target.value)}
-        onKeyUp={handleKeyUp}
+        onKeyUp={handleKeyUp} // Gérer l'événement onKeyUp pour détecter la touche "Entrée"
         value={text}
       />
       <div className="send">
@@ -127,6 +78,7 @@ const Input = () => {
         </label>
         <button onClick={handleSend}>Envoyer</button>
       </div>
+      <div ref={messagesEndRef} /> {/* Référence pour faire défiler vers le haut */}
     </div>
   );
 };

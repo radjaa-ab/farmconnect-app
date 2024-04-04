@@ -80,15 +80,22 @@ function Login({ initialValues, onChange }) {
         console.log(error);
       });
   };
-
+  
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    const email = e.target[0].value;
-
+    const emailInput = document.getElementById("reset-email");
+    if (!emailInput || !emailInput.value) {
+      console.error("Email address is required to reset password.");
+      return;
+    }
+  
+    const email = emailInput.value;
+  
     try {
       await sendPasswordResetEmail(auth, email);
+      console.log("Password reset email sent successfully.");
     } catch (error) {
-      console.error("Erreur lors de la réinitialisation du mot de passe :", error);
+      console.error("Error sending password reset email:", error);
     }
   };
 
@@ -101,8 +108,8 @@ function Login({ initialValues, onChange }) {
         <div className="formWrapper">
           <span className="logo">Commencez maintenant</span>
           <form onSubmit={handleSubmit}>
-            <input type="email" placeholder="email" />
-            <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
+          <input type="email" id="reset-email" name="email" placeholder="Email address" required />
+          <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
             <PasswordStrengthBar password={password} />
             <button>Se connecter</button>
             {user && <span>Quelque chose s'est mal passé</span>}

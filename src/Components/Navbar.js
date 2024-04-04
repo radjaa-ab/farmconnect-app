@@ -1,11 +1,10 @@
 import React from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { app, auth } from '../firebase'; // Importez l'initialisation de Firebase
 
 const Navbar = () => {
 
   const handleLogout = () => {
-    firebase.auth().signOut().then(() => {
+    auth.signOut().then(() => {
       console.log("Déconnexion réussie");
     }).catch((error) => {
       console.log("Erreur lors de la déconnexion :", error);
@@ -18,7 +17,7 @@ const Navbar = () => {
       <div className="user">
         <img alt="" />
         <span>FarmConnect</span>
-        <button onClick={handleLogout}>Déconnexion</button>
+        <button style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100px' }} onClick={handleLogout}>Déconnexion</button>
       </div>
     </div>
   );
