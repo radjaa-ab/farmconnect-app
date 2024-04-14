@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Add from "../img/addAvatar.png";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
@@ -12,17 +13,16 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
 import PasswordStrengthBar from 'react-password-strength-bar';
-import { Modal, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-
-const professions = {
-  Consommateur: "Consommateur",
-  Commercant: "Commercant",
-  Agriculteur: "Agriculteur",
-  Agriculteuringenieur: "Agriculteur ingenieur"
-};
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 const Register = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -48,120 +48,74 @@ const Register = () => {
     };
   }, []);
 
-  const [showModal, setShowModal] = useState(false);
-  const [profession, setProfession] = useState("");
-  const [justificatif, setJustificatif] = useState(null);
-  const [selectedProfession, setSelectedProfession] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const handleModalButtonClick = () => {
-    setSelectedProfession(profession);
-    setSelectedFile(justificatif);
-    handleCloseModal();
-  };
-
-  const handleCloseModal = () => setShowModal(false);
-  
-  const handleProfessionChange = (e) => {
-    setProfession(e.target.value);
-  };
-
-  const handleJustificatifChange = (e) => {
-    setJustificatif(e.target.files[0]);
-  };
-
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-  
+    console.log(t("Connecting..."));
     signInWithPopup(auth, provider)
-      .then(async (result) => {
-        setShowModal(true);
-  
-        const user = result.user;
-        const displayName = user.displayName;
-        const email = user.email;
-        const photoURL = user.photoURL;
-        const { profession } = userDetails;
-        const document = userDetails.proof; 
-
-        setUserDetails({
-          ...userDetails,
-          displayName,
-          email,
-          photoURL,
-        });
-  
-        await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          displayName,
-          email,
-          photoURL,
-          profession, 
-          documentURL: photoURL, 
-        });
+      .then(() => {
+        alert(t("connected"));
       })
       .catch((error) => {
-        console.error("Erreur lors de la connexion avec Google", error);
+        console.log(t("error"));
       });
   };
-  
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-
-    if (name === "profession" || name === "proof") {
-      setUserDetails((prevState) => ({
-        ...prevState,
-        [name]: name === "proof" ? files[0] : value,
-      }));
-    } else {
-      setUserDetails((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+    setUserDetails((prevState) => ({
+      ...prevState,
+      [name]: name === t ("proof") ? files[0] : value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
+      // Créer l'utilisateur
       const res = await createUserWithEmailAndPassword(auth, email, password);
-  
+
+      // Envoyer la vérification par e-mail
       await sendEmailVerification(auth.currentUser);
-  
+
+      // Créer un nom d'image unique
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
-  
-      await uploadBytesResumable(storageRef, userDetails.proof).then(async () => {
-        const downloadURL = await getDownloadURL(storageRef);
-  
-        try {
-          await updateProfile(res.user, {
-            displayName,
-            photoURL: downloadURL,
-            profession: userDetails.profession,
-            documentURL: downloadURL, 
-          });
-  
-          await setDoc(doc(db, "users", res.user.uid), {
-            uid: res.user.uid,
-            displayName,
-            email,
-            photoURL: downloadURL,
-            profession: userDetails.profession, 
-            documentURL: downloadURL,
-          });
-  
-          await setDoc(doc(db, "userChats", res.user.uid), {});
-  
-          navigate("/");
-  
-          setShowLoginForm(true);
-        } catch (err) {
-          console.error(err);
-          setErr(true);
-          setLoading(false);
-        }
+
+      // Télécharger l'image vers le stockage
+      await uploadBytesResumable(storageRef, userDetails.proof).then(() => {
+        // Obtenir l'URL de téléchargement de l'image
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            // Mettre à jour le profil de l'utilisateur
+            await updateProfile(res.user, {
+              displayName,
+              photoURL: downloadURL,
+            });
+
+            // Créer l'utilisateur dans Firestore
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL: downloadURL,
+            });
+
+            // Créer des conversations utilisateur vides dans Firestore
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+
+            // Naviguer vers "/"
+            navigate("/");
+
+            // Afficher le composant de connexion après une inscription réussie
+            setShowLoginForm(true);
+          } catch (err) {
+            console.error(err);
+            setErr(true);
+            setLoading(false);
+          }
+        });
       });
     } catch (err) {
       console.error(err);
@@ -172,87 +126,50 @@ const Register = () => {
 
   return (
     <div className="formContainer">
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Compléter votre profil</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group controlId="profession">
-            <Form.Label>Profession</Form.Label>
-            <Form.Select name="profession" value={profession} onChange={handleProfessionChange}>
-              <option value="">Sélectionnez une profession</option>
-              {Object.entries(professions).map(([key, value]) => {
-                return (
-                  <option key={key} value={key}>
-                    {value}
-                  </option>
-                );
-              })}
-            </Form.Select>
-          </Form.Group>
-          {profession && profession !== "Consommateur" && (
-            <Form.Group controlId="justificatif">
-              <Form.Label>Justificatif (fichier)</Form.Label>
-              <Form.Control type="file" onChange={handleJustificatifChange} />
-            </Form.Group>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Fermer
-          </Button>
-          <Link to="/SettingsPage">
-            <Button variant="primary" onClick={handleModalButtonClick}>
-              Accéder aux paramètres
-            </Button>
-          </Link>
-        </Modal.Footer>
-      </Modal>
-
       {!isOnline && <Offline />} 
       {showLoginForm ? (
         <LoginComponent />
       ) : (
         <div className="formWrapper" style={{ marginTop: '-70px'}}>
-          <span className="logo">Commencez maintenant</span>
+          <span className="logo">{t("start now")}</span>
           <form onSubmit={handleSubmit}>
             <input
               required
               type="text"
-              placeholder="Nom affiché"
+              placeholder={t("display name")}
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
             />
             <input
               required
               type="email"
-              placeholder="Email"
+              placeholder={t("email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               required
               type="password"
-              placeholder="Mot de passe"
+              placeholder={t("password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <PasswordStrengthBar password={password} />
             <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProfession">
-              <Form.Label>Profession</Form.Label>
+              <Form.Label>{t("profession")}</Form.Label>
               <Form.Select name="profession" value={userDetails.profession} onChange={handleChange} className="custom-input">
-                <option value="">Sélectionnez une profession</option>
-                <option value="commerçant">Commerçant</option>
-                <option value="consommateur">Consommateur</option>
-                <option value="ingénieur_agriculteur">Ingénieur Agricole</option>
-                <option value="agriculteur">Agriculteur</option>
+                <option value="">{t("Select a profession")}</option>
+                <option value="commerçant">{t("merchant")}</option>
+                <option value="consommateur">{t("Consumer")}</option>
+                <option value="ingénieur_agriculteur">{t("ingénieur Agricole")}</option>
+                <option value="agriculteur">{t("farmer")}</option>
               </Form.Select>
             </Form.Group>
             {userDetails.profession === 'commerçant' ||
               userDetails.profession === 'ingénieur_agriculteur' ||
               userDetails.profession === 'agriculteur' ? (
               <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProof">
-                <Form.Label>Justificatif (carte d'agriculteur, diplome d'ingenieur, registre de commerce)</Form.Label>
+                <Form.Label>{t("Proof (farmer’s card, engineer’s diploma, trade register)")}</Form.Label>
                 <Form.Control
                   required
                   type="file"
@@ -269,25 +186,24 @@ const Register = () => {
               id="file"
             />
             <Row>
-              <Col>
-                <label htmlFor="file">
-                  <img src={Add} alt="" />
-                  <span>Ajouter un avatar</span>
-                </label>
-              </Col>
-              <Col>
-                <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                  <img src={GoogleSignin} alt="Se connecter avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
-                </button>
-              </Col>
-            </Row>
-            <button disabled={loading}>S'inscrire</button>
-            {loading && "Téléchargement et compression de l'image en cours, veuillez patienter..."}
-            {err && <span>Quelque chose s'est mal passé</span>}
+            <Col>
+            <label htmlFor="file">
+              <img src={Add} alt="" />
+              <span>{t("add an avatar")}</span>
+            </label>            </Col>
+            <Col>
+              <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
+                <img src={GoogleSignin} alt={t("login with Google")} type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+              </button>
+            </Col>
+          </Row>
+            <button disabled={loading}>{t("register")}</button>
+            {loading && t("Downloading and compressing the current image, please wait...")}
+            {err && <span>{t("Something went wrong")}</span>}
           </form>
           <p>
-            Vous avez déjà un compte ?{" "}
-            <button onClick={() => setShowLoginForm(true)} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px'}}>Se connecter</button>
+           {t("already have an account?")}{" "}
+            <button onClick={() => setShowLoginForm(true)} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px'}}>{t("login")}</button>
           </p>
         </div>
       )}
