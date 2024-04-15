@@ -51,7 +51,7 @@ function Register() {
       <form onSubmit={handleSignUp}>
         <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Nom d'utilisateur" required />
         <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" required />
-        <input type="text" value={contact} onChange={(e) => setContact(e.target.value)} placeholder="Email/Téléphone" required />
+        <input type="text" value={contact} onChange={(e) => setContact(e.target.value)} placeholder="Téléphone" required />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mot de passe" required />
         <select value={profession} onChange={handleProfessionChange} required>
           <option value="">Choisissez une profession</option>
