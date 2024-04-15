@@ -46,10 +46,11 @@ function Register() {
   };
 
   return (
-    <div className="formWrapper" style={{marginTop: '-50px'}}>
+    <div className="formWrapper" style={{marginTop: '-80px'}}>
       <span className="logo">Inscription</span>
       <form onSubmit={handleSignUp}>
         <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Nom d'utilisateur" required />
+        <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Wilaya" required />
         <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" required />
         <input type="text" value={contact} onChange={(e) => setContact(e.target.value)} placeholder="Téléphone" required />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mot de passe" required />
