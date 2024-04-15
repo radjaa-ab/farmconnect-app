@@ -95,15 +95,15 @@
 
 .formContainer .formWrapper form button {
   background-color: #288f43;
-  color: rgba(0, 0, 0, 0.791);
+  color: rgba(252, 250, 250, 0.791);
   width: 111px;
   border-radius: 10px;
   padding: 5px;
   font-weight: bold;
   font-size: 15px;
-  border-color: white;
   cursor: pointer;
   transition: all;
+  border: none;
 
 }
 

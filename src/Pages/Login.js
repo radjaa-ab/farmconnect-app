@@ -108,15 +108,13 @@ function Login({ initialValues, onChange }) {
         <div className="formWrapper">
           <span className="logo">Commencez maintenant</span>
           <form onSubmit={handleSubmit}>
-          <input type="email" id="reset-email" name="email" placeholder="Email address" required />
+          <input type="Text" name="username" placeholder="Nom d'utilisateur" required />
           <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
-            <PasswordStrengthBar password={password} />
             <button>Se connecter</button>
-            {user && <span>Quelque chose s'est mal passé</span>}
           </form>
           <p>
             Vous n'avez pas de compte ?{" "}
-            <button onClick={handleRegisterClick} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '17px'}}>S'inscrire</button>
+            <button onClick={handleRegisterClick} style={{border: 'none', backgroundColor: 'transparent', color: '#32CD32', fontWeight: 'bold', fontSize: '17px'}}>S'inscrire</button>
           </p>
           <p>
             <button onClick={handleResetPassword} style={{border: 'none', backgroundColor: 'transparent', color: 'white', fontWeight : 'bold'}}>Mot de passe oublié ?</button>
