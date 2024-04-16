@@ -3,8 +3,15 @@ import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/
 import { auth } from "../firebase";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 function Register() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -14,27 +21,10 @@ function Register() {
   const [username, setUsername] = useState("");
   const [profession, setProfession] = useState("");
   const [file, setFile] = useState(false);
-  const [showFileInput, setShowFileInput] = useState(false);
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-
-  useEffect(() => {
-    const handleOnlineStatusChange = () => {
-      setIsOnline(navigator.onLine);
-    };
-
-    window.addEventListener("online", handleOnlineStatusChange);
-    window.addEventListener("offline", handleOnlineStatusChange);
-
-    return () => {
-      window.removeEventListener("online", handleOnlineStatusChange);
-      window.removeEventListener("offline", handleOnlineStatusChange);
-    };
-  }, []);
-
-  
+  const [avatar, setAvatar] = useState(null);
+  const [showFileInput, setShowFileInput] = useState(false); // State to control visibility of file input
+  const [error, setError] = useState(null); // State to handle errors during signup
+  const [successMessage, setSuccessMessage] = useState(""); // State to handle success message
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -42,7 +32,7 @@ function Register() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(auth.currentUser);
       // Additional code to handle other fields and file uploads
-      setSuccessMessage("Inscription réussie ! Veuillez vérifier votre e-mail pour activer votre compte.");
+      setSuccessMessage(t("Successful registration! Please check your email to activate your account."));
     } catch (error) {
       setError(t("Error while registering") + error.message);
     }
@@ -53,38 +43,44 @@ function Register() {
     setFile(file);
   };
 
+  const handleAvatarChange = (e) => {
+    const avatar = e.target.files[0];
+    setAvatar(avatar);
+  };
+
   const handleProfessionChange = (e) => {
     const selectedProfession = e.target.value;
     setProfession(selectedProfession);
+    // Show file input if selected profession requires it
     setShowFileInput(["commerçant", "agriculteur", "ingenieur"].includes(selectedProfession));
   };
 
   return (
     <div className="formWrapper" style={{marginTop: '-80px'}}>
-      <span className="logo">Inscription</span>
+      <span className="logo">{t("registration")}</span>
       {error && <div className="error">{error}</div>}
       {successMessage && <div className="success">{successMessage}</div>}
       <form onSubmit={handleSignUp}>
-        <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Nom d'utilisateur" required />
-        <input type="text" value={ville} onChange={(e) => setVille(e.target.value)} placeholder="Wilaya" required />
-        <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" required />
-        <input type="email" value={contact} onChange={(e) => setContact(e.target.value)} placeholder="email" required />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mot de passe" required />
+        <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={t("username")} required />
+        <input type="text" value={ville} onChange={(e) => setVille(e.target.value)} placeholder={t("City")} required />
+        <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder={t("Age")} required />
+        <input type="email" value={contact} onChange={(e) => setContact(e.target.value)} placeholder={t("email")} required />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder={t("password")} required />
         <select value={profession} onChange={handleProfessionChange} required>
-          <option value="">Choisissez une profession</option>
-          <option value="commerçant">Commerçant</option>
-          <option value="agriculteur">Agriculteur</option>
-          <option value="ingenieur">Ingénieur</option>
-          <option value="consomateur">Consomateur</option>
+          <option value="">{t("Select a profession")}</option>
+          <option value="commerçant">{t("merchant")}</option>
+          <option value="agriculteur">{t("farmer")}</option>
+          <option value="ingenieur">{t("ingénieur Agricole")}</option>
+          <option value="consomateur">{t("Consumer")}</option>
         </select>
         {showFileInput && ( 
           <div>
-            <label>Inserer votre fichier : 
+            <label>{t("Insert your file : ")}
           <input type="file" onChange={handleFileChange} required />
           </label>
           </div>
         )}
-        <button>S'inscrire</button>
+        <button>{t("register")}</button>
       </form>
     </div>
   );
