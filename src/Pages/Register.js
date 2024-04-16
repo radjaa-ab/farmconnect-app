@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate, Link } from "react-router-dom"; // Importer Link
+import { useNavigate, Link } from "react-router-dom";
+import PasswordStrengthBar from 'react-password-strength-bar'; // Importer PasswordStrengthBar
 
 function Register() {
   const navigate = useNavigate();
@@ -15,18 +16,18 @@ function Register() {
   const [username, setUsername] = useState("");
   const [profession, setProfession] = useState("");
   const [file, setFile] = useState(false);
-  const [showFileInput, setShowFileInput] = useState(false); // State to control visibility of file input
-  const [error, setError] = useState(null); // State to handle errors during signup
-  const [successMessage, setSuccessMessage] = useState(""); // State to handle success message
+  const [showFileInput, setShowFileInput] = useState(false);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(auth.currentUser);
-      // Additional code to handle other fields and file uploads
       setSuccessMessage("Inscription réussie ! Veuillez vérifier votre e-mail pour activer votre compte.");
-      navigate("/Products"); // Naviguer vers la page des produits après l'inscription réussie
+      navigate("/Products");
 
     } catch (error) {
       setError("Erreur lors de l'inscription : " + error.message);
@@ -41,9 +42,9 @@ function Register() {
   const handleProfessionChange = (e) => {
     const selectedProfession = e.target.value;
     setProfession(selectedProfession);
-    // Show file input if selected profession requires it
     setShowFileInput(["commerçant", "agriculteur", "ingenieur"].includes(selectedProfession));
   };
+  
 
   return (
     <div className="formWrapper" style={{marginTop: '-80px'}}>
@@ -56,6 +57,7 @@ function Register() {
         <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" required />
         <input type="email" value={contact} onChange={(e) => setContact(e.target.value)} placeholder="email" required />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mot de passe" required />
+        <PasswordStrengthBar password={password} /> {/* Barre de force du mot de passe */}
         <select value={profession} onChange={handleProfessionChange} required>
           <option value="">Choisissez une profession</option>
           <option value="commerçant">Commerçant</option>
@@ -63,16 +65,22 @@ function Register() {
           <option value="ingenieur">Ingénieur</option>
           <option value="consomateur">Consommateur</option>
         </select>
-        {showFileInput && ( 
+        {showFileInput && (
           <div>
             <label>Inserer votre fichier : 
-          <input type="file" onChange={handleFileChange} required />
-          </label>
+              <input type="file" onChange={handleFileChange} required />
+            </label>
           </div>
         )}
         <button>S'inscrire</button>
+        
       </form>
+          <p>
+            Vous avez déjà un compte ?{" "}
+            <button onClick={() => setShowLoginForm(true)} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px'}}>Se connecter</button>
+          </p>
     </div>
+    
   );
 };
 

@@ -118,6 +118,7 @@ function Login({ initialValues, onChange }) {
           <form onSubmit={handleSubmit}>
           <input type="Text" name="username" placeholder="Nom d'utilisateur" required />
           <input type="password" placeholder="Mot de passe" onChange={handlePasswordChange} />
+          <PasswordStrengthBar password={password} />
             <button>Se connecter</button>
           </form>
           <p>
