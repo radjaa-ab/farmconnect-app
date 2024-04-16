@@ -68,6 +68,8 @@ function App() {
           <Route path="SettingsPage/" element={<SettingsPage />} />
           <Route path="/Panier" element={< Panier />} />
           <Route path="Maain" element= {<Maain/>} />
+
+          <Route path="Products" element= {<Products/>} />
         </Route>
       </Routes>
     </BrowserRouter>
