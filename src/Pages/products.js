@@ -27,6 +27,7 @@ function ProductsPage() {
       {products.map((product) => (
         <ProductItem key={product.id} product={product} />
       ))}
+      <ProductItem />
     </div>
   );
 }
