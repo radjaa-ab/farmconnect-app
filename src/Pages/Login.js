@@ -121,8 +121,8 @@ function Login({ initialValues, onChange }) {
         <div className="formWrapper">
           <span className="logo">{t("start now")}</span>
           <form onSubmit={handleSubmit}>
-          <input type="Text" name="username" placeholder="Nom d'utilisateur" required />
-          <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
+          <input type="Text" name="username" placeholder={t("username")} required />
+          <input type="password" placeholder={t("password")} onChange={handlePasswordChange} />
             <button>Se connecter</button>
           </form>
           <p>
