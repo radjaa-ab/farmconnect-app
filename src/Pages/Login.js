@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Import Link
+import { useNavigate, Link } from "react-router-dom"; // Importer Link
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -40,9 +40,10 @@ function Login({ initialValues, onChange }) {
 
     try {
       await signInWithEmailAndPassword(auth, email, enteredPassword);
-      navigate("/products"); // Navigate to products page upon successful login
+      navigate("/Products"); // Naviguer vers la page des produits après la connexion réussie
     } catch (err) {
       console.error(err);
+      alert("Erreur lors de la connexion : vérifiez votre nom d'utilisateur et votre mot de passe.");
     }
   };
 
@@ -58,8 +59,10 @@ function Login({ initialValues, onChange }) {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(auth.currentUser);
+      alert("Inscription réussie ! Veuillez vérifier votre e-mail pour activer votre compte.");
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
+      alert("Erreur lors de l'inscription : " + error.message);
     }
   };
 
@@ -75,9 +78,11 @@ function Login({ initialValues, onChange }) {
     signInWithPopup(auth, provider)
       .then(() => {
         alert("Connecté");
+        navigate("/Products"); // Naviguer vers la page des produits après la connexion réussie
       })
       .catch((error) => {
         console.log(error);
+        alert("Erreur lors de la connexion avec Google : " + error.message);
       });
   };
 
@@ -85,7 +90,8 @@ function Login({ initialValues, onChange }) {
     e.preventDefault();
     const emailInput = document.getElementById("reset-email");
     if (!emailInput || !emailInput.value) {
-      console.error("Email address is required to reset password.");
+      console.error("Adresse e-mail requise pour réinitialiser le mot de passe.");
+      alert("Veuillez fournir une adresse e-mail pour réinitialiser le mot de passe.");
       return;
     }
   
@@ -93,9 +99,11 @@ function Login({ initialValues, onChange }) {
   
     try {
       await sendPasswordResetEmail(auth, email);
-      console.log("Password reset email sent successfully.");
+      console.log("E-mail de réinitialisation du mot de passe envoyé avec succès.");
+      alert("Un e-mail de réinitialisation du mot de passe a été envoyé à l'adresse fournie.");
     } catch (error) {
-      console.error("Error sending password reset email:", error);
+      console.error("Erreur lors de l'envoi de l'e-mail de réinitialisation du mot de passe :", error);
+      alert("Erreur lors de l'envoi de l'e-mail de réinitialisation du mot de passe : " + error.message);
     }
   };
 
@@ -109,7 +117,7 @@ function Login({ initialValues, onChange }) {
           <span className="logo">Commencez maintenant</span>
           <form onSubmit={handleSubmit}>
           <input type="Text" name="username" placeholder="Nom d'utilisateur" required />
-          <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
+          <input type="password" placeholder="Mot de passe" onChange={handlePasswordChange} />
             <button>Se connecter</button>
           </form>
           <p>

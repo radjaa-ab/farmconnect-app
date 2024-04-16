@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { useNavigate, Link } from "react-router-dom"; // Import Link
 
 function Register() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -14,7 +15,6 @@ function Register() {
   const [username, setUsername] = useState("");
   const [profession, setProfession] = useState("");
   const [file, setFile] = useState(false);
-  const [avatar, setAvatar] = useState(null);
   const [showFileInput, setShowFileInput] = useState(false); // State to control visibility of file input
   const [error, setError] = useState(null); // State to handle errors during signup
   const [successMessage, setSuccessMessage] = useState(""); // State to handle success message
@@ -26,6 +26,8 @@ function Register() {
       await sendEmailVerification(auth.currentUser);
       // Additional code to handle other fields and file uploads
       setSuccessMessage("Inscription réussie ! Veuillez vérifier votre e-mail pour activer votre compte.");
+      navigate("/Products"); // Navigate to products page upon successful login
+
     } catch (error) {
       setError("Erreur lors de l'inscription : " + error.message);
     }
@@ -34,11 +36,6 @@ function Register() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setFile(file);
-  };
-
-  const handleAvatarChange = (e) => {
-    const avatar = e.target.files[0];
-    setAvatar(avatar);
   };
 
   const handleProfessionChange = (e) => {
