@@ -6,13 +6,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import "./i18n";
+import Products from "./Pages/products.js";
 import { toast, ToastContainer } from "react-toastify";
 import Message from "./Components/firebase_Messaging.js";
 import "react-toastify/dist/ReactToastify.css";
 import { getMessaging, onMessage, getToken } from "firebase/messaging";
 import { messaging } from "./firebase";
 import Panier from './Components/Panier';
-import AssistanceTelephonique from './Components/AssistanceTelephonique';
 
 
 
@@ -60,13 +60,14 @@ function App() {
             index
             element={
               <ProtectedRoute>
-                <Maain />
+                <Products />
               </ProtectedRoute>
             }
           />
           <Route path="Home/" element={<Home />} />
           <Route path="SettingsPage/" element={<SettingsPage />} />
           <Route path="/Panier" element={< Panier />} />
+          <Route path="Maain" element= {<Maain/>} />
         </Route>
       </Routes>
     </BrowserRouter>
