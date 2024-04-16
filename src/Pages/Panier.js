@@ -13,7 +13,7 @@ const Panier = () => {
           <div className="small-one">
             <div className="contact">
               <img className="map-pin-icon" alt="" />
-              <div className="store-location-lincoln-">Somewhere in India</div>
+              <div className="store-location-lincoln-">Somewhere in algeria</div>
             </div>
             <div className="links">
               <div className="eng">
@@ -21,7 +21,7 @@ const Panier = () => {
                 <img className="group-icon" alt="" />
               </div>
               <div className="usd">
-                <div className="usd1">HINDI</div>
+                <div className="usd1">Alg</div>
                 <img className="group-icon1" alt="" />
               </div>
               <div className="devider" />
@@ -418,7 +418,7 @@ const Panier = () => {
           </div>
           <div className="copyright">
             <div className="ecobazar-ecommerce">
-              Ecobazar eCommerce © 2021. All Rights Reserved
+             FarmConnect © 2024. All Rights Reserved
             </div>
             <div className="methodapplepay-parent">
               <img className="methodapplepay-icon" alt="" />
