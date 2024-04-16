@@ -10,8 +10,17 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
 import PasswordStrengthBar from 'react-password-strength-bar';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
 
 function Login({ initialValues, onChange }) {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
   const [user] = useAuthState(auth);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [password, setPassword] = useState(""); 
@@ -59,7 +68,7 @@ function Login({ initialValues, onChange }) {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(auth.currentUser);
     } catch (error) {
-      console.error("Erreur lors de l'inscription :", error);
+      console.error(t("Error while registering:"), error);
     }
   };
 
@@ -74,7 +83,7 @@ function Login({ initialValues, onChange }) {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then(() => {
-        alert("Connecté");
+        alert(t("connected"));
       })
       .catch((error) => {
         console.log(error);
@@ -85,7 +94,7 @@ function Login({ initialValues, onChange }) {
     e.preventDefault();
     const emailInput = document.getElementById("reset-email");
     if (!emailInput || !emailInput.value) {
-      console.error("Email address is required to reset password.");
+      console.error(t("Email address is required to reset password."));
       return;
     }
   
@@ -93,7 +102,7 @@ function Login({ initialValues, onChange }) {
   
     try {
       await sendPasswordResetEmail(auth, email);
-      console.log("Password reset email sent successfully.");
+      console.log(t("Password reset email sent successfully."));
     } catch (error) {
       console.error("Error sending password reset email:", error);
     }
@@ -106,26 +115,26 @@ function Login({ initialValues, onChange }) {
         <SignUpForms />
       ) : (
         <div className="formWrapper">
-          <span className="logo">Commencez maintenant</span>
+          <span className="logo">{t("start now")}</span>
           <form onSubmit={handleSubmit}>
-          <input type="Text" name="username" placeholder="Nom d'utilisateur" required />
-          <input type="password" placeholder="mot de passe" onChange={handlePasswordChange} />
-            <button>Se connecter</button>
+          <input type="Text" name="username" placeholder={t("username")} required />
+          <input type="password" placeholder={t("password")} onChange={handlePasswordChange} />
+            <button>{t("login")}</button>
           </form>
           <p>
-            Vous n'avez pas de compte ?{" "}
-            <button onClick={handleRegisterClick} style={{border: 'none', backgroundColor: 'transparent', color: '#32CD32', fontWeight: 'bold', fontSize: '17px'}}>S'inscrire</button>
+          {t("You do not have an account?")}{" "}
+            <button onClick={handleRegisterClick} style={{border: 'none', backgroundColor: 'transparent', color: '#32CD32', fontWeight: 'bold', fontSize: '17px'}}>{t("register")}</button>
           </p>
           <p>
-            <button onClick={handleResetPassword} style={{border: 'none', backgroundColor: 'transparent', color: 'white', fontWeight : 'bold'}}>Mot de passe oublié ?</button>
+            <button onClick={handleResetPassword} style={{border: 'none', backgroundColor: 'transparent', color: 'white', fontWeight : 'bold'}}>{t("Have you forgotten your password?")}</button>
           </p>
           <Row>
             <Col>
-              <p style={{marginLeft: '10px'}}>Ou connectez-vous avec Google</p>
+              <p style={{marginLeft: '10px'}}>{t("Or sign in with Google")}</p>
             </Col>
             <Col>
               <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                <img src={GoogleSignin} alt="Connectez-vous avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+                <img src={GoogleSignin} alt={t("login with Google ")}type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
               </button>
             </Col>
           </Row>
