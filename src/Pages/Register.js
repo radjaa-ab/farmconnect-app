@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate, Link } from "react-router-dom"; // Import Link
+import { useNavigate, Link } from "react-router-dom"; // Importer Link
 
 function Register() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Register() {
       await sendEmailVerification(auth.currentUser);
       // Additional code to handle other fields and file uploads
       setSuccessMessage("Inscription réussie ! Veuillez vérifier votre e-mail pour activer votre compte.");
-      navigate("/Products"); // Navigate to products page upon successful login
+      navigate("/Products"); // Naviguer vers la page des produits après l'inscription réussie
 
     } catch (error) {
       setError("Erreur lors de l'inscription : " + error.message);
@@ -61,7 +61,7 @@ function Register() {
           <option value="commerçant">Commerçant</option>
           <option value="agriculteur">Agriculteur</option>
           <option value="ingenieur">Ingénieur</option>
-          <option value="consomateur">Consomateur</option>
+          <option value="consomateur">Consommateur</option>
         </select>
         {showFileInput && ( 
           <div>
