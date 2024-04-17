@@ -1,70 +1,94 @@
 import React from 'react';
-import image from '../Images/toufa7.jpg';
-// Define a reusable Product component
-const Product = ({ name, image, price }) => {
-  return (
-    <div style={styles.product}>
-      <div style={styles.productImage}>
-      <img src={image} alt={name} style={styles.image} />
-      </div>
-      <div style={styles.productInfo}>
-        <div style={styles.info}>
-          <span>{name}</span>
-          <div style={styles.price}>
-            <span style={styles.dollar}>{price}</span>
-          </div>
-        </div>
-        <button style={styles.button}>Add to Cart</button>
-      </div>
-    </div>
-  );
-};
+import { useState } from 'react';
 
-export default function products() {
-  const products = [
+const App = () => {
+  const [products, setProducts] = useState([
     {
-      name: 'Pomme vert',
-      image: image,
-      price: 100,
+      id: 1,
+      name: 'Product 1',
+      price: 250,
+      category: 'products',
+      image: 'https://via.placeholder.com/300',
     },
-    //... add more products
-  ];
+    {
+      id: 2,
+      name: 'Product 2',
+      price: 150,
+      category: 'products',
+      image: 'https://via.placeholder.com/300',
+    },
+    {
+      id: 3,
+      name: 'Product 3',
+      price: 200,
+      category: 'products',
+      image: 'https://via.placeholder.com/300',
+    },
+    {
+      id: 4,
+      name: 'Product 4',
+      price: 300,
+      category: 'products',
+      image: 'https://via.placeholder.com/300',
+    },
+    {
+      id: 5,
+      name: 'Product 5',
+      price: 200,
+      category: 'products',
+      image: 'https://via.placeholder.com/300',
+    },
+  ]);
+
+  const renderCategories = () => {
+    const categories = [...new Set(products.map((p) => p.category))];
+    return categories.map((category) => (
+      <div key={category} className="category">
+        <h3>{category}</h3>
+      </div>
+    ));
+  };
+
+  const renderProducts = () => {
+    return products.map((product) => (
+      <div key={product.id} className="product">
+        <img src={product.image} alt={product.name} className="product-image" />
+        <div className="product-info">
+          <h3>{product.name}</h3>
+          <div className="price">
+            <span className="dollar">$</span>
+            <span>{product.price}</span>
+          </div>
+          <button className="button">Add to Cart</button>
+        </div>
+      </div>
+    ));
+  };
 
   return (
     <div style={styles.mainContainer}>
       <header style={styles.header}>
-        <div style={styles.logo}>FarmConnect</div>
+        <h1 style={styles.logo}>Store</h1>
         <nav style={styles.nav}>
-        <ul style={styles.navList}>
-    <li Style = {{Color : 'green'}}><a href="#">Accueil</a></li>
-    <li Style = {{Color : 'green'}}><a  href="#">Produits</a></li>
-</ul>
-
+          <ul style={styles.navList}>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
         </nav>
       </header>
-      <section style={styles.banner}>
-        {/* Banner content */}
-      </section>
-      <section style={styles.categories}>
-        <h2>Categories</h2>
-        <div style={styles.categoryGrid}>
-          {/* Render category components here */}
-        </div>
-      </section>
-      <section style={styles.products}>
-        <h2>Fruits et Légumes</h2>
-        <div style={styles.productGrid}>
-          {products.map((product) => (
-            <Product key={product.name} {...product} />
-          ))}
-        </div>
-      </section>
+      <div style={styles.banner}>
+        <h2>Welcome to the Store</h2>
+        <p>The best place to find products online</p>
+      </div>
+      <div style={styles.categories}>{renderCategories()}</div>
+      <div style={styles.products}>{renderProducts()}</div>
       <footer style={styles.footer}>
-        {/* Footer content */}
+        <p>Footer Information</p>
       </footer>
     </div>
   );
-}
+};
 
 const styles = {
   mainContainer: {
@@ -72,101 +96,95 @@ const styles = {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '20px',
-    backgroundColor: '#f7f7f7', // Added background color
+    backgroundColor: '#f7f7f7',
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '20px',
-    backgroundColor: '#fff', // Added background color
-    padding: '10px 20px', // Added padding
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Added box shadow
-    borderRadius: '5px', // Added border radius
+    backgroundColor: '#2ecc71',
+    padding: '10px 20px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    borderRadius: '5px',
   },
   logo: {
     fontSize: '24px',
     fontWeight: 'bold',
-    color: 'green',
   },
   nav: {
-    marginLeft: 'auto',
+    display: 'flex',
+    alignItems: 'center',
   },
   navList: {
-    listStyle: 'none', // Remove list bullets
-    padding: 0, // Remove default padding
-    margin: 0, // Remove default margin
+    display: 'flex',
+    listStyleType: 'none',
+    margin: 0,
+    padding: 0,
+  },
+  navListItem: {
+    marginRight: '10px',
   },
   banner: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#27ae60', 
+    padding: '20px',
+    borderRadius: '5px',
     marginBottom: '20px',
-    backgroundColor: '#fff', // Added background color
-    padding: '20px', // Added padding
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Added box shadow
-    borderRadius: '5px', // Added border radius
   },
   categories: {
+    display: 'flex',
+    flexWrap: 'wrap',
     marginBottom: '20px',
-    backgroundColor: '#fff', // Added background color
-    padding: '20px', // Added padding
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Added box shadow
-    borderRadius: '5px', // Added border radius
   },
-  categoryGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-    gap: '20px',
+  category: {
+    marginRight: '20px',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    backgroundColor: '#2ecc71', 
+    cursor: 'pointer',
   },
   products: {
-    marginBottom: '20px',
-    backgroundColor: '#fff', // Added background color
-    padding: '20px', // Added padding
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Added box shadow
-    borderRadius: '5px', // Added border radius
-  },
-  productGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
     gap: '20px',
   },
   product: {
-    border: '1px solid #ccc',
+    backgroundColor: '#fff',
+    padding: '20px',
     borderRadius: '5px',
-    padding: '10px',
-    backgroundColor: '#fff', // Added background color
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   },
   productImage: {
-    marginBottom: '10px',
-  },
-  image: {
-    width: '300px',
+    width: '100%',
     height: 'auto',
-    borderRadius: '5px',
   },
-  productInfo: {},
-  info: {
+  productInfo: {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
     alignItems: 'center',
   },
   price: {
-    fontWeight: 'bold',
+    marginBottom: '10px',
   },
   dollar: {
-    color: 'green',
+    fontSize: '16px',
   },
   button: {
-    backgroundColor: 'green',
-    color: '#fff',
+    backgroundColor: '#2ecc71', 
     padding: '10px 20px',
+    border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    border: 'none',
-    outline: 'none',
   },
   footer: {
-    backgroundColor: '#fff', // Added background color
-    padding: '20px', // Added padding
-    boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.1)', // Added box shadow
-    borderRadius: '5px', // Added border radius
+    padding: '20px',
+    textAlign: 'center',
+    backgroundColor: '#2ecc71', 
+    marginTop: '20px',
   },
 };
+
+export default App;

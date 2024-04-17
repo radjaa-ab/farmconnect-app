@@ -8,16 +8,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useTranslation } from 'react-i18next';
-import i18n from '../i18n';
-
-
 
 const Search = () => {
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = lng => {
-    i18n.changeLanguage(lng);
-  }; 
+  const { t } = useTranslation();
+  
   const [username, setUsername] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -40,7 +34,7 @@ const Search = () => {
         const users = querySnapshot.docs.map((doc) => doc.data().displayName);
         setSuggestions(users);
       } catch (error) {
-        console.error(t("Error fetching suggestions: "), error);
+        console.error("Error fetching suggestions: ", error);
       }
     };
 
@@ -57,8 +51,9 @@ const Search = () => {
   };
 
   return (
-    <div className="search" >
-      <input style={{ width: '100%', backgroundColor: '#507050'}}
+    <div className="search">
+      <input
+        style={{ width: '100%', backgroundColor: '#507050'}}
         type="text"
         placeholder={t("find a user")}
         value={username}
@@ -66,8 +61,18 @@ const Search = () => {
       />
       <ul>
         {suggestions.map((username, index) => (
-          <li style={{   listStyleType: 'none', backgroundColor: '#ccc', width: 'auto', Padding: '0%', borderRadius: '5px', textAlign: 'center'
-          }} key={index} onClick={() => handleSelect(username)}>
+          <li
+            key={index}
+            onClick={() => handleSelect(username)}
+            style={{
+              listStyleType: 'none',
+              backgroundColor: '#ccc',
+              width: 'auto',
+              padding: '0%',
+              borderRadius: '5px',
+              textAlign: 'center'
+            }}
+          >
             {username}
           </li>
         ))}
