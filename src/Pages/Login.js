@@ -16,6 +16,7 @@ import i18n from '../i18n';
 
 function Login({ initialValues, onChange }) {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
@@ -25,7 +26,6 @@ function Login({ initialValues, onChange }) {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [password, setPassword] = useState(""); 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleOnlineStatusChange = () => {
@@ -86,6 +86,7 @@ function Login({ initialValues, onChange }) {
     signInWithPopup(auth, provider)
       .then(() => {
         alert("Connecté");
+        navigate("/Products");
       })
       .catch((error) => {
         console.log(error);
@@ -123,7 +124,7 @@ function Login({ initialValues, onChange }) {
           <form onSubmit={handleSubmit}>
           <input type="Text" name="username" placeholder={t("username")} required />
           <input type="password" placeholder={t("password")} onChange={handlePasswordChange} />
-            <button>Se connecter</button>
+            <button>{t("login")}</button>
           </form>
           <p>
           {t("You do not have an account?")}{" "}

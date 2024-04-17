@@ -75,7 +75,7 @@
   "devDependencies": {
     "sass": "^1.72.0",
     "sass-loader": "^14.1.1",
-    "source-map-loader": "^5.0.0",
+    "source-map-loader": "^5.0.0"
     
   }
 }
