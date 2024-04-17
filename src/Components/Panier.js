@@ -1,26 +1,23 @@
 import {
-    MDBBtn,
-    MDBCard,
-    MDBCardBody,
-    MDBCardImage,
-    MDBCol,
-    MDBContainer,
-    MDBIcon,
-    MDBInput,
-    MDBRow,
-    MDBTypography,
-    } from "mdb-react-ui-kit";
-    import React from "react";
-    import { useTranslation } from 'react-i18next';
-    import i18n from '../i18n';
-    
-    export default function Panier() {
-      const { t, i18n } = useTranslation();
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCol,
+  MDBContainer,
+  MDBIcon,
+  MDBInput,
+  MDBRow,
+  MDBTypography,
+} from "mdb-react-ui-kit";
+import React from "react";
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
-      const changeLanguage = lng => {
-    i18n.changeLanguage(lng);
-  }; 
-    return (
+export default function Panier() {
+  const { t } = useTranslation();
+
+  return (
     <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
@@ -34,9 +31,9 @@ import {
                         <MDBIcon fas icon="long-arrow-alt-left me-2" /> {t("Continue shopping")}
                       </a>
                     </MDBTypography>
-    
+
                     <hr />
-    
+
                     <div className="d-flex justify-content-between align-items-center mb-4">
                       <div>
                         <p className="mb-1">{t("Shopping cart")}</p>
@@ -46,13 +43,13 @@ import {
                         <p>
                           <span className="text-muted">{t("Sort by:")}</span>
                           <a href="#!" className="text-body">
-                           {t(" price")}
+                            {t("price")}
                             <MDBIcon fas icon="angle-down mt-1" />
                           </a>
                         </p>
                       </div>
                     </div>
-    
+
                     <MDBCard className="mb-3">
                       <MDBCardBody>
                         <div className="d-flex justify-content-between">
@@ -61,7 +58,7 @@ import {
                               <MDBCardImage
                                 src=" "
                                 fluid className="rounded-3" style={{ width: "65px" }}
-                                alt={4("Shopping item")} />
+                                alt={t("Shopping item")} />
                             </div>
                             <div className="ms-3">
                               <MDBTypography tag="h5">
@@ -78,7 +75,7 @@ import {
                             </div>
                             <div style={{ width: "80px" }}>
                               <MDBTypography tag="h5" className="mb-0">
-                                {t("Price")}
+                                {t("price")}
                               </MDBTypography>
                             </div>
                             <a href="#!" style={{ color: "#cecece" }}>
@@ -96,5 +93,5 @@ import {
         </MDBRow>
       </MDBContainer>
     </section>
-    );
-    }
+  );
+}
