@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import BasicExample from '../Components/Navigation';
+import Navigation from '../Components/Navigation';
 
 const App = () => {
   const [products, setProducts] = useState([
@@ -70,7 +70,7 @@ const App = () => {
     
     <div style={styles.mainContainer}>
       <header style={styles.header}>
-        <h1 style={styles.logo}>Store</h1>
+        <Navigation/>
         <nav style={styles.nav}>
           <ul style={styles.navList}>
             <li>Home</li>
