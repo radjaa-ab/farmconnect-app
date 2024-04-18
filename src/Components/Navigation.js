@@ -24,7 +24,7 @@ function Navigation() {
   const ProductsPlaceholder = t("Rechercher des produits");
 
   const navigate = useNavigate(); // Initialisez useNavigate
-
+  
   // Fonction de gestion du clic sur le lien des paramètres
   const handleSettingsClick = () => {
     navigate('/SettingsPage'); // Redirigez l'utilisateur vers la page des paramètres
