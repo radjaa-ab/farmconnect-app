@@ -69,14 +69,9 @@ const App = () => {
   return (
     
     <div style={styles.mainContainer}>
-      <header style={styles.header}>
-        <Navigation/>
-        <nav style={styles.nav}>
-          <ul style={styles.navList}>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-          </ul>
+      <header>
+        <nav>
+          <Navigation/>
         </nav>
       </header>
       <div style={styles.banner}>
@@ -95,9 +90,9 @@ const App = () => {
 const styles = {
   mainContainer: {
     fontFamily: 'Arial, sans-serif',
-    maxWidth: '1200px',
+    maxWidth: '1800px',
     margin: '0 auto',
-    padding: '20px',
+    padding: '0px',
     backgroundColor: '#f7f7f7',
   },
   header: {
