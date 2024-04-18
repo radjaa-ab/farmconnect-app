@@ -10,95 +10,7 @@ const BuyersPage = () => {
     <div className="buyers-page">
       <div className="buyers-page-child" />
       <section className="frame-parent">
-        <div className="top-header-parent">
-          <div className="top-header">
-            <div className="top-header-child" />
-            <div className="phpinterest-logo-bold" />
-            <div className="top-header-inner">
-              <div className="frame-group">
-                <div className="iconsaxboldfacebook-parent">
-                  <img
-                    className="iconsaxboldfacebook"
-                    alt=""
-                    src="/iconsaxboldfacebook.svg"
-                  />
-                  <img
-                    className="mditwitter-icon"
-                    alt=""
-                    src="/mditwitter.svg"
-                  />
-                </div>
-                <div className="mdilinkedin-parent">
-                  <img
-                    className="mdilinkedin-icon"
-                    alt=""
-                    src="/mdilinkedin.svg"
-                  />
-                  <div className="welcometo-agriconnect">{`Bienvenue à FarmConnect `}</div>
-                </div>
-              </div>
-            </div>
-            <div className="phonecall-1-parent">
-              <img
-                className="phonecall-1-icon"
-                loading="lazy"
-                alt=""
-                src="/phonecall-1.svg"
-              />
-              <div className="wrapper">
-                <div className="div">9430144469</div>
-              </div>
-            </div>
-          </div>
-          <header className="nav-links">
-            <div className="nav-links1">
-              <div className="nav-links2">
-                <div className="home" onClick={onHomeTextClick}>
-                  Accueil
-                </div>
-                <img
-                  className="chevron-down-icon"
-                  alt=""
-                  src="/chevron-down.svg"
-                />
-              </div>
-              <div className="nav-links3">
-                <div className="home1">Produits</div>
-                <img
-                  className="chevron-down-icon1"
-                  alt=""
-                  src="/chevron-down-1.svg"
-                />
-              </div>
-              <div className="nav-links4">
-                <div className="home2">Equipements</div>
-                <img
-                  className="chevron-down-icon2"
-                  alt=""
-                  src="/chevron-down-2.svg"
-                />
-              </div>
-              <div className="nav-links5">
-                <div className="home3">Blog</div>
-                <img
-                  className="chevron-down-icon3"
-                  alt=""
-                  src="/chevron-down-2.svg"
-                />
-              </div>
-              <div className="nav-links6">
-                <div className="home4">A propos</div>
-                <img className="chevron-down-icon4" alt="" />
-              </div>
-              <div className="nav-links7">
-                <div className="home5">Contactez-nous</div>
-                <img className="chevron-down-icon5" alt="" />
-              </div>
-            </div>
-            <img className="search-icon" alt="" src="/search.svg" />
-            <div className="search">Search</div>
-          </header>
-        </div>
+        
         <div className="frame-wrapper">
           <div className="frame-container">
             <div className="bannar-wrapper">
@@ -256,13 +168,7 @@ const BuyersPage = () => {
                       <div className="div4">120.00</div>
                     </div>
                   </div>
-                  <div className="rating1">
-                    <img className="rating-child2" alt="" />
-                    <img className="rating-child3" alt="" />
-                    <img className="rating-child4" alt="" />
-                    <img className="rating-child5" alt="" />
-                    <img className="rating-child6" alt="" />
-                  </div>
+                 
                   <img
                     className="add-to-cart1"
                     alt=""
@@ -286,13 +192,7 @@ const BuyersPage = () => {
                       <div className="div5">112.00</div>
                     </div>
                   </div>
-                  <div className="rating2">
-                    <img className="rating-child7" alt="" />
-                    <img className="rating-child8" alt="" />
-                    <img className="rating-child9" alt="" />
-                    <img className="rating-child10" alt="" />
-                    <img className="rating-child11" alt="" />
-                  </div>
+                  
                   <img
                     className="add-to-cart2"
                     alt=""
@@ -318,13 +218,7 @@ const BuyersPage = () => {
                       <div className="div6">9.00</div>
                     </div>
                   </div>
-                  <div className="rating3">
-                    <img className="rating-child12" alt="" />
-                    <img className="rating-child13" alt="" />
-                    <img className="rating-child14" alt="" />
-                    <img className="rating-child15" alt="" />
-                    <img className="rating-child16" alt="" />
-                  </div>
+                  
                   <img
                     className="add-to-cart3"
                     alt=""
@@ -348,13 +242,7 @@ const BuyersPage = () => {
                       <div className="div7">34.00</div>
                     </div>
                   </div>
-                  <div className="rating4">
-                    <img className="rating-child17" alt="" />
-                    <img className="rating-child18" alt="" />
-                    <img className="rating-child19" alt="" />
-                    <img className="rating-child20" alt="" />
-                    <img className="rating-child21" alt="" />
-                  </div>
+                  
                   <img
                     className="add-to-cart4"
                     alt=""
@@ -380,13 +268,7 @@ const BuyersPage = () => {
                       <div className="div8">20.00</div>
                     </div>
                   </div>
-                  <div className="rating5">
-                    <img className="rating-child22" alt="" />
-                    <img className="rating-child23" alt="" />
-                    <img className="rating-child24" alt="" />
-                    <img className="rating-child25" alt="" />
-                    <img className="rating-child26" alt="" />
-                  </div>
+                  
                   <img
                     className="add-to-cart5"
                     alt=""
@@ -410,13 +292,7 @@ const BuyersPage = () => {
                       <div className="div9">20.00</div>
                     </div>
                   </div>
-                  <div className="rating6">
-                    <img className="rating-child27" alt="" />
-                    <img className="rating-child28" alt="" />
-                    <img className="rating-child29" alt="" />
-                    <img className="rating-child30" alt="" />
-                    <img className="rating-child31" alt="" />
-                  </div>
+                  
                   <img
                     className="add-to-cart6"
                     alt=""
@@ -440,13 +316,7 @@ const BuyersPage = () => {
                       <div className="div10">12.00</div>
                     </div>
                   </div>
-                  <div className="rating7">
-                    <img className="rating-child32" alt="" />
-                    <img className="rating-child33" alt="" />
-                    <img className="rating-child34" alt="" />
-                    <img className="rating-child35" alt="" />
-                    <img className="rating-child36" alt="" />
-                  </div>
+                  
                   <img
                     className="add-to-cart7"
                     alt=""
@@ -471,13 +341,7 @@ const BuyersPage = () => {
                       <div className="div12" />
                     </div>
                   </div>
-                  <div className="rating8">
-                    <img className="rating-child37" alt="" />
-                    <img className="rating-child38" alt="" />
-                    <img className="rating-child39" alt="" />
-                    <img className="rating-child40" alt="" />
-                    <img className="rating-child41" alt="" />
-                  </div>
+                  
                   <img className="add-to-cart8" alt="" src="/add-to-cart.svg" />
                 </div>
                 <div className="tag1">
@@ -496,13 +360,7 @@ const BuyersPage = () => {
                       <div className="div14">34.00</div>
                     </div>
                   </div>
-                  <div className="rating9">
-                    <img className="rating-child42" alt="" />
-                    <img className="rating-child43" alt="" />
-                    <img className="rating-child44" alt="" />
-                    <img className="rating-child45" alt="" />
-                    <img className="rating-child46" alt="" />
-                  </div>
+                  
                   <img
                     className="add-to-cart9"
                     alt=""
@@ -544,13 +402,7 @@ const BuyersPage = () => {
                           <div className="div16" />
                         </div>
                       </div>
-                      <div className="rating10">
-                        <img className="rating-child47" alt="" />
-                        <img className="rating-child48" alt="" />
-                        <img className="rating-child49" alt="" />
-                        <img className="rating-child50" alt="" />
-                        <img className="rating-child51" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart10"
                         alt=""
@@ -578,13 +430,7 @@ const BuyersPage = () => {
                           <div className="div18">300</div>
                         </div>
                       </div>
-                      <div className="rating11">
-                        <img className="rating-child52" alt="" />
-                        <img className="rating-child53" alt="" />
-                        <img className="rating-child54" alt="" />
-                        <img className="rating-child55" alt="" />
-                        <img className="rating-child56" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart11"
                         alt=""
@@ -608,13 +454,7 @@ const BuyersPage = () => {
                           <div className="div19">100</div>
                         </div>
                       </div>
-                      <div className="rating12">
-                        <img className="rating-child57" alt="" />
-                        <img className="rating-child58" alt="" />
-                        <img className="rating-child59" alt="" />
-                        <img className="rating-child60" alt="" />
-                        <img className="rating-child61" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart12"
                         alt=""
@@ -639,13 +479,7 @@ const BuyersPage = () => {
                           <div className="div20">200</div>
                         </div>
                       </div>
-                      <div className="rating13">
-                        <img className="rating-child62" alt="" />
-                        <img className="rating-child63" alt="" />
-                        <img className="rating-child64" alt="" />
-                        <img className="rating-child65" alt="" />
-                        <img className="rating-child66" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart13"
                         alt=""
@@ -668,13 +502,7 @@ const BuyersPage = () => {
                           <div className="div21">120</div>
                         </div>
                       </div>
-                      <div className="rating14">
-                        <img className="rating-child67" alt="" />
-                        <img className="rating-child68" alt="" />
-                        <img className="rating-child69" alt="" />
-                        <img className="rating-child70" alt="" />
-                        <img className="rating-child71" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart14"
                         alt=""
@@ -716,13 +544,7 @@ const BuyersPage = () => {
                           <div className="div23" />
                         </div>
                       </div>
-                      <div className="rating15">
-                        <img className="rating-child72" alt="" />
-                        <img className="rating-child73" alt="" />
-                        <img className="rating-child74" alt="" />
-                        <img className="rating-child75" alt="" />
-                        <img className="rating-child76" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart15"
                         alt=""
@@ -750,13 +572,7 @@ const BuyersPage = () => {
                           <div className="div25">300</div>
                         </div>
                       </div>
-                      <div className="rating16">
-                        <img className="rating-child77" alt="" />
-                        <img className="rating-child78" alt="" />
-                        <img className="rating-child79" alt="" />
-                        <img className="rating-child80" alt="" />
-                        <img className="rating-child81" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart16"
                         alt=""
@@ -780,13 +596,7 @@ const BuyersPage = () => {
                           <div className="div26">100</div>
                         </div>
                       </div>
-                      <div className="rating17">
-                        <img className="rating-child82" alt="" />
-                        <img className="rating-child83" alt="" />
-                        <img className="rating-child84" alt="" />
-                        <img className="rating-child85" alt="" />
-                        <img className="rating-child86" alt="" />
-                      </div>
+                      
                       <img
                         className="add-to-cart17"
                         alt=""
@@ -838,14 +648,7 @@ const BuyersPage = () => {
                           <div className="div29">300</div>
                         </div>
                       </div>
-                      <div className="rating18">
-                        <img className="rating-child87" alt="" />
-                        <img className="rating-child88" alt="" />
-                        <img className="rating-child89" alt="" />
-                        <img className="rating-child90" alt="" />
-                        <img className="rating-child91" alt="" />
-                        <div className="feedback"> (524 Feedback)</div>
-                      </div>
+                      
                     </div>
                     <div className="hurry-up-offer-ends-in">
                       <div className="hurry-up-offer">
@@ -891,13 +694,7 @@ const BuyersPage = () => {
                         <div className="div36">200</div>
                       </div>
                     </div>
-                    <div className="rating19">
-                      <img className="rating-child92" alt="" />
-                      <img className="rating-child93" alt="" />
-                      <img className="rating-child94" alt="" />
-                      <img className="rating-child95" alt="" />
-                      <img className="rating-child96" alt="" />
-                    </div>
+                   
                     <img
                       className="add-to-cart19"
                       alt=""
@@ -920,13 +717,7 @@ const BuyersPage = () => {
                         <div className="div37">120</div>
                       </div>
                     </div>
-                    <div className="rating20">
-                      <img className="rating-child97" alt="" />
-                      <img className="rating-child98" alt="" />
-                      <img className="rating-child99" alt="" />
-                      <img className="rating-child100" alt="" />
-                      <img className="rating-child101" alt="" />
-                    </div>
+                   
                     <img
                       className="add-to-cart20"
                       alt=""
