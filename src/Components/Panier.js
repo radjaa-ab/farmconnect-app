@@ -12,7 +12,6 @@ import {
 } from "mdb-react-ui-kit";
 import React from "react";
 import { useTranslation } from 'react-i18next';
-import Navigation from '../Navigation';
 import i18n from '../i18n';
 
 export default function Panier() {
