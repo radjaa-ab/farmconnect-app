@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import Navigation from '../Components/Navigation';
-
+import Footer from '../Components/footer';
 const App = () => {
   const [products, setProducts] = useState([
     {
@@ -80,12 +80,12 @@ const App = () => {
       </div>
       <div style={styles.categories}>{renderCategories()}</div>
       <div style={styles.products}>{renderProducts()}</div>
-      <footer style={styles.footer}>
-        <p>Footer Information</p>
+      <footer >
+        <Footer/>
       </footer>
     </div>
   );
-};
+}
 
 const styles = {
   mainContainer: {
