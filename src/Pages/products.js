@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import BasicExample from '../Components/Navigation';
 
 const App = () => {
   const [products, setProducts] = useState([
@@ -7,42 +8,42 @@ const App = () => {
       id: 1,
       name: 'Product 1',
       price: 250,
-      category: 'products',
+      category: 'fruits',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 2,
       name: 'Product 2',
       price: 150,
-      category: 'products',
+      category: 'fruits',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 3,
       name: 'Product 3',
       price: 200,
-      category: 'products',
+      category: 'fruits',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 4,
       name: 'Product 4',
       price: 300,
-      category: 'products',
+      category: 'legumes',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 5,
       name: 'Product 5',
       price: 200,
-      category: 'products',
+      category: 'legumes',
       image: 'https://via.placeholder.com/300',
     },
   ]);
 
   const renderCategories = () => {
     const categories = [...new Set(products.map((p) => p.category))];
-    return categories.map((category) => (
+    return categories.map((category) => ( 
       <div key={category} className="category">
         <h3>{category}</h3>
       </div>
@@ -56,7 +57,7 @@ const App = () => {
         <div className="product-info">
           <h3>{product.name}</h3>
           <div className="price">
-            <span className="dollar">$</span>
+            <span className="dinar">Da</span>
             <span>{product.price}</span>
           </div>
           <button className="button">Add to Cart</button>
@@ -66,6 +67,7 @@ const App = () => {
   };
 
   return (
+    
     <div style={styles.mainContainer}>
       <header style={styles.header}>
         <h1 style={styles.logo}>Store</h1>
@@ -129,7 +131,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#27ae60', 
+    backgroundColor: '#27ae60',
     padding: '20px',
     borderRadius: '5px',
     marginBottom: '20px',
@@ -143,7 +145,7 @@ const styles = {
     marginRight: '20px',
     padding: '10px 20px',
     borderRadius: '5px',
-    backgroundColor: '#2ecc71', 
+    backgroundColor: '#2ecc71',
     cursor: 'pointer',
   },
   products: {
@@ -173,7 +175,7 @@ const styles = {
     fontSize: '16px',
   },
   button: {
-    backgroundColor: '#2ecc71', 
+    backgroundColor: '#2ecc71',
     padding: '10px 20px',
     border: 'none',
     borderRadius: '5px',
@@ -182,7 +184,7 @@ const styles = {
   footer: {
     padding: '20px',
     textAlign: 'center',
-    backgroundColor: '#2ecc71', 
+    backgroundColor: '#2ecc71',
     marginTop: '20px',
   },
 };

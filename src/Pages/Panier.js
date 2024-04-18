@@ -181,12 +181,6 @@ const Panier = () => {
                     </div>
                   </div>
                 </div>
-                <div className="quantité">quantité</div>
-                    <div className="tat-du-stock-wrapper">
-                     
-                    </div>
-                  </div>
-                </div>
                 <div className="line-wrapper">
                   <div className="frame-child" />
                 </div>

@@ -21,7 +21,6 @@ const Homepage = () => {
         <img className="check-1-icon" alt="" src="/check-1.svg" />
       </div>
       <div className="healthy-natural">{`Healthy & natural food for lovers of healthy food.`}</div>
-      <div className="ut-quis-tempus">{`Ut quis tempus erat. Phasellus euismod bibendum magna non tristique. Pellentesque semper vestibulum elit sed condimentum. Nunc pretium fermentum interdum. `}</div>
       <div className="check1">
         <div className="check-item" />
         <img className="check-1-icon1" alt="" src="/check-1.svg" />
@@ -29,15 +28,8 @@ const Homepage = () => {
       <div className="every-day-fresh">
         Every day fresh and quality products for you.
       </div>
-      <div className="maecenas-vehicula-a">
-        Maecenas vehicula a justo quis laoreet. Sed in placerat nibh, a posuere
-        ex. Morbi sem neque, aliquam sed orci et, rhoncus lobortis felis. Sed
-        vestibulum nisl sit amet sapien.
-      </div>
-      <div className="button">
-        <div className="normal">Shop Now</div>
-        <img className="group-icon" alt="" src="/group.svg" />
-      </div>
+     
+     
       <img className="bg-icon" alt="" src="/bg.svg" />
       <div className="image">
         <img className="image-icon" alt="" src="/image@2x.png" />
@@ -108,13 +100,7 @@ const Homepage = () => {
               <div className="div1">$20.99</div>
             </div>
           </div>
-          <div className="rating">
-            <img className="rating-child" alt="" src="/star-1.svg" />
-            <img className="rating-item" alt="" src="/star-1.svg" />
-            <img className="rating-inner" alt="" src="/star-1.svg" />
-            <img className="star-icon" alt="" src="/star-1.svg" />
-            <img className="rating-child1" alt="" src="/star-5.svg" />
-          </div>
+          
         </div>
         <img className="add-to-cart" alt="" src="/add-to-cart.svg" />
         <div className="tag">
@@ -134,13 +120,7 @@ const Homepage = () => {
               <div className="div4">$20.99</div>
             </div>
           </div>
-          <div className="rating1">
-            <img className="rating-child2" alt="" src="/star-1.svg" />
-            <img className="rating-child3" alt="" src="/star-1.svg" />
-            <img className="rating-child4" alt="" src="/star-1.svg" />
-            <img className="rating-child5" alt="" src="/star-1.svg" />
-            <img className="rating-child6" alt="" src="/star-5.svg" />
-          </div>
+         
         </div>
         <img className="add-to-cart1" alt="" src="/add-to-cart.svg" />
       </div>
@@ -156,13 +136,7 @@ const Homepage = () => {
               <div className="div6">$20.99</div>
             </div>
           </div>
-          <div className="rating2">
-            <img className="rating-child7" alt="" src="/star-1.svg" />
-            <img className="rating-child8" alt="" src="/star-1.svg" />
-            <img className="rating-child9" alt="" src="/star-1.svg" />
-            <img className="rating-child10" alt="" src="/star-1.svg" />
-            <img className="rating-child11" alt="" src="/star-5.svg" />
-          </div>
+          
         </div>
         <img className="add-to-cart2" alt="" src="/add-to-cart-2.svg" />
         <div className="add-to-wishlist-parent">
@@ -182,13 +156,7 @@ const Homepage = () => {
               <div className="div8">$20.99</div>
             </div>
           </div>
-          <div className="rating3">
-            <img className="rating-child12" alt="" src="/star-1.svg" />
-            <img className="rating-child13" alt="" src="/star-1.svg" />
-            <img className="rating-child14" alt="" src="/star-1.svg" />
-            <img className="rating-child15" alt="" src="/star-1.svg" />
-            <img className="rating-child16" alt="" src="/star-5.svg" />
-          </div>
+          
         </div>
         <img className="add-to-cart3" alt="" src="/add-to-cart.svg" />
       </div>
@@ -198,50 +166,7 @@ const Homepage = () => {
         alt=""
         src="/growthcloseupenvironmentallushnatural-2@2x.png"
       />
-      <div className="feature">
-        <div className="feature1">
-          <div className="icon">
-            <img
-              className="delivery-truck-1-icon"
-              alt=""
-              src="/deliverytruck-1.svg"
-            />
-          </div>
-          <div className="info5">
-            <div className="free-shipping">Free Shipping</div>
-            <div className="free-shipping-with">
-              Free shipping with discount
-            </div>
-          </div>
-        </div>
-        <div className="feature2">
-          <div className="icon1">
-            <img className="headphones-1-icon" alt="" src="/headphones-1.svg" />
-          </div>
-          <div className="info6">
-            <div className="great-support-247">Great Support 24/7</div>
-            <div className="instant-access-to">Instant access to Contact</div>
-          </div>
-        </div>
-        <div className="feature3">
-          <div className="icon2">
-            <img className="shopping-bag-icon" alt="" src="/shoppingbag.svg" />
-          </div>
-          <div className="info7">
-            <div className="sucure-payment">100% Sucure Payment</div>
-            <div className="we-ensure-your">We ensure your money is save</div>
-          </div>
-        </div>
-        <div className="feature4">
-          <div className="icon3">
-            <img className="package-icon" alt="" src="/package.svg" />
-          </div>
-          <div className="info8">
-            <div className="money-back-guarantee">Money-Back Guarantee</div>
-            <div className="days-money-back">30 days money-back</div>
-          </div>
-        </div>
-      </div>
+      
       <div className="bg">
         <div className="bg1" />
         <img className="top-icon" alt="" src="/top@2x.png" />
@@ -262,17 +187,11 @@ const Homepage = () => {
         <p className="fresh-healthy">{`Fresh & Healthy`}</p>
         <p className="organic-food">Organic Food</p>
       </div>
-      <div className="sale-up-to-container">
-        <span>{`Sale up to `}</span>
-        <span className="off">30% OFF</span>
-      </div>
+      
       <div className="free-shipping-on">
         Free shipping on all your order. we deliver, you enjoy
       </div>
-      <div className="button3">
-        <div className="normal1">Shop now</div>
-        <img className="group-icon3" alt="" src="/group-3.svg" />
-      </div>
+     
       <header className="navigation">
         <div className="small-one">
           <div className="contact">
@@ -335,11 +254,8 @@ const Homepage = () => {
             <img className="plant-1-icon" alt="" src="/plant-1.svg" />
             <div className="ecobazar">Ecobazar</div>
           </div>
-          <div className="icons">
-            <div className="call-now">
-              <img className="phonecall-1-icon" alt="" src="/phonecall-1.svg" />
-              <div className="div9">(219) 555-0114</div>
-            </div>
+          
+            
             <div className="icons1">
               <img className="search-icon" alt="" src="/search.svg" />
               <img className="heart-icon" alt="" src="/heart.svg" />
@@ -351,7 +267,7 @@ const Homepage = () => {
               </div>
               <img className="user-3-1-icon" alt="" src="/user-3-1.svg" />
             </div>
-          </div>
+          
         </div>
       </header>
       <main className="homepage1">
@@ -361,7 +277,7 @@ const Homepage = () => {
               <div className="contact1">
                 <img className="map-pin-icon1" alt="" />
                 <div className="store-location-lincoln-1">
-                  Somewhere in India
+                  Somewhere in  algeria
                 </div>
               </div>
               <div className="frame-group">
@@ -370,7 +286,7 @@ const Homepage = () => {
                   <img className="group-icon6" alt="" />
                 </div>
                 <div className="usd-group">
-                  <div className="usd1">HINDI</div>
+                  <div className="usd1">DZ</div>
                   <img className="group-icon7" alt="" />
                 </div>
               </div>
@@ -1653,13 +1569,7 @@ const Homepage = () => {
                               <div className="customer">Customer</div>
                             </div>
                           </div>
-                          <div className="rating21">
-                            <img className="rating-child102" alt="" />
-                            <img className="rating-child103" alt="" />
-                            <img className="rating-child104" alt="" />
-                            <img className="rating-child105" alt="" />
-                            <img className="rating-child106" alt="" />
-                          </div>
+                          
                         </div>
                       </div>
                       <div className="testimonial-card1">
@@ -1681,13 +1591,7 @@ const Homepage = () => {
                               <div className="customer1">Customer</div>
                             </div>
                           </div>
-                          <div className="rating22">
-                            <img className="rating-child107" alt="" />
-                            <img className="rating-child108" alt="" />
-                            <img className="rating-child109" alt="" />
-                            <img className="rating-child110" alt="" />
-                            <img className="rating-child111" alt="" />
-                          </div>
+                          
                         </div>
                       </div>
                       <div className="testimonial-card2">
@@ -1767,124 +1671,7 @@ const Homepage = () => {
             </div>
           </div>
         </section>
-        <section className="footer2">
-          <div className="copyright1">
-            <div className="ecobazar-ecommerce-2021-all-wrapper">
-              <div className="ecobazar-ecommerce1">
-                Ecobazar eCommerce © 2021. All Rights Reserved
-              </div>
-            </div>
-            <div className="methodapplepay-group">
-              <img
-                className="methodapplepay-icon1"
-                alt=""
-                src="/methodapplepay-1@2x.png"
-              />
-              <img
-                className="methodvisa-icon1"
-                alt=""
-                src="/methodapplepay-1@2x.png"
-              />
-              <img
-                className="methoddiscover-icon1"
-                alt=""
-                src="/methodapplepay-1@2x.png"
-              />
-              <img
-                className="methodmastercard-icon1"
-                alt=""
-                src="/methodapplepay-1@2x.png"
-              />
-              <div className="cart3">
-                <div className="base1" />
-                <div className="cart-inner">
-                  <div className="lock-1-parent">
-                    <img className="lock-1-icon1" alt="" />
-                    <div className="secure1">Secure</div>
-                  </div>
-                </div>
-                <div className="payment1">Payment</div>
-              </div>
-            </div>
-          </div>
-          <div className="footer-wrapper">
-            <div className="footer3">
-              <div className="company1">
-                <div className="logo3">
-                  <div className="plant-1-frame">
-                    <img className="plant-1-icon3" alt="" />
-                  </div>
-                  <h1 className="ecobazar3">Ecobazar</h1>
-                </div>
-                <div className="morbi-cursus-porttitor1">
-                  Morbi cursus porttitor enim lobortis molestie. Duis gravida
-                  turpis dui, eget bibendum magn.
-                </div>
-                <div className="social-media">
-                  <img className="social-media-icon4" alt="" />
-                  <img className="social-media-icon5" alt="" />
-                  <img className="social-media-icon6" alt="" />
-                  <img className="social-media-icon7" alt="" />
-                </div>
-              </div>
-              <div className="my-account-parent">
-                <div className="my-account3">
-                  <div className="my-account4">My Account</div>
-                  <img className="my-account-child" alt="" />
-                  <div className="links4">
-                    <div className="my-account5">My Account</div>
-                    <div className="order-history1">Order History</div>
-                    <div className="shoping-cart1">Shoping Cart</div>
-                    <div className="wishlist1">Wishlist</div>
-                  </div>
-                </div>
-                <div className="help1">
-                  <div className="helps1">Helps</div>
-                  <img className="help-child" alt="" />
-                  <div className="links5">
-                    <div className="contact3">Contact</div>
-                    <div className="faqs1">Faqs</div>
-                    <div className="terms-condition1">{`Terms & Condition`}</div>
-                    <div className="privacy-policy1">Privacy Policy</div>
-                  </div>
-                </div>
-                <div className="proxy2">
-                  <div className="proxy3">Proxy</div>
-                  <img className="proxy-child" alt="" />
-                  <div className="links6">
-                    <div className="about1">About</div>
-                    <div className="shop1">Shop</div>
-                    <div className="product10">Product</div>
-                    <div className="track-order1">Track Order</div>
-                  </div>
-                </div>
-                <div className="download-mobile-app">
-                  <div className="download-mobile-app1">
-                    Download Mobile App
-                  </div>
-                  <img className="download-mobile-app-child" alt="" />
-                  <div className="download-our-mobile-app">
-                    <div className="app-store">
-                      <img className="apple-negative-1-icon" alt="" />
-                      <div className="download-on-the-parent">
-                        <div className="download-on-the">Download on the</div>
-                        <div className="app-store1">App Store</div>
-                      </div>
-                    </div>
-                    <div className="google-play">
-                      <img className="icongoogle-play-1" alt="" />
-                      <div className="download-on-the-group">
-                        <div className="download-on-the1">Download on the</div>
-                        <div className="google-play1">Google play</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <img className="bg-icon8" alt="" src="/bg-8@2x.png" />
-            </div>
-          </div>
-        </section>
+        
       </main>
       <img className="top-icon1" alt="" src="/top@2x.png" />
     </div>
