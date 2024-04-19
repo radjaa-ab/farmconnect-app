@@ -3,8 +3,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next'; // Importing useTranslation hook
 import './Footer.css';
 import i18n from '../i18n';
+import { Link } from 'react-router-dom';
+import TermsAndConditions from './Termes';
 
 const Footer = () => {
+    const showTermes = true; // Define showTermes here or assign a value based on some condition
+
   const { t } = useTranslation(); // Using useTranslation hook to access t function
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
@@ -52,14 +56,17 @@ const Footer = () => {
             </div>
           </div>
           <div className="help">
-            <div className="helps">Helps</div>
-            <div className="links1">
-              <div className="contact2">Contact</div>
-              <div className="faqs">Faqs</div>
-              <div className="terms-condition">Terms & Condition</div>
-              <div className="privacy-policy">Privacy Policy</div>
-            </div>
-          </div>
+  <div className="helps">Helps</div>
+  <div className="links1">
+    <div className="contact2">Contact</div>
+    <div className="faqs">Faqs</div>
+    <div className="terms-condition">
+    <Link to="/termes">Terms & Conditions</Link>
+    </div>
+    <div className="privacy-policy">Privacy Policy</div>
+  </div>
+</div>
+
           <div className="proxy">
             <div className="proxy1">Proxy</div>
             <div className="links2">
