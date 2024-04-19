@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getMessaging, onMessage, getToken } from "firebase/messaging";
 import { messaging } from "./firebase";
 import Panier from './Components/Panier';
-
+import sections from './Dashboard/routes/sections.jsx';
 
 
 
@@ -68,7 +68,7 @@ function App() {
           <Route path="SettingsPage/" element={<SettingsPage />} />
           <Route path="/Panier" element={< Panier />} />
           <Route path="Maain" element= {<Maain/>} />
-
+            < Route path = "sections" element = {<sections />} />
           <Route path="Products" element= {<Products/>} />
         </Route>
       </Routes>
