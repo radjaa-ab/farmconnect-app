@@ -78,12 +78,18 @@ function Register() {
           <form onSubmit={handleSignUp}>
             <input type="text" value={idUser} onChange={(e) => setidUser(e.target.value)} placeholder={t("username")} required />
             <input type="number" value={age} onChange={(e) => setAge(parseInt(e.target.value))} placeholder={t("Age")} required />
-            <select value={ville} onChange={(e) => setVille(e.target.value)} required >
+            <select 
+              value={ville} 
+              onChange={(e) => setVille(e.target.value)} 
+              required 
+              style={{ background: '#ddd', borderRadius: '5px', border: 'none', color: 'black', width: '300px' }}
+            >
               <option value="">{t("City")}</option>
               {wilayas.map((wilaya, index) => (
                 <option key={index} value={wilaya}>{wilaya}</option>
               ))}
             </select>
+
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("email")} required />
             <input type="password" value={passwordHash} onChange={(e) => setPasswordHash(e.target.value)} placeholder={t("password")} required />
             <PasswordStrengthBar password={passwordHash} />
@@ -96,8 +102,8 @@ function Register() {
             </select>
             {showFileInput && (
               <div>
-                <label>{t("Insert your file : ")}
-                  <input type="file" onChange={handleFileChange} required />
+                <label >{t("Insert your file : ")}
+                  <input type="file" onChange={handleFileChange} required  />
                 </label>
               </div>
             )}
