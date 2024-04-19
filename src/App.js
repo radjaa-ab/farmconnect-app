@@ -13,7 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { getMessaging, onMessage, getToken } from "firebase/messaging";
 import { messaging } from "./firebase";
 import Panier from './Components/Panier';
-import sections from './Dashboard/routes/sections.jsx';
+import Admin from './Dashboard/app.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 
 
 
@@ -53,6 +54,7 @@ function App() {
   };
 
   return (
+    <HelmetProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/">
@@ -68,12 +70,12 @@ function App() {
           <Route path="SettingsPage/" element={<SettingsPage />} />
           <Route path="/Panier" element={< Panier />} />
           <Route path="Maain" element= {<Maain/>} />
-            < Route path = "sections" element = {<sections />} />
+            < Route path = "Admin" element = {<Admin />} />
           <Route path="Products" element= {<Products/>} />
         </Route>
       </Routes>
     </BrowserRouter>
-    
+    </HelmetProvider>
   );
 }
 

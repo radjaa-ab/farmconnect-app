@@ -17,24 +17,24 @@ export default function Router() {
     {
       element: (
         <DashboardLayout>
-          <Suspense>
+          <Suspense fallback={<div>Chargement...</div>}>
             <Outlet />
           </Suspense>
         </DashboardLayout>
       ),
       children: [
-        { element: <IndexPage />, index: true },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        { path: '/', element: <IndexPage />, index: true },
+        { path: '/user', element: <UserPage /> },
+        { path: '/products', element: <ProductsPage /> },
+        { path: '/blog', element: <BlogPage /> },
       ],
     },
     {
-      path: 'login',
+      path: '/login',
       element: <LoginPage />,
     },
     {
-      path: '404',
+      path: '/404',
       element: <Page404 />,
     },
     {
