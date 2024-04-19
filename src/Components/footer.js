@@ -1,8 +1,15 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next'; // Importing useTranslation hook
 import './Footer.css';
+import i18n from '../i18n';
 
 const Footer = () => {
+  const { t } = useTranslation(); // Using useTranslation hook to access t function
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <footer className="bg-body-secondary text-light">
       <div className="footer1">

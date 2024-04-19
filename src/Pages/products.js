@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';// Import Link from react-router-dom
 import { useState } from "react"; 
 import Navigation from '../Components/Navigation';
 import Footer from '../Components/footer';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+
 
 const App = () => {
+  const { t } = useTranslation(); 
+
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -70,6 +74,7 @@ const App = () => {
     setCart([...cart, product]);
   };
 
+  
   const renderProducts = () => {
     const rows = [];
     for (let i = 0; i < products.length; i += 3) {
@@ -117,10 +122,10 @@ const App = () => {
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
             <div className="grid gap-1">
               <h1 className="text-2xl font-bold tracking-tight text-center md:text-left">
-              Shop Green Produce
+                {t('shop.title')}
               </h1>
               <p className="text-gray-500 dark:text-gray-400 text-center md:text-left">
-                Find the freshest fruits and vegetables for a healthy lifestyle.
+                {t('shop.description')}
               </p>
             </div>
           </div>
