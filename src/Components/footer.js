@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import './Footer.css';
 
 const Footer = () => {
   return (
@@ -20,8 +20,7 @@ const Footer = () => {
                 <h1 className="ecobazar2">FarmConnect </h1>
               </div>
               <div className="morbi-cursus-porttitor">
-                Agricultural Products Rural 
-                System: FarmConnect Hub
+                Agricultural Products Rural System: FarmConnect Hub
               </div>
               <div className="cta">
                 <div className="button8">
@@ -50,7 +49,7 @@ const Footer = () => {
             <div className="links1">
               <div className="contact2">Contact</div>
               <div className="faqs">Faqs</div>
-              <div className="terms-condition">{`Terms & Condition`}</div>
+              <div className="terms-condition">Terms & Condition</div>
               <div className="privacy-policy">Privacy Policy</div>
             </div>
           </div>
@@ -66,10 +65,10 @@ const Footer = () => {
           <div className="categories14">
             <div className="categories15">Categories</div>
             <div className="links3">
-              <div className="fruit-vegetables">{`Fruit & Vegetables`}</div>
-              <div className="meat-fish">{`Meat & Fish`}</div>
-              <div className="bread-bakery">{`Bread & Bakery`}</div>
-              <div className="beauty-health">{`Beauty & Health`}</div>
+              <div className="fruit-vegetables">Fruit & Vegetables</div>
+              <div className="meat-fish">Meat & Fish</div>
+              <div className="bread-bakery">Bread & Bakery</div>
+              <div className="beauty-health">Beauty & Health</div>
             </div>
           </div>
         </div>
@@ -91,11 +90,25 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="categories16">Categories</div>
-      <div className="fruit-vegetables1">{`Fruit & Vegetables`}</div>
-      <div className="meat-fish1">{`Meat & Fish`}</div>
-      <div className="bread-bakery1">{`Bread & Bakery`}</div>
-      <div className="beauty-health1">{`Beauty & Health`}</div>
+      <Container>
+        <Row>
+          <Col>
+            <div className="categories16">Categories</div>
+          </Col>
+          <Col>
+            <div className="fruit-vegetables1">Fruit & Vegetables</div>
+          </Col>
+          <Col>
+            <div className="meat-fish1">Meat & Fish</div>
+          </Col>
+          <Col>
+            <div className="bread-bakery1">Bread & Bakery</div>
+          </Col>
+          <Col>
+            <div className="beauty-health1">Beauty & Health</div>
+          </Col>
+        </Row>
+      </Container>
     </footer>
   );
 };
