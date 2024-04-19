@@ -21,8 +21,7 @@ function Login({ initialValues, onChange }) {
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
   };
-
-  const [user] = useAuthState(auth);
+  const [username, setUsername] = useState("");
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [password, setPassword] = useState(""); 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -122,8 +121,8 @@ function Login({ initialValues, onChange }) {
         <div className="formWrapper">
           <span className="logo">{t("start now")}</span>
           <form onSubmit={handleSubmit}>
-          <input type="Text" name="username" placeholder={t("username")} required />
-          <input type="password" placeholder={t("password")} onChange={handlePasswordChange} />
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder={t("username")} required />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder={t("password")} required />
             <button>{t("login")}</button>
           </form>
           <p>
