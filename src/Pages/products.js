@@ -1,188 +1,140 @@
 import React from 'react';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';// Import Link from react-router-dom
+import { useState } from "react"; 
 import Navigation from '../Components/Navigation';
 import Footer from '../Components/footer';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
-const App = () => { 
+
+const App = () => {
+  const { t } = useTranslation(); 
+
   const [products, setProducts] = useState([
     {
       id: 1,
-      name: 'Product 1',
+      name: 'Apples',
       price: 250,
-      category: 'fruits',
+      description: 'Crisp and juicy goodness.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 2,
-      name: 'Product 2',
+      name: 'Broccoli',
       price: 150,
-      category: 'fruits',
+      description: 'Nutrient-packed superfood.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 3,
-      name: 'Product 3',
+      name: 'Carrots',
       price: 200,
-      category: 'fruits',
+      description: 'Crunchy and packed with vitamins.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 4,
-      name: 'Product 4',
+      name: 'Spinach',
       price: 300,
-      category: 'legumes',
+      description: 'Nutrient-dense leafy green.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 5,
-      name: 'Product 5',
+      name: 'Tomatoes',
       price: 200,
-      category: 'legumes',
+      description: 'Juicy and bursting with flavor.',
+      image: 'https://via.placeholder.com/300',
+    },
+    {
+      id: 6,
+      name: 'Blueberries',
+      price: 250,
+      description: 'Sweet and antioxidant-rich.',
+      image: 'https://via.placeholder.com/300',
+    },
+    {
+      id: 7,
+      name: 'Avocado',
+      price: 200,
+      description: 'Creamy and nutrient-dense.',
+      image: 'https://via.placeholder.com/300',
+    },
+    {
+      id: 8,
+      name: 'Kale',
+      price: 300,
+      description: 'Nutrient-packed leafy green.',
       image: 'https://via.placeholder.com/300',
     },
   ]);
 
-  const renderCategories = () => {
-    const categories = [...new Set(products.map((p) => p.category))];
-    return categories.map((category) => ( 
-      <div key={category} className="category">
-        <h3>{category}</h3>
-      </div>
-    ));
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
   };
 
+  
   const renderProducts = () => {
-    return products.map((product) => (
-      <div key={product.id} className="product">
-        <img src={product.image} alt={product.name} className="product-image" />
-        <div className="product-info">
-          <h3>{product.name}</h3>
-          <div className="price">
-            <span className="dinar">Da</span>
-            <span>{product.price}</span>
-          </div>
-          <button className="button">Add to Cart</button>
+    const rows = [];
+    for (let i = 0; i < products.length; i += 3) {
+      const rowProducts = products.slice(i, i + 3);
+      rows.push(
+        <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {rowProducts.map((product) => (
+            <div key={product.id} className="bg-white shadow-lg rounded-lg p-4">
+              <Link to="#" className="block">
+                <img
+                  alt={product.name}
+                  className="w-full h-40 object-cover rounded-lg mb-4"
+                  src={product.image}
+                />
+              </Link>
+              <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+              <p className="text-gray-500 mb-4">{product.description}</p>
+              <div className="flex justify-between">
+                <Link
+                  to="/"
+                  className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-200"
+                >
+                  Shop
+                </Link>
+                <button
+                  onClick={() => addToCart(product)}
+                  className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-    ));
+      );
+    }
+    return rows;
   };
 
   return (
-    
-    <div style={styles.mainContainer}>
-      <header>
-        <nav>
-          <Navigation/>
-        </nav>
-      </header>
-      <div style={styles.banner}>
-        <h2>Welcome to the Store</h2>
-        <p>The best place to find products online</p>
-      </div>
-      <div style={styles.categories}>{renderCategories()}</div>
-      <div style={styles.products}>{renderProducts()}</div>
-      <footer >
-        <Footer/>
-      </footer>
+    <div className="min-h-screen">
+      <Navigation />
+      <section className="w-full py-12">
+        <div className="container grid gap-6 md:gap-8 px-4 md:px-6 max-w-xl mx-auto lg:max-w-none">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
+            <div className="grid gap-1">
+              <h1 className="text-2xl font-bold tracking-tight text-center md:text-left">
+                {t('shop.title')}
+              </h1>
+              <p className="text-gray-500 dark:text-gray-400 text-center md:text-left">
+                {t('shop.description')}
+              </p>
+            </div>
+          </div>
+          {renderProducts()}
+        </div>
+      </section>
+      <Footer />
     </div>
   );
-}
-
-const styles = {
-  mainContainer: {
-    fontFamily: 'Arial, sans-serif',
-    maxWidth: 'device-width',
-    margin: '0 auto',
-    padding: '0px',
-    backgroundColor: '#f7f7f7',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '20px',
-    backgroundColor: '#2ecc71',
-    padding: '10px 20px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    borderRadius: '5px',
-  },
-  logo: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-  },
-  nav: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  navList: {
-    display: 'flex',
-    listStyleType: 'none',
-    margin: 0,
-    padding: 0,
-  },
-  navListItem: {
-    marginRight: '10px',
-  },
-  banner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#27ae60',
-    padding: '20px',
-    borderRadius: '5px',
-    marginBottom: '20px',
-  },
-  categories: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    marginBottom: '20px',
-  },
-  category: {
-    marginRight: '20px',
-    padding: '10px 20px',
-    borderRadius: '5px',
-    backgroundColor: '#2ecc71',
-    cursor: 'pointer',
-  },
-  products: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '20px',
-  },
-  product: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '5px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  productImage: {
-    width: '100%',
-    height: 'auto',
-  },
-  productInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  price: {
-    marginBottom: '10px',
-  },
-  dollar: {
-    fontSize: '16px',
-  },
-  button: {
-    backgroundColor: '#2ecc71',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
-  footer: {
-    padding: '20px',
-    textAlign: 'center',
-    backgroundColor: '#2ecc71',
-    marginTop: '20px',
-  },
 };
 
 export default App;

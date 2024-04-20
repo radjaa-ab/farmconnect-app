@@ -35,7 +35,7 @@
     "focus-trap": "^7.5.4",
     "framer-motion": "^6.5.1",
     "headlessui": "^0.0.0",
-    "i18next": "^23.10.1",
+    "i18next": "^23.11.2",
     "i18next-browser-languagedetector": "^7.2.1",
     "i18next-http-middleware": "^3.5.0",
     "i18next-xhr-backend": "^3.2.2",
@@ -88,5 +88,11 @@
     "sass": "^1.72.0",
     "sass-loader": "^14.1.1",
     "source-map-loader": "^5.0.0"
-  }
+  },
+  
+    "shop": {
+      "title": "Shop Green Produce",
+      "description": "Find the freshest fruits and vegetables for a healthy lifestyle."
+    }
+  
 }

@@ -85,32 +85,14 @@ function Register() {
           {error && <div className="error">{error}</div>}
           {successMessage && <div className="success">{successMessage}</div>}
           <form onSubmit={handleSignUp}>
-            <div className="name-inputs">
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t("Name")} required />
-              <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={t("first name")} required />
-            </div>
-            <div className="additional-inputs">
-              <input 
-                type="number" 
-                value={age > 0 ? age : ''} 
-                onChange={(e) => {
-                  const value = parseInt(e.target.value, 10);
-                  if (!isNaN(value) && value > 0) {
-                    setAge(value);
-                  } else {
-                    setAge('');
-                  }
-                }} 
-                placeholder={t("Age")} 
-                required 
-              />
-              <select value={ville} onChange={(e) => setVille(e.target.value)} required >
-                <option value="">{t("City")}</option>
-                {wilayas.map((wilaya, index) => (
-                  <option key={index} value={wilaya}>{wilaya}</option>
-                ))}
-              </select>
-            </div>
+            <input type="text" value={idUser} onChange={(e) => setidUser(e.target.value)} placeholder={t("username")} required />
+            <input type="number" value={age} onChange={(e) => setAge(parseInt(e.target.value))} placeholder={t("Age")} required />
+            <select value={ville} onChange={(e) => setVille(e.target.value)} required >
+              <option value="">{t("City")}</option>
+              {wilayas.map((wilaya, index) => (
+                <option key={index} value={wilaya}>{wilaya}</option>
+              ))}
+            </select>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("email")} required />
             <div className="mdp1">
         <input 
@@ -151,8 +133,8 @@ function Register() {
             </select>
             {showFileInput && (
               <div>
-                <label>{t("Insert your file : ")}
-                  <input type="file" onChange={handleFileChange} required />
+                <label >{t("Insert your file : ")}
+                  <input type="file" onChange={handleFileChange} required  />
                 </label>
               </div>
             )}
