@@ -6,13 +6,14 @@ const Post = ({ post }) => {
 
   return (
     <Card className="mb-3">
-      <Card.Header style={{Width:'800px'}}>
-        <img src={avatar} alt="Avatar" className="avatar mr-3" />
-        <div>
-          <h6 className="mb-0">{author}</h6>
-          <p className="text-muted mb-0">{date}</p>
-        </div>
+      <Card.Header style={{ width: '800px', display: 'flex', alignItems: 'center' }}>
+       <img src={avatar} alt="Avatar" className="avatar mr-3" style={{marginRight:'10px', marginTop:'-1px', height:'50px', width:'50px'}} />
+       <div>
+         <h6 className="mb-0">{author}</h6>
+         <p className="text-muted mb-0">{date}</p>
+       </div>
       </Card.Header>
+
       <Card.Body>
         <Card.Text>{content}</Card.Text>
         {media && (

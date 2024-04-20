@@ -5,6 +5,7 @@ import Post from '../Components/Post';
 import téléchargement from '../Components/téléchargement.jpg';
 import Navigation from '../Components/Navigation';
 import Footer from '../Components/footer'; // Make sure the path is correct
+import avatar from '../Components/avatar.png'
 
 function Feed() {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ function Feed() {
   const [posts, setPosts] = useState([
     {
       id: 1,
-      avatar: 'url_to_avatar_image',
+      avatar: avatar,
       author: 'John Doe',
       date: 'April 19, 2024',
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
