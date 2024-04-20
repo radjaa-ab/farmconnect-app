@@ -19,8 +19,6 @@ import TermsAndConditions from './Components/Termes.js'; // Import your TermsAnd
 import sections from './Dashboard/routes/sections.jsx';
 import Feed from './Pages/Feed.js';
 
-
-
 async function requestPermission() {
   const permission = await Notification.requestPermission();
 
@@ -75,21 +73,11 @@ function App() {
           <Route path="/Products" element={<Products />} />
           <Route path="/termes" element={<TermsAndConditions />} />
           <Route path="/Equipements" element={<Equipements />} />
-
+          <Route path="/sections" element={<sections />} />
+          <Route path="/Feed" element={<Feed />} />
         </Routes>
       </Router>
     </HelmetProvider>
-          <Route path="Home/" element={<Home />} />
-          <Route path="SettingsPage/" element={<SettingsPage />} />
-          <Route path="/Panier" element={< Panier />} />
-          <Route path="Maain" element= {<Maain/>} />
-          < Route path ="sections" element = {<sections />} />
-          <Route path="Products" element= {<Products/>} />
-          <Route path="Feed/" element={<Feed />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    
   );
 }
 
