@@ -29,7 +29,7 @@ export default function Panier() {
         <MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
             <MDBCol>
-              <MDBCard>
+              <MDBCard className="border-0">
                 <MDBCardBody className="p-4">
                   <MDBRow>
                     <MDBCol lg="7">
@@ -57,7 +57,7 @@ export default function Panier() {
                         </div>
                       </div>
 
-                      <MDBCard className="mb-3" style={{ backgroundColor: "#fff" }}>
+                      <MDBCard className="mb-3 border-0" style={{ backgroundColor: "#fff" }}>
                         <MDBCardBody className="d-flex justify-content-between align-items-center">
                           <div className="d-flex flex-row align-items-center">
                             <div>
