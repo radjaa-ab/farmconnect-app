@@ -6,8 +6,6 @@ import LoginComponent from "./Login";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
-import axios from "axios";
-
 
 
 const wilayas = [
@@ -34,13 +32,13 @@ function Register() {
   const [ville, setVille] = useState(""); // Utilisez la liste des wilayas
   const [justificatif, setJustificatif] = useState(null); // Les données Blob peuvent être nulles initialement
   const [email, setEmail] = useState("");
-  const [passwordHash, setPasswordHash] = useState("");
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [showFileInput, setShowFileInput] = useState(false);
-  const [profession, setProfession] = useState("");
-  const [specialite, setSpecialite] = useState("");
-  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [passwordHash, setPasswordHash] = useState(""); // Ne pas stocker les mots de passe en texte brut
+  const [error, setError] = useState(null); // État pour gérer les erreurs lors de l'inscription
+  const [successMessage, setSuccessMessage] = useState(""); // État pour gérer le message de réussite
+  const [showFileInput, setShowFileInput] = useState(false); // État initial pour la visibilité de l'entrée de fichier
+  const [profession, setProfession] = useState(""); // État pour stocker la profession
+  const [specialite, setSpecialite] = useState(""); // État pour stocker la spécialité de l'ingénieur
+  const [showLoginForm, setShowLoginForm] = useState(false); // État pour afficher le formulaire de connexion
 
   useEffect(() => {
     const handleOnlineStatusChange = () => {
@@ -169,36 +167,8 @@ function Register() {
             </select>
 
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("email")} required />
-            <div className="mdp1">
-            <input 
-              type={showPassword ? "text" : "password"} 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              placeholder={t("password")} 
-              required 
-            />
-            <FontAwesomeIcon 
-              icon={faEye} 
-              className="eye-icon" 
-              onClick={() => togglePasswordVisibility(showPassword, setShowPassword)} 
-            />
-          </div>
-          <div className="mdp2">
-            <input 
-              type={showConfirmPassword ? "text" : "password"} 
-              value={confirmPassword} 
-              onChange={(e) => setConfirmPassword(e.target.value)} 
-              placeholder={t("confirm password")}
-              required 
-            />
-            <FontAwesomeIcon 
-              icon={faEye} 
-              className="eye-icon" 
-              onClick={() => togglePasswordVisibility(showConfirmPassword, setShowConfirmPassword)} 
-            />
-          </div>
-
-            <PasswordStrengthBar password={password} />
+            <input type="password" value={passwordHash} onChange={(e) => setPasswordHash(e.target.value)} placeholder={t("password")} required />
+            <PasswordStrengthBar password={passwordHash} />
             <select value={profession} onChange={handleProfessionChange} required>
               <option value="">{t("Select a profession")}</option>
               <option value="commerçant">{t("merchant")}</option>
@@ -208,8 +178,8 @@ function Register() {
             </select>
             {showFileInput && (
               <div>
-                <label>{t("Insert your file : ")}
-                  <input type="file" onChange={handleFileChange} required />
+                <label >{t("Insert your file : ")}
+                  <input type="file" onChange={handleFileChange} required  />
                 </label>
               </div>
             )}
@@ -222,10 +192,10 @@ function Register() {
             )}
             <button>{t("register")}</button>
             <p>{t("vous")}
+              {" "}
               <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px' }}>{t("login")}</button>
             </p>
           </form>
-          
         </div>
       )}
     </>
@@ -233,4 +203,3 @@ function Register() {
 }
 
 export default Register;
-
