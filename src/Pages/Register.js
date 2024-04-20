@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import Offline from '../Pages/Offline';
 import LoginComponent from "./Login";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+import axios from "axios";
+
+
 
 const wilayas = [
   "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar", 
@@ -19,11 +22,15 @@ const wilayas = [
 ];
 
 function Register() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [idUser, setidUser] = useState("");
-  const [age, setAge] = useState(0); // Initialiser avec une valeur par défaut
+  const [age, setAge] = useState(16); // Initialiser avec l'âge minimum
   const [ville, setVille] = useState(""); // Utilisez la liste des wilayas
   const [justificatif, setJustificatif] = useState(null); // Les données Blob peuvent être nulles initialement
   const [email, setEmail] = useState("");
@@ -61,9 +68,66 @@ function Register() {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    // Code pour inscrire l'utilisateur avec Firebase
-    // Utilisez les valeurs des états pour créer un nouvel utilisateur dans Firebase
-  };
+    // Vérifier que tous les champs obligatoires sont remplis
+    if (!idUser || age <= 0 || !ville || !email || !passwordHash || !profession) {
+        setError("Veuillez remplir tous les champs obligatoires.");
+        return;
+    }
+    // Vérifier la profession et spécifier la spécialité si c'est un ingénieur
+    if (profession === "ingenieur" && !specialite) {
+        setError("Veuillez spécifier la spécialité.");
+        return;
+    }
+    
+    // Créer un objet FormData pour envoyer les données au script PHP
+    const formData = new FormData();
+    formData.append('idUser', idUser);
+    formData.append('age', age);
+    formData.append('ville', ville);
+    formData.append('email', email);
+    formData.append('password', passwordHash);
+    formData.append('profession', profession);
+    if (profession === "ingenieur") {
+        formData.append('specialite', specialite);
+    }
+    if (profession === "consommateur") {
+        formData.append('justificatif', justificatif);
+    }
+
+    // Envoyer les données au script PHP avec fetch
+    fetch('Register.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la requête au serveur.');
+        }
+        return response.text();
+    })
+    .then(data => {
+        // Afficher un message de succès ou d'erreur en fonction de la réponse du serveur
+        if (data.startsWith('Erreur')) {
+            setError(data);
+        } else {
+            setSuccessMessage(data);
+            // Réinitialiser les champs du formulaire après une inscription réussie
+            setidUser("");
+            setAge(0);
+            setVille("");
+            setEmail("");
+            setPasswordHash("");
+            setProfession("");
+            setSpecialite("");
+            setJustificatif(null);
+            setShowFileInput(false);
+        }
+    })
+    .catch(error => {
+        setError(error.message);
+    });
+};
+
 
   return (
     <>
@@ -77,7 +141,21 @@ function Register() {
           {successMessage && <div className="success">{successMessage}</div>}
           <form onSubmit={handleSignUp}>
             <input type="text" value={idUser} onChange={(e) => setidUser(e.target.value)} placeholder={t("username")} required />
-            <input type="number" value={age} onChange={(e) => setAge(parseInt(e.target.value))} placeholder={t("Age")} required />
+            <input 
+              type="number" 
+              value={age} 
+              onChange={(e) => {
+                const newAge = parseInt(e.target.value);
+                if (newAge >= 16 && newAge <= 100) {
+                  setAge(newAge);
+                } else {
+                  setAge(age);
+                }
+              }} 
+              placeholder={t("Age")}
+              required 
+            />
+
             <select 
               value={ville} 
               onChange={(e) => setVille(e.target.value)} 
@@ -115,9 +193,8 @@ function Register() {
               </div>
             )}
             <button>{t("register")}</button>
-            <p>
-              Vous avez déjà un compte ?{" "}
-              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px' }}>Se connecter</button>
+            <p>{t("vous")}
+              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px' }}>{t("login")}</button>
             </p>
           </form>
         </div>
