@@ -1,4 +1,4 @@
-CREATE TABLE User (
+CREATE TABLE Users (
     idUser VARCHAR(20) PRIMARY KEY,
     age INTEGER,
     ville VARCHAR(30),

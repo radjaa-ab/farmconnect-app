@@ -1,9 +1,15 @@
 <?php
+    header('Access-Control-Allow-Origin: *');
+    header("Access-Control-Allow-Headers: *");
+    echo "Testing";
+?>
+
+<?php
 // Connexion à la base de données
 $servername = "localhost";
-$username = "votre_nom_utilisateur";
-$password = "votre_mot_de_passe";
-$dbname = "votre_base_de_donnees";
+$username = "root";
+$password = "zoumourouda";
+$dbname = "farmconnect";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -23,22 +29,22 @@ $profession = $_POST['profession'];
 // Vérifier la profession et insérer les données dans les tables appropriées
 switch ($profession) {
     case 'agriculteur':
-        $sqlUser = "INSERT INTO User (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
+        $sqlUser = "INSERT INTO Users (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
         $sqlAgriculteur = "INSERT INTO Agriculteur (idUser) VALUES ('$idUser')";
         break;
     case 'ingenieur':
         $specialite = $_POST['specialite'];
-        $sqlUser = "INSERT INTO User (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
+        $sqlUser = "INSERT INTO Users (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
         $sqlIngenieur = "INSERT INTO Ingenieur (idUser, specialite) VALUES ('$idUser', '$specialite')";
         break;
     case 'commerçant':
-        $sqlUser = "INSERT INTO User (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
+        $sqlUser = "INSERT INTO Users (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
         $sqlCommercant = "INSERT INTO Commercant (idUser) VALUES ('$idUser')";
         break;
     case 'consommateur':
         $justificatif = isset($_FILES['justificatif']) ? $_FILES['justificatif']['name'] : 'none';
         move_uploaded_file($_FILES['justificatif']['tmp_name'], 'uploads/' . $justificatif); // Déplacer le fichier justificatif vers un répertoire approprié
-        $sqlUser = "INSERT INTO User (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
+        $sqlUser = "INSERT INTO Users (idUser, age, ville, email, motDePasseHash, profession) VALUES ('$idUser', $age, '$ville', '$email', '$passwordHash', '$profession')";
         $sqlConsommateur = "INSERT INTO Consommateur (idUser, justificatif) VALUES ('$idUser', '$justificatif')";
         break;
     default:
