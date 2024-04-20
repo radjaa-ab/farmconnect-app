@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import Post from '../Components/Post';
 import téléchargement from '../Components/téléchargement.jpg';
@@ -39,13 +39,14 @@ function Feed() {
         <Col md={4} className="post-container">
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="newPost">
-              <Form.Control className="holder"
+              <Form.Control className='Holder'
+                //Styles={{marginTop: '100px'}}
                 as="textarea"
                 rows={3}
                 placeholder={t('Write something...')}
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
-                //style={Styles.newPost}
+                style={Styles.newPost}
               />
             </Form.Group>
             <Button variant="primary" type="submit" style={Styles.Button}>
@@ -54,7 +55,7 @@ function Feed() {
           </Form>
         </Col>
       </Row>
-      <Row style={{ ...Styles.postcontainer, margin: '0 auto', maxWidth: '1200px', marginLeft: '430px' }}>
+      <Row style={{ ...Styles.postcontainer, margin: '0 auto', maxWidth: '1200px', marginLeft: '430px'}}>
         <Col md={8} className="feed-container">
           {/* Iterate over posts array and render each post */}
           {posts.map((post) => (
@@ -72,25 +73,27 @@ const Styles = {
     marginTop: '30px',
     marginBottom: '20px',
   },
-  newPost: {
+  /*newPost: {
     marginLeft: '20px',
     width: '100%',
-  },
+  },*/
   Button: {
-    marginLeft: '500px',
+    marginLeft: '600px',
     color: 'white',
     backgroundColor: 'green',
     width: '180px',
     marginBottom: '30px',
-    marginTop: '30px',
+    marginTop: '20px',
   },
-  holder: {
-    width: '100%',
+  newPost: {
+    width: '780px',
     padding: '10px',
-    border: '1px solid #ccc',
+    border: '5px solid lightgreen',
     borderRadius: '5px',
     fontSize: '16px',
+    marginTop: '50px',
   },
+  
 };
 
 export default Feed;
