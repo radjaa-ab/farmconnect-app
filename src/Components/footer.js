@@ -66,17 +66,17 @@ const Footer = () => {
          
         </div>
         <div className="copyright">
-          <div className="ecobazar-ecommerce">
-                    FarmConnect © 2024. All Rights Reserved
-          </div>
-          <div className="methodapplepay-parent">
-            <img className="methodapplepay-icon" alt="" />
-            <img className="methodvisa-icon" alt="" />
-            <img className="methoddiscover-icon" alt="" />
-            <img className="methodmastercard-icon" alt="" />
-           
-          </div>
-        </div>
+  <div className="copyright-text">
+    FarmConnect © 2024. All Rights Reserved
+  </div>
+  <div className="methodapplepay-parent">
+    <img className="methodapplepay-icon" alt="" />
+    <img className="methodvisa-icon" alt="" />
+    <img className="methoddiscover-icon" alt="" />
+    <img className="methodmastercard-icon" alt="" />
+  </div>
+</div>
+
       </div>
       
     </footer>

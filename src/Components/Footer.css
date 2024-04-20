@@ -209,15 +209,18 @@
 .methodapplepay-parent {
   display: flex;
   align-items: center;
-}.footer .copyright {
+}
+.footer .copyright {
   display: flex;
-  justify-content: flex-end; /* Align the content to the right */
   align-items: center;
   flex-grow: 1; /* Allow the content to take up available space */
-  margin-right: 40px; /* Adjust the margin-right value to move it more to the right */
 }
 
 .ecobazar-ecommerce {
-  margin-right: 0; /* Remove the margin-right property from this class */
+  margin-right: 20px; /* Adjust the margin-right value as needed */
 }
 
+/* New style for the copyright text */
+.copyright-text {
+  margin-left: auto; /* Push the text to the right */
+}
