@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Post from '../Components/Post';
 import téléchargement from '../Components/téléchargement.jpg';
 import Navigation from '../Components/Navigation';
+import Footer from '../Components/footer'; // Make sure the path is correct
 
 function Feed() {
   const { t } = useTranslation();
@@ -61,6 +62,7 @@ function Feed() {
           ))}
         </Col>
       </Row>
+      <Footer />
     </div>
   );
 }
@@ -89,9 +91,6 @@ const Styles = {
     borderRadius: '5px',
     fontSize: '16px',
   },
-  
-  
-  
 };
 
 export default Feed;
