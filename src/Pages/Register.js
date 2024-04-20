@@ -193,7 +193,7 @@ function Register() {
             <button>{t("register")}</button>
             <p>{t("vous")}
               {" "}
-              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px' }}>{t("login")}</button>
+              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: 'green', fontWeight: 'bold', fontSize: '15px' }}>{t("login")}</button>
             </p>
           </form>
         </div>
