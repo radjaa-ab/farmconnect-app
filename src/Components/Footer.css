@@ -222,5 +222,6 @@
 
 /* New style for the copyright text */
 .copyright-text {
-  margin-left: auto; /* Push the text to the right */
+  margin-top: 0;
+  padding-left: 7%;
 }
