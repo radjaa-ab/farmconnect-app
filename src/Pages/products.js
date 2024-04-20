@@ -100,11 +100,20 @@ const App = () => {
                   Shop
                 </Link>
                 <button
-                  onClick={() => addToCart(product)}
-                  className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-200"
-                >
-                  Add to Cart
-                </button>
+  onClick={() => addToCart(product)}
+  style={{
+    backgroundColor: 'green',
+    color: 'white',
+    padding: '0.5rem 1rem',
+    borderRadius: '0.25rem',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 0.2s ease-in-out',
+  }}
+>
+  Add to Cart
+</button>
+
               </div>
             </div>
           ))}

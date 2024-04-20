@@ -66,7 +66,7 @@
     width: 8rem;
     height: 3rem;
     background-color: #444;
-    color: #fff;
+    color: #53c03d;
     border: none;
     border-radius: 0.25rem;
     margin-right: 1rem;
@@ -192,4 +192,14 @@
   .bottom-text {
     margin: 0;
     color: #999;
+  }
+  .green-link {
+    color: rgb(166, 240, 166);
+    text-decoration: none;
+    /* Add any additional styling here */
+  }
+  .green-button {
+    border: none; /* Remove border */
+    background-color: green; /* Set background color to green */
+    /* Add any additional styling here */
   }
