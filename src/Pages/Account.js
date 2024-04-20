@@ -2,7 +2,7 @@ import React from 'react';
 import './SettingsPage.css'; // Import CSS file for styling
 import BasicExample from '../Components/Navigation'; // Import the navigation bar component
 import Footer from '../Components/footer';
-const SettingsPage = () => {
+const Account = () => {
   return (
     <div>
       <BasicExample /> {/* Include the navigation bar */}
@@ -68,4 +68,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default Account;

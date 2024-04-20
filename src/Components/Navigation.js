@@ -21,17 +21,21 @@ function Navigation() {
     i18n.changeLanguage(lng);
   };
 
-  const ProductsPlaceholder = t("Rechercher des produits");
+  const ProductsPlaceholder = t("search for products");
 
   const navigate = useNavigate(); // Initialisez useNavigate
   
   // Fonction de gestion du clic sur le lien des paramètres
   const handleSettingsClick = () => {
-    navigate('/SettingsPage'); // Redirigez l'utilisateur vers la page des paramètres
+    navigate('/Account'); // Redirigez l'utilisateur vers la page des paramètres
   };
 
   const handlePClick =  () => {
-    navigate('/Panier') ;// Redirigez l
+    navigate('/Products') ;// Redirigez l
+  }
+
+  const handleEClick =  () => {
+    navigate('/Equipements') ;// Redirigez l
   }
   // Fonction de gestion du clic sur l'image d'appel
   const handleCallClick = () => {
@@ -49,8 +53,8 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
             <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleSettingsClick}>{t("Myaccount")}</Nav.Link>
-            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleSettingsClick}>{t("products")}</Nav.Link>
-            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleSettingsClick}>{t("equipements")}</Nav.Link>
+            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handlePClick}>{t("products")}</Nav.Link>
+            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleEClick}>{t("equipements")}</Nav.Link>
             <SearchBar placeholderText={ProductsPlaceholder} />
             <div style={{ padding: '7px'}}>
               <LanguageSelector />
