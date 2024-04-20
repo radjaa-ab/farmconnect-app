@@ -113,33 +113,33 @@ function Register() {
             </div>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("email")} required />
             <div className="mdp1">
-        <input 
-          type={showPassword ? "text" : "password"} 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          placeholder={t("password")} 
-          required 
-        />
-        <FontAwesomeIcon 
-          icon={faEye} 
-          className="eye-icon" 
-          onClick={() => togglePasswordVisibility(showPassword, setShowPassword)} 
-        />
-      </div>
-      <div className="mdp2">
-        <input 
-          type={showConfirmPassword ? "text" : "password"} 
-          value={confirmPassword} 
-          onChange={(e) => setConfirmPassword(e.target.value)} 
-          placeholder={t("confirm password")}
-          required 
-        />
-        <FontAwesomeIcon 
-          icon={faEye} 
-          className="eye-icon" 
-          onClick={() => togglePasswordVisibility(showConfirmPassword, setShowConfirmPassword)} 
-        />
-      </div>
+            <input 
+              type={showPassword ? "text" : "password"} 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder={t("password")} 
+              required 
+            />
+            <FontAwesomeIcon 
+              icon={faEye} 
+              className="eye-icon" 
+              onClick={() => togglePasswordVisibility(showPassword, setShowPassword)} 
+            />
+          </div>
+          <div className="mdp2">
+            <input 
+              type={showConfirmPassword ? "text" : "password"} 
+              value={confirmPassword} 
+              onChange={(e) => setConfirmPassword(e.target.value)} 
+              placeholder={t("confirm password")}
+              required 
+            />
+            <FontAwesomeIcon 
+              icon={faEye} 
+              className="eye-icon" 
+              onClick={() => togglePasswordVisibility(showConfirmPassword, setShowConfirmPassword)} 
+            />
+          </div>
 
             <PasswordStrengthBar password={password} />
             <select value={profession} onChange={handleProfessionChange} required>
@@ -166,7 +166,7 @@ function Register() {
             <button>{t("register")}</button>
             <p>
               Vous avez déjà un compte ?{" "}
-              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: 'green', fontWeight: 'bold', fontSize: '15px' }}>Se connecter</button>
+              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: '#32CD32', fontWeight: 'bold', fontSize: '15px' }}>Se connecter</button>
             </p>
           </form>
           

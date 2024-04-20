@@ -153,14 +153,19 @@ function Login({ initialValues, onChange }) {
             <button onClick={handleResetPassword} style={{border: 'none', backgroundColor: 'transparent', color: 'white', fontWeight : 'bold'}}>{t("Have you forgotten your password?")}</button>
           </p>
           <Row>
-            <Col>
-              <p style={{marginLeft: '10px'}}>{t("Or sign in with Google")}</p>
-            </Col>
-            <Col>
-              <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                <img src={GoogleSignin} alt={t("login with Google ")}type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
-              </button>
-            </Col>
+          <Col style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+  <div style={{ marginRight: '10px', textAlign: 'center' }}>
+    <p style={{ margin: '0', marginBottom: '5px', width: '237.92px', height: '64px', lineHeight: '64px' }}>{t("-----------Or sign in with Google--------")}</p>
+    <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
+      <img src={GoogleSignin} alt={t("login with Google")} type="button" onClick={googleSignIn} style={{ width:'32px', height: '32px' }}/>
+    </button>
+  </div>
+</Col>
+
+
+
+
+
           </Row>
           
         </div>
