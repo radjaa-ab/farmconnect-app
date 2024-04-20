@@ -12,6 +12,9 @@ import Offline from '../Pages/Offline';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+
 
 
 function Login({ initialValues, onChange }) {
@@ -20,6 +23,10 @@ function Login({ initialValues, onChange }) {
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
+  };
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
   const [username, setUsername] = useState("");
   const [showSignUpForm, setShowSignUpForm] = useState(false);
@@ -122,7 +129,20 @@ function Login({ initialValues, onChange }) {
           <span className="logo">{t("start now")}</span>
           <form onSubmit={handleSubmit}>
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder={t("username")} required />
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder={t("password")} required />
+          <div className="mdp3">
+        <input 
+          type={showPassword ? "text" : "password"} 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          placeholder={t("password")} 
+          required 
+        />
+        <FontAwesomeIcon 
+          icon={faEye} 
+          className="eye-icon" 
+          onClick={() => togglePasswordVisibility(showPassword, setShowPassword)} 
+        />
+      </div>
             <button>{t("login")}</button>
           </form>
           <p>
