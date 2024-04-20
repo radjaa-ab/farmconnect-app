@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth"; // Import manquant
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import Offline from '../Pages/Offline';
 import LoginComponent from "./Login";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+
+
+
 
 const wilayas = [
   "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar", 
@@ -19,21 +24,30 @@ const wilayas = [
 ];
 
 function Register() {
+  const togglePasswordVisibility = (type, setter) => {
+    setter(!type);
+  };
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [idUser, setidUser] = useState("");
-  const [age, setAge] = useState(0); // Initialiser avec une valeur par défaut
-  const [ville, setVille] = useState(""); // Utilisez la liste des wilayas
-  const [justificatif, setJustificatif] = useState(null); // Les données Blob peuvent être nulles initialement
+  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [age, setAge] = useState(0);
+  const [ville, setVille] = useState("");
+  const [justificatif, setJustificatif] = useState(null);
   const [email, setEmail] = useState("");
-  const [passwordHash, setPasswordHash] = useState(""); // Ne pas stocker les mots de passe en texte brut
-  const [error, setError] = useState(null); // État pour gérer les erreurs lors de l'inscription
-  const [successMessage, setSuccessMessage] = useState(""); // État pour gérer le message de réussite
-  const [showFileInput, setShowFileInput] = useState(false); // État initial pour la visibilité de l'entrée de fichier
-  const [profession, setProfession] = useState(""); // État pour stocker la profession
-  const [specialite, setSpecialite] = useState(""); // État pour stocker la spécialité de l'ingénieur
-  const [showLoginForm, setShowLoginForm] = useState(false); // État pour afficher le formulaire de connexion
+  const [passwordHash, setPasswordHash] = useState("");
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showFileInput, setShowFileInput] = useState(false);
+  const [profession, setProfession] = useState("");
+  const [specialite, setSpecialite] = useState("");
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
     const handleOnlineStatusChange = () => {
@@ -64,6 +78,8 @@ function Register() {
     // Code pour inscrire l'utilisateur avec Firebase
     // Utilisez les valeurs des états pour créer un nouvel utilisateur dans Firebase
   };
+  
+ 
 
   return (
     <>
@@ -76,23 +92,63 @@ function Register() {
           {error && <div className="error">{error}</div>}
           {successMessage && <div className="success">{successMessage}</div>}
           <form onSubmit={handleSignUp}>
-            <input type="text" value={idUser} onChange={(e) => setidUser(e.target.value)} placeholder={t("username")} required />
-            <input type="number" value={age} onChange={(e) => setAge(parseInt(e.target.value))} placeholder={t("Age")} required />
-            <select 
-              value={ville} 
-              onChange={(e) => setVille(e.target.value)} 
-              required 
-              style={{ background: '#ddd', borderRadius: '5px', border: 'none', color: 'black', width: '300px' }}
-            >
-              <option value="">{t("City")}</option>
-              {wilayas.map((wilaya, index) => (
-                <option key={index} value={wilaya}>{wilaya}</option>
-              ))}
-            </select>
-
+            <div className="name-inputs">
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t("Name")} required />
+              <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={t("first name")} required />
+            </div>
+            <div className="additional-inputs">
+              <input 
+                type="number" 
+                value={age > 0 ? age : ''} 
+                onChange={(e) => {
+                  const value = parseInt(e.target.value, 10);
+                  if (!isNaN(value) && value > 0) {
+                    setAge(value);
+                  } else {
+                    setAge('');
+                  }
+                }} 
+                placeholder={t("Age")} 
+                required 
+              />
+              <select value={ville} onChange={(e) => setVille(e.target.value)} required >
+                <option value="">{t("City")}</option>
+                {wilayas.map((wilaya, index) => (
+                  <option key={index} value={wilaya}>{wilaya}</option>
+                ))}
+              </select>
+            </div>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("email")} required />
-            <input type="password" value={passwordHash} onChange={(e) => setPasswordHash(e.target.value)} placeholder={t("password")} required />
-            <PasswordStrengthBar password={passwordHash} />
+            <div className="mdp1">
+            <input 
+              type={showPassword ? "text" : "password"} 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder={t("password")} 
+              required 
+            />
+            <FontAwesomeIcon 
+              icon={faEye} 
+              className="eye-icon" 
+              onClick={() => togglePasswordVisibility(showPassword, setShowPassword)} 
+            />
+          </div>
+          <div className="mdp2">
+            <input 
+              type={showConfirmPassword ? "text" : "password"} 
+              value={confirmPassword} 
+              onChange={(e) => setConfirmPassword(e.target.value)} 
+              placeholder={t("confirm password")}
+              required 
+            />
+            <FontAwesomeIcon 
+              icon={faEye} 
+              className="eye-icon" 
+              onClick={() => togglePasswordVisibility(showConfirmPassword, setShowConfirmPassword)} 
+            />
+          </div>
+
+            <PasswordStrengthBar password={password} />
             <select value={profession} onChange={handleProfessionChange} required>
               <option value="">{t("Select a profession")}</option>
               <option value="commerçant">{t("merchant")}</option>
@@ -102,8 +158,8 @@ function Register() {
             </select>
             {showFileInput && (
               <div>
-                <label >{t("Insert your file : ")}
-                  <input type="file" onChange={handleFileChange} required  />
+                <label>{t("Insert your file : ")}
+                  <input type="file" onChange={handleFileChange} required />
                 </label>
               </div>
             )}
@@ -117,9 +173,10 @@ function Register() {
             <button>{t("register")}</button>
             <p>
               Vous avez déjà un compte ?{" "}
-              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px' }}>Se connecter</button>
+              <button onClick={() => setShowLoginForm(true)} style={{ border: 'none', backgroundColor: 'transparent', color: '#32CD32', fontWeight: 'bold', fontSize: '15px' }}>Se connecter</button>
             </p>
           </form>
+          
         </div>
       )}
     </>
@@ -127,3 +184,4 @@ function Register() {
 }
 
 export default Register;
+
