@@ -11,7 +11,7 @@ const Chats = () => {
   const { dispatch } = useContext(ChatContext);
 
   useEffect(() => {
-    if (currentUser.uid) {
+    if (currentUser && currentUser.uid) { // Add a check for currentUser existence
       const getChats = async () => {
         const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
           console.log("Chats: doc.data(): ", doc.data());
@@ -25,7 +25,7 @@ const Chats = () => {
 
       getChats();
     }
-  }, [currentUser.uid]);
+  }, [currentUser]); // Remove currentUser.uid from the dependency array
 
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });

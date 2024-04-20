@@ -7,8 +7,11 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { useTranslation } from 'react-i18next';
 
 const Search = () => {
+  const { t } = useTranslation();
+  
   const [username, setUsername] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -48,17 +51,28 @@ const Search = () => {
   };
 
   return (
-    <div className="search" >
-      <input style={{ width: '100%', backgroundColor: '#507050'}}
+    <div className="search">
+      <input
+        style={{ width: '100%', backgroundColor: '#507050'}}
         type="text"
-        placeholder="Trouver un utilisateur"
+        placeholder={t("find a user")}
         value={username}
         onChange={handleInputChange}
       />
       <ul>
         {suggestions.map((username, index) => (
-          <li style={{   listStyleType: 'none', backgroundColor: '#ccc', width: 'auto', Padding: '0%', borderRadius: '5px', textAlign: 'center'
-          }} key={index} onClick={() => handleSelect(username)}>
+          <li
+            key={index}
+            onClick={() => handleSelect(username)}
+            style={{
+              listStyleType: 'none',
+              backgroundColor: '#ccc',
+              width: 'auto',
+              padding: '0%',
+              borderRadius: '5px',
+              textAlign: 'center'
+            }}
+          >
             {username}
           </li>
         ))}
