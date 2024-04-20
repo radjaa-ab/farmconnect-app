@@ -14,6 +14,7 @@ import { getMessaging, onMessage, getToken } from "firebase/messaging";
 import { messaging } from "./firebase";
 import Panier from './Components/Panier';
 import sections from './Dashboard/routes/sections.jsx';
+import Feed from './Pages/Feed.js';
 
 
 
@@ -68,8 +69,9 @@ function App() {
           <Route path="SettingsPage/" element={<SettingsPage />} />
           <Route path="/Panier" element={< Panier />} />
           <Route path="Maain" element= {<Maain/>} />
-            < Route path = "sections" element = {<sections />} />
+          < Route path ="sections" element = {<sections />} />
           <Route path="Products" element= {<Products/>} />
+          <Route path="Feed/" element={<Feed />} />
         </Route>
       </Routes>
     </BrowserRouter>
