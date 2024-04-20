@@ -67,7 +67,7 @@ const Footer = () => {
         </div>
         <div className="copyright">
           <div className="ecobazar-ecommerce">
-            FarmConnect © 2024. All Rights Reserved
+                    FarmConnect © 2024. All Rights Reserved
           </div>
           <div className="methodapplepay-parent">
             <img className="methodapplepay-icon" alt="" />
