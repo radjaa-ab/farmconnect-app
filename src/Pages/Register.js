@@ -143,18 +143,19 @@ function Register() {
               type="number" 
               value={age} 
               onChange={(e) => {
-                const newAge = parseInt(e.target.value);
-                if (newAge >= 16 && newAge <= 100) {
+                const newAge = parseInt(e.target.value, 10);
+                if (!isNaN(newAge) && newAge >= 16 && newAge <= 100) {
                   setAge(newAge);
                 } else {
-                  setAge(age);
+                  setAge(''); // Réinitialise le champ à une chaîne vide
                 }
               }} 
               placeholder={t("Age")}
               required 
             />
 
-            <select 
+            
+            <div className="additional-inputs"><select 
               value={ville} 
               onChange={(e) => setVille(e.target.value)} 
               required 
@@ -165,6 +166,7 @@ function Register() {
                 <option key={index} value={wilaya}>{wilaya}</option>
               ))}
             </select>
+            </div>
 
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("email")} required />
             <input type="password" value={passwordHash} onChange={(e) => setPasswordHash(e.target.value)} placeholder={t("password")} required />

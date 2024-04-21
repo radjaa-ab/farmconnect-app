@@ -4,6 +4,23 @@
     margin: 0 auto;
     padding: 20px;
   }
+  .icon-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .icon-container i {
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #333; /* You can change the color as per your design */
+  }
+  
+  .icon-container i:hover {
+    color: #555; /* You can change the hover color as per your design */
+  }
+  
   
   .nav-Feed {
     background-color: #f0f0f0;

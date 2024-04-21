@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Row, Col, Form, Button, Placeholder } from 'react-bootstrap';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { BsCameraVideoFill, BsImageFill } from 'react-icons/bs'; // Import icons
 import Post from '../Components/Post';
 import téléchargement from '../Components/téléchargement.jpg';
 import Navigation from '../Components/Navigation';
-import Footer from '../Components/footer'; // Make sure the path is correct
-import avatar from '../Components/avatar.png'
+import Footer from '../Components/footer';
+import avatar from '../Components/avatar.png';
 
 function Feed() {
   const { t } = useTranslation();
@@ -31,6 +32,26 @@ function Feed() {
     setNewPost('');
   };
 
+  const handleVideoClick = () => {
+    // Handle video icon click
+    console.log('Video icon clicked');
+    // Show the "Choose File" dialog for videos
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'video/*';
+    input.click();
+  };
+
+  const handleImageClick = () => {
+    // Handle image icon click
+    console.log('Image icon clicked');
+    // Show the "Choose File" dialog for images
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.click();
+  };
+
   return (
     <div className="Feed">
       <Row className="nav-Feed">
@@ -40,8 +61,8 @@ function Feed() {
         <Col md={4} className="post-container">
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="newPost">
-              <Form.Control className='Holder'
-                //Styles={{marginTop: '100px'}}
+              <Form.Control
+                className="Holder"
                 as="textarea"
                 rows={3}
                 placeholder={t('Write something...')}
@@ -50,13 +71,24 @@ function Feed() {
                 style={Styles.newPost}
               />
             </Form.Group>
+            <div className="icon-container">
+              <div className="icon" onClick={handleVideoClick}>
+                
+                <BsCameraVideoFill />
+                <span>Saisir vidéo</span>
+              </div>
+              <div className="icon" onClick={handleImageClick}>
+                <BsImageFill />
+                <span>Saisir photo</span>
+              </div>
+            </div>
             <Button variant="primary" type="submit" style={Styles.Button}>
               {t('Post')}
             </Button>
           </Form>
         </Col>
       </Row>
-      <Row style={{ ...Styles.postcontainer, margin: '0 auto', maxWidth: '1200px', marginLeft: '430px'}}>
+      <Row style={{ ...Styles.postcontainer, margin: '0 auto', maxWidth: '1200px', marginLeft: '430px' }}>
         <Col md={8} className="feed-container">
           {/* Iterate over posts array and render each post */}
           {posts.map((post) => (
@@ -74,10 +106,6 @@ const Styles = {
     marginTop: '30px',
     marginBottom: '20px',
   },
-  /*newPost: {
-    marginLeft: '20px',
-    width: '100%',
-  },*/
   Button: {
     marginLeft: '600px',
     color: 'white',
@@ -94,7 +122,6 @@ const Styles = {
     fontSize: '16px',
     marginTop: '50px',
   },
-  
 };
 
 export default Feed;
