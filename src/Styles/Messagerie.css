@@ -498,11 +498,9 @@
 /* Media query for larger devices */
 @media (min-width: 1200px) {
   .Navigation {
+    flex-shrink: 0;
     /* Additional styles for larger devices */
   }
-}
-.Navigation {
-  flex-shrink: 0; /* Ensure that the navigation bar does not shrink */
 }
 
 .container {

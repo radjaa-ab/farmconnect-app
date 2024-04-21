@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Navigation from './Navigation'; 
 
 const TermsAndConditions = () => {
   const { t, i18n } = useTranslation();
@@ -53,11 +54,13 @@ const TermsAndConditions = () => {
 
   return (
     <div className="terms-and-conditions">
-      <h1 style={{ textAlign: 'center', color: 'green' }}>{t('Terms and Conditions')}</h1>
-      <div style={{ margin: '0 auto', maxWidth: '600px' }}>
-        <p style={{ fontSize: '18px' }}>{terms[i18n.language]}</p>
-      </div>
+    <Navigation /> {/* Navigation bar */}
+    <h1>{t('Terms and Conditions')}</h1> {/* Heading */}
+    <div style={{ margin: '0 auto', maxWidth: '600px' }}>
+      <p style={{ fontSize: '18px' }}>{terms[i18n.language]}</p> {/* Terms content */}
     </div>
+  </div>
+  
   );
 };
 
