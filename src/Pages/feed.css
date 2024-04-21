@@ -1,0 +1,89 @@
+/* feed.css */
+
+.Feed {
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .nav-Feed {
+    background-color: #f0f0f0;
+    padding: 10px 0;
+  }
+  
+  .post-container {
+    margin-bottom: 20px;
+  }
+  
+  .post-container .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .holder {
+    width: 100%;
+  }
+  
+  .post-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .feed-container .post {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .feed-container .post .author {
+    font-weight: bold;
+  }
+  
+  .feed-container .post .date {
+    color: #888;
+  }
+  
+  .feed-container .post .content {
+    margin-top: 10px;
+  }
+  
+  .feed-container .post .media {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  .footer {
+    background-color: #f0f0f0;
+    padding: 20px 0;
+    text-align: center;
+  }
+  /* feed.css */
+
+.nav-Feed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: #f0f0f0;
+    padding: 10px 0;
+  }
+  
+  .Footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 20px 0;
+    text-align: center;
+    z-index: 1000; /* Ensure it's above other content */
+  }
+  
+  .Feed {
+    padding-top: 50px; /* Adjust according to navbar height */
+    padding-bottom: 70px; /* Adjust according to footer height */
+  }
+  
+  /* Other styles remain the same */
+  

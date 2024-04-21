@@ -7,12 +7,7 @@ import { Link } from 'react-router-dom';
 import TermsAndConditions from './Termes';
 
 const Footer = () => {
-    const showTermes = true; // Define showTermes here or assign a value based on some condition
-
-  const { t } = useTranslation(); // Using useTranslation hook to access t function
-  const changeLanguage = lng => {
-    i18n.changeLanguage(lng);
-  };
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-body-secondary text-light">
@@ -20,109 +15,49 @@ const Footer = () => {
         <div className="footer">
           <div className="company-wrapper">
             <div className="company">
-              <div className="logo2">
-                <div className="plant-1-container">
-                  <img
-                    className="plant-1-icon2"
-                    alt=""
-                    src="/plant-1-2.svg"
-                  />
-                </div>
-                <h1 className="ecobazar2">FarmConnect </h1>
-              </div>
+              <h1 className="ecobazar2">{t('FarmConnect')}</h1>
               <div className="morbi-cursus-porttitor">
-                Agricultural Products Rural System: FarmConnect Hub
-              </div>
-              <div className="cta">
-                <div className="button8">
-                  <div className="div21">(219) 555-0114</div>
-                </div>
-                <div className="or">or</div>
-                <div className="button9">
-                  <div className="proxygmailcom">Proxy@gmail.com</div>
-                </div>
+                {t('Système Rural de Produits Agricoles : Hub FarmConnect')}
               </div>
             </div>
           </div>
           <div className="my-account-wrapper">
             <div className="my-account">
-              <div className="my-account1">My Account</div>
+              <div className="my-account1">{t('Mon Compte')}</div>
               <div className="links">
-                <div className="my-account2">My Account</div>
-                <div className="order-history">Order History</div>
-                <div className="shoping-cart">Shoping Cart</div>
-                <div className="wishlist">Wishlist</div>
+                <div className="my-account2">{t('Mon Compte')}</div>
+                <div className="order-history">{t('Historique des Commandes')}</div>
               </div>
             </div>
           </div>
           <div className="help">
-  <div className="helps">Helps</div>
-  <div className="links1">
-    <div className="contact2">Contact</div>
-    <div className="faqs">Faqs</div>
-    <div className="terms-condition">
-    <Link to="/termes">Terms & Conditions</Link>
-    </div>
-    <div className="privacy-policy">Privacy Policy</div>
-  </div>
-</div>
-
-          <div className="proxy">
-            <div className="proxy1">Proxy</div>
-            <div className="links2">
-              <div className="about">About</div>
-              <div className="shop">Shop</div>
-              <div className="product">Product</div>
-              <div className="track-order">Track Order</div>
+            <div className="helps">{t('Aide')}</div>
+            <div className="links1">
+              <div className="contact2">{t('Contact')}</div>
+              <div className="faqs">{t('FAQs')}</div>
+              <div className="terms-condition">
+                <Link to="/termes" className="green-link">
+                  {t('Termes & Conditions')}
+                </Link>
+              </div>
+              <div className="privacy-policy">{t('Politique de Confidentialité')}</div>
             </div>
           </div>
-          <div className="categories14">
-            <div className="categories15">Categories</div>
-            <div className="links3">
-              <div className="fruit-vegetables">Fruit & Vegetables</div>
-              <div className="meat-fish">Meat & Fish</div>
-              <div className="bread-bakery">Bread & Bakery</div>
-              <div className="beauty-health">Beauty & Health</div>
+          <div className="proxy">
+            <div className="proxy1">{t('Proxy')}</div>
+            <div className="links2">
+              <div className="about">{t('À Propos')}</div>
+              <div className="shop">{t('Boutique')}</div>
+              <div className="product">{t('Produit')}</div>
             </div>
           </div>
         </div>
         <div className="copyright">
-          <div className="ecobazar-ecommerce">
-            FarmConnect © 2024. All Rights Reserved
-          </div>
-          <div className="methodapplepay-parent">
-            <img className="methodapplepay-icon" alt="" />
-            <img className="methodvisa-icon" alt="" />
-            <img className="methoddiscover-icon" alt="" />
-            <img className="methodmastercard-icon" alt="" />
-            <div className="cart2">
-              <div className="base" />
-              <img className="lock-1-icon" alt="" />
-              <div className="secure">Secure</div>
-              <div className="payment">Payment</div>
-            </div>
+          <div className="copyright-text">
+            {t('FarmConnect © 2024. Tous Droits Réservés')}
           </div>
         </div>
       </div>
-      <Container>
-        <Row>
-          <Col>
-            <div className="categories16">Categories</div>
-          </Col>
-          <Col>
-            <div className="fruit-vegetables1">Fruit & Vegetables</div>
-          </Col>
-          <Col>
-            <div className="meat-fish1">Meat & Fish</div>
-          </Col>
-          <Col>
-            <div className="bread-bakery1">Bread & Bakery</div>
-          </Col>
-          <Col>
-            <div className="beauty-health1">Beauty & Health</div>
-          </Col>
-        </Row>
-      </Container>
     </footer>
   );
 };

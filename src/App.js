@@ -9,12 +9,15 @@ import { getMessaging, onMessage, getToken } from 'firebase/messaging';
 import { messaging } from './firebase';
 import Panier from './Components/Panier';
 import Admin from './Dashboard/app.jsx';
+import Equipements from './Components/Equipements';
 import { HelmetProvider } from 'react-helmet-async';
 import Home from './Pages/Home';
-import SettingsPage from './Pages/SettingsPage';
+import Account from './Pages/Account';
 import Maain from './Pages/Maain';
 
 import TermsAndConditions from './Components/Termes.js'; // Import your TermsAndConditions component
+import sections from './Dashboard/routes/sections.jsx';
+import Feed from './Pages/Feed.js';
 
 async function requestPermission() {
   const permission = await Notification.requestPermission();
@@ -63,12 +66,15 @@ function App() {
             }
           />
           <Route path="/Home" element={<Home />} />
-          <Route path="/SettingsPage" element={<SettingsPage />} />
+          <Route path="/Account" element={<Account />} />
           <Route path="/Panier" element={<Panier />} />
           <Route path="/Maain" element={<Maain />} />
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Products" element={<Products />} />
           <Route path="/termes" element={<TermsAndConditions />} />
+          <Route path="/Equipements" element={<Equipements />} />
+          <Route path="/sections" element={<sections />} />
+          <Route path="/Feed" element={<Feed />} />
         </Routes>
       </Router>
     </HelmetProvider>

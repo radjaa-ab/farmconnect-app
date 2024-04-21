@@ -1,7 +1,5 @@
 {
   "hello": "Salut",
-  "Speciality : ":"Spécialité : ",
-  "Insert your file":"Insérez votre fichier : ", 
   "City":"Wilaya",
   "Age":"Age",
   "Insert your file:":"Inserer votre fichier :",
@@ -225,7 +223,7 @@
   "New window": "Nouvelle fenêtre",
   "terms of use": "conditions d'utilisation",
   "Success!": "Succès !",
-  "My account": "Mon compte",
+  "Myaccount": "Compte",
   "Account deletion": "Suppression du compte",
   "privacy policy here": "voir la politique de confidentialité ici",
   "Yes, delete my account": "Oui, supprimer mon compte",
