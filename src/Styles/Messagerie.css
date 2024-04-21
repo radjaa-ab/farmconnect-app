@@ -483,3 +483,29 @@
   background-color: #60b877;
   cursor: pointer;
 }
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure that the page takes at least the full height of the viewport */
+}
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+  .Navigation {
+    /* Additional styles for smaller devices */
+  }
+}
+
+/* Media query for larger devices */
+@media (min-width: 1200px) {
+  .Navigation {
+    /* Additional styles for larger devices */
+  }
+}
+.Navigation {
+  flex-shrink: 0; /* Ensure that the navigation bar does not shrink */
+}
+
+.container {
+  flex-grow: 1; /* Allow the container to grow to fill remaining space */
+}
+
