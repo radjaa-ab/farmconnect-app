@@ -28,22 +28,11 @@ const Post = ({ post }) => {
         )}
         {/* Add more interactive features like comments, likes, etc. */}
         {/* For now, just a simple button for demonstration */}
-      <div>
-       <Button variant="success" style={{ marginRight: '30px' }}>Like</Button>
-       <Button variant="success">Comment</Button>
-     </div>
-
+        <Button variant="success" className="mr-2">Like</Button>
+        <Button variant="success">Comment</Button>
       </Card.Body>
     </Card>
   );
 };
-
- StyleSheet = {
-  Button: {
-    width: '400px',
-
-  }
-};
-
 
 export default Post;
