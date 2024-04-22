@@ -9,7 +9,7 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 90%;
+    width: 100%;
   }
 
   .navbar .logo {
@@ -232,10 +232,7 @@
 .home {
   background-color: rgb(227, 227, 227);
   height: 100vh;
-  display: flex;
-  align-items: center;
   font-family: 'Roboto', sans-serif;
-  justify-content: center;
 }
 
 .home .container {

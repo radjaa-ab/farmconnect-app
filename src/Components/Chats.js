@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
@@ -13,14 +13,14 @@ const Chats = () => {
   useEffect(() => {
     if (currentUser && currentUser.uid) { // Add a check for currentUser existence
       const getChats = async () => {
-        const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-          console.log("Chats: doc.data(): ", doc.data());
-          setChats(doc.data());
-        });
-
-        return () => {
-          unsub();
-        };
+        const docSnapshot = await getDoc(doc(db, "userChats", currentUser.uid));
+        if (docSnapshot.exists()) {
+          const data = docSnapshot.data();
+          console.log("Chats: doc.data(): ", data);
+          setChats(data);
+        } else {
+          console.log("Le document userChats n'existe pas.");
+        }
       };
 
       getChats();
