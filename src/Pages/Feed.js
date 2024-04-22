@@ -23,39 +23,60 @@ function Feed() {
     // Add more posts as needed
   ]);
 
-  const [newPost, setNewPost] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('New Post:', newPost);
-    setNewPost('');
-  };
+    const [content, setContent] = useState('');
+    const [media, setMedia] = useState(null);
+  
+    const handleContentChange = (event) => {
+      setContent(event.target.value);
+    };
+  
+    const handleMediaChange = (event) => {
+      const file = event.target.files[0];
+      setMedia(file);
+    };
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      // Envoyer le contenu et les médias au backend ou effectuer une action appropriée
+      console.log('Contenu de la publication :', content);
+      console.log('Média de la publication :', media);
+      // Réinitialiser les états après soumission
+      setContent('');
+      setMedia(null);
+    };
+  
 
   return (
     <div className="Feed">
       <Row className="nav-Feed">
         <Navigation />
       </Row>
-      <Row style={{ ...Styles.postcontainer, margin: '0 auto', maxWidth: '1200px', marginLeft: '430px' }}>
-        <Col md={4} className="post-container">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="newPost">
-              <Form.Control className='Holder'
-                //Styles={{marginTop: '100px'}}
-                as="textarea"
-                rows={3}
-                placeholder={t('Write something...')}
-                value={newPost}
-                onChange={(e) => setNewPost(e.target.value)}
-                style={Styles.newPost}
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit" style={Styles.Button}>
-              {t('Post')}
-            </Button>
-          </Form>
-        </Col>
-      </Row>
+
+      <form onSubmit={handleSubmit} className='nouv'>
+      <textarea
+        value={content}
+        onChange={handleContentChange}
+        placeholder="Entrez votre publication ici..."
+        style={{
+          width: '765px',
+          minHeight: '100px',
+          padding: '10px',
+          fontSize: '16px',
+          marginBottom: '10px',
+          borderRadius: '5px',
+          border: '1px solid #ccc',
+          marginLeft:'445px'
+        }}
+      />
+      <input
+        type="file"
+        accept="image/*, video/*"
+        onChange={handleMediaChange}
+        style={{ marginBottom: '10px', marginLeft:'845px' }}
+      />
+      <button type="submit">Publier</button>
+    </form>
+      
       <Row style={{ ...Styles.postcontainer, margin: '0 auto', maxWidth: '1200px', marginLeft: '430px'}}>
         <Col md={8} className="feed-container">
           {/* Iterate over posts array and render each post */}
@@ -74,10 +95,6 @@ const Styles = {
     marginTop: '30px',
     marginBottom: '20px',
   },
-  /*newPost: {
-    marginLeft: '20px',
-    width: '100%',
-  },*/
   Button: {
     marginLeft: '600px',
     color: 'white',
@@ -94,6 +111,7 @@ const Styles = {
     fontSize: '16px',
     marginTop: '50px',
   },
+
   
 };
 
