@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { Row, Col, Form, Button, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { BsCameraVideoFill, BsImageFill } from 'react-icons/bs'; // Import icons
 import Post from '../Components/Post';
 import téléchargement from '../Components/téléchargement.jpg';
 import Navigation from '../Components/Navigation';
-import Footer from '../Components/footer';
-import avatar from '../Components/avatar.png';
+import Footer from '../Components/footer'; // Make sure the path is correct
+import avatar from '../Components/avatar.png'
 
 function Feed() {
   const { t } = useTranslation();
