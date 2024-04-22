@@ -1,5 +1,7 @@
 {
   "hello": "Salut",
+  "Speciality : ":"Spécialité : ",
+  "Insert your file":"Insérez votre fichier : ", 
   "vous": "Vous avez déjà un compte ?",
   "City":"Wilaya",
   "Age":"Age",
