@@ -37,9 +37,13 @@ function Navigation() {
   const handleEClick =  () => {
     navigate('/Equipements') ;// Redirigez l
   }
+
+  const handlePanClick =  () => {
+    navigate('/Panier') ;// Redirigez l
+  }
   // Fonction de gestion du clic sur l'image d'appel
   const handleCallClick = () => {
-    window.location.href = 'tel:0657783698'; // Appel vers le numéro 0657783698
+    navigate(""); // Appel vers le numéro 0657783698
   };
 
   return (
@@ -59,7 +63,7 @@ function Navigation() {
             <div style={{ padding: '7px'}}>
               <LanguageSelector />
             </div>
-            <Nav.Link  onClick={handlePClick}>
+            <Nav.Link  onClick={handlePanClick}>
               <img src={Cart} alt={t("cart")} style={{ width: '25px' }} />
             </Nav.Link>
             <Nav.Link onClick={handleCallClick}>
