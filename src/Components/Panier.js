@@ -15,9 +15,17 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import i18n from '../i18n';
+import { useNavigate } from "react-router-dom";
 
 export default function Panier() {
   const { t } = useTranslation();
+
+
+  const navigate = useNavigate();
+  
+  const handlecommander =  () => {
+    navigate("/Maain");
+  }
 
   return (
     <div>
@@ -91,9 +99,19 @@ export default function Panier() {
                         </MDBTypography>
                       </MDBCol>
                       <MDBCol lg="6">
-                        <MDBBtn className="mb-4" color="danger" size="md" waves="light" hover wavesEffect="on-hover">
-                          {t("Proceed to checkout")}
-                        </MDBBtn>
+                      <MDBBtn
+                        className="mb-4"
+                        color="success"
+                        size="md"
+                        waves="light"
+                        hover
+                        wavesEffect="on-hover"
+                        onClick={handlecommander} // Retirez les parenthèses
+                      >
+                        {t("Commander")}
+                      </MDBBtn>
+
+
                       </MDBCol>
                     </MDBRow>
                   </MDBCol>
