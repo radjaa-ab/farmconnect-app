@@ -24,24 +24,19 @@ function Navigation() {
   const ProductsPlaceholder = t("search for products");
 
   const navigate = useNavigate(); // Initialisez useNavigate
-
+  
   // Fonction de gestion du clic sur le lien des paramètres
   const handleSettingsClick = () => {
     navigate('/Account'); // Redirigez l'utilisateur vers la page des paramètres
   };
 
   const handlePClick =  () => {
-    navigate('/Products') ;// Redirigez l'utilisateur vers la page des produits
+    navigate('/Products') ;// Redirigez l
   }
 
   const handleEClick =  () => {
-    navigate('/Equipements') ;// Redirigez l'utilisateur vers la page des équipements
+    navigate('/Equipements') ;// Redirigez l
   }
-
-  const handleCartClick = () => {
-    console.log('Cart button clicked');
-    navigate('/Panier');
-  };
   // Fonction de gestion du clic sur l'image d'appel
   const handleCallClick = () => {
     window.location.href = 'tel:0657783698'; // Appel vers le numéro 0657783698
@@ -51,7 +46,7 @@ function Navigation() {
     <Navbar expand="lg" className='bg-body-tertiary'>
       <Container style={{ padding: "0%" }}>
         <Navbar.Brand href="/" className="d-flex align-items-center brand">
-          <Image src={Image} alt="image" />
+          <img src={Image} alt="image" />
           <span className="brand-text">FarmConnect</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -64,11 +59,11 @@ function Navigation() {
             <div style={{ padding: '7px'}}>
               <LanguageSelector />
             </div>
-            <Nav.Link onClick={handleCartClick}>
+            <Nav.Link  onClick={handlePClick}>
               <img src={Cart} alt={t("cart")} style={{ width: '25px' }} />
             </Nav.Link>
             <Nav.Link onClick={handleCallClick}>
-              <img src={Call} alt={t("call")} style={{ width: '25px' }} />
+              <img src={Call} alt="email us" style={{ width: '25px' }} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
