@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import Navigation from "./Navigation";
 import Footer from "./footer";
@@ -11,11 +11,37 @@ import {
   MDBCol,
   MDBContainer,
   MDBIcon,
-  MDBInput,
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+
+// Define the QuantityInput component separately
+const QuantityInput = ({ initialQuantity, onQuantityChange }) => {
+  const [quantity, setQuantity] = useState(initialQuantity); // Initialize quantity state
+
+  // Function to increment quantity
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  useEffect(() => {
+    onQuantityChange(quantity);
+  }, [quantity, onQuantityChange]);
+
+  return (
+    <div>
+      <input
+        type="number"
+        value={quantity}
+        min="1"
+        className="mb-0"
+        disabled
+      />
+      <button onClick={incrementQuantity}>Increment</button>
+    </div>
+  );
+};
 
 export default function Panier() {
   const { t } = useTranslation();
@@ -26,19 +52,29 @@ export default function Panier() {
   }
 
   const [cart, setCart] = useState([
-    { id: 1, name: "Product 1", price: 25 },
-    { id: 2, name: "Product 2", price: 30 },
+    { id: 1, name: "Product 1", price: 25, quantity: 1 },
+    { id: 2, name: "Product 2", price: 30, quantity: 1 },
     // Add more items to the cart as needed
   ]);
 
-  // Function to calculate subtotal
-  const calculateSubtotal = () => {
-    let subtotal = 0;
-    cart.forEach((product) => {
-      subtotal += product.price;
-    });
-    return subtotal;
+  // State to hold subtotal
+  const [subtotal, setSubtotal] = useState(0);
+
+  // Function to update quantity in cart
+  const handleQuantityChange = (productId, newQuantity) => {
+    setCart(cart.map(item => item.id === productId ? { ...item, quantity: newQuantity } : item));
   };
+
+  // Function to navigate to Products page
+  const addProduct = () => {
+    navigate("/Products");
+  };
+
+  useEffect(() => {
+    // Calculate subtotal whenever cart changes
+    let newSubtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    setSubtotal(newSubtotal);
+  }, [cart]);
 
   return (
     <div>
@@ -87,14 +123,8 @@ export default function Panier() {
                               <p className="mb-0 text-muted">{product.price} Da</p>
                             </div>
                             <div>
-                              <MDBInput
-                                type="number"
-                                value="1"
-                                min="1"
-                                className="mb-0"
-                                label={t("Quantity")}
-                                disabled
-                              />
+                              {/* Pass initialQuantity and onQuantityChange to QuantityInput component */}
+                              <QuantityInput initialQuantity={product.quantity} onQuantityChange={(newQuantity) => handleQuantityChange(product.id, newQuantity)} />
                             </div>
                           </div>
                         </MDBCol>
@@ -105,7 +135,7 @@ export default function Panier() {
                     <MDBRow className="mt-4">
                       <MDBCol lg="6">
                         <MDBTypography tag="h5">
-                          <a href="#!" className="text-body text-decoration-none">
+                          <a href="#!" className="text-body text-decoration-none" onClick={addProduct}>
                             <MDBIcon fas icon="long-arrow-alt-left me-2" /> {t("Add more products")}
                           </a>
                         </MDBTypography>
@@ -140,7 +170,7 @@ export default function Panier() {
               {t("Subtotal")}
             </MDBTypography>
             <MDBTypography tag="h5" className="fw-normal mb-0">
-              {calculateSubtotal()} Da
+              {subtotal} Da
             </MDBTypography>
           </MDBCol>
           <MDBCol md="6">

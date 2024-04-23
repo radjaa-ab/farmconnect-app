@@ -75,52 +75,41 @@ const App = () => {
   };
 
   const renderProducts = () => {
-  return (
-    <div className="grid grid-cols-1 gap-6 md:gap-8 px-4 md:px-6 max-w-xl mx-auto lg:max-w-none" style={{gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))'}}>
-      {products.map((product) => (
-        <div key={product.id} className="bg-white shadow-lg rounded-lg p-4">
-          <Link to="#" className="block">
-            <img
-              alt={product.name}
-              className="w-full h-40 object-cover rounded-lg mb-4"
-              src={product.image}
-            />
-          </Link>
-          <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-          <p className="text-gray-500 mb-4">{product.description}</p>
-          <div className="flex justify-between">
-            <Link
-              to="/"
-              className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-200"
-            >
-              Shop
-            </Link>
-            <button
-              onClick={() => addToCart(product)}
-              style={{
-                backgroundColor: 'green',
-                color: 'white',
-                padding: '0.5rem 1rem',
-                borderRadius: '0.25rem',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'background-color 0.2s ease-in-out',
-              }}
-            >
-              Add to Cart
-            </button>
+    return (
+      <div className="row">
+        {products.map((product, index) => (
+          <div key={index} className="col-lg-4 col-md-6 mb-4">
+            <div className="card">
+              <img
+                alt={product.name}
+                className="card-img-top"
+                src={product.image}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">{product.description}</p>
+                <p className="card-text">Price: {product.price} Da</p> {/* Displaying the price */}
+                <div className="d-flex justify-content-end align-items-center">
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="btn btn-success"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
+        ))}
+      </div>
+    );
+  };
+  
   return (
     <div className="min-h-screen">
       <Navigation />
       <section className="w-full py-12">
-        <div className="container px-4 md:px-6 mx-auto">
+        <div className="container">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
             <div className="grid gap-1">
               <h1 className="text-2xl font-bold tracking-tight text-center md:text-left">
@@ -131,7 +120,9 @@ const App = () => {
               </p>
             </div>
           </div>
-          {renderProducts()}
+          <div className="mt-8">
+            {renderProducts()}
+          </div>
         </div>
       </section>
       <Footer />
