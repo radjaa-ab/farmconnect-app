@@ -4,7 +4,14 @@ import { useState } from "react";
 import Navigation from '../Components/Navigation';
 import Footer from '../Components/footer';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
-
+import laitue from '../Images/laitue.jpg';
+import banane from '../Images/banane.jpg';
+import concombre from '../Images/concombre.jpg';
+import brocoli from '../Images/brocoli.jpg';
+import pomme from '../Images/toufa7.jpg';
+import carotte from '../Images/carotte.jpg';
+import patates from '../Images/patates.png';
+c
 
 const App = () => {
   const { t } = useTranslation(); 
@@ -15,56 +22,56 @@ const App = () => {
       name: 'Laitue',
       price: 50,
       description: 'Base de salade fraîche et croquante.',
-      image: 'https://via.placeholder.com/300',
+      image: laitue,
     },
     {
       id: 2,
       name: 'Concombres',
       price: 75,
       description: 'Ajout croquant et rafraîchissant aux salades et sandwichs.',
-      image: 'https://via.placeholder.com/300',
+      image: concombre,
     },
     {
       id: 3,
       name: 'Bananes',
       price: 100,
       description: 'En-cas pratique et sucré.',
-      image: 'https://via.placeholder.com/300',
+      image: banane,
     },
     {
       id: 4,
       name: 'Pommes de terre',
       price: 150,
       description: 'Légume racine polyvalent, idéal pour de nombreux plats.',
-      image: 'https://via.placeholder.com/300',
+      image: patates,
     },
     {
       id: 5,
       name: 'Oranges',
       price: 120,
       description: 'Fruit citrique riche en vitamine C et en saveur.',
-      image: 'https://via.placeholder.com/300',
+      image: orange,
     },
     {
       id: 6,
       name: 'Carottes',
       price: 200,
       description: 'Légume racine croquant et riche en nutriments.',
-      image: 'https://via.placeholder.com/300',
+      image: carotte,
     },
     {
       id: 7,
       name: 'Pommes',
       price: 250,
       description: 'Délicieuses et juteuses.',
-      image: 'https://via.placeholder.com/300',
+      image: pomme,
     },
     {
       id: 8,
       name: 'Brocoli',
       price: 150,
       description: 'Superaliment nutritif.',
-      image: 'https://via.placeholder.com/300',
+      image: brocoli,
     },
   ]);
 
@@ -80,7 +87,7 @@ const App = () => {
         {products.map((product, index) => (
           <div key={index} className="col-lg-4 col-md-6 mb-4">
             <div className="card">
-              <img
+            <img
                 alt={product.name}
                 className="card-img-top"
                 src={product.image}

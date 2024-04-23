@@ -4,8 +4,14 @@ import { useState } from "react";
 import Navigation from '../Components/Navigation';
 import Footer from '../Components/footer';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
-
-
+import tracteur from '../Images/tracteur.jpg';
+import souffleur from '../Images/souffleur.jpg';
+import charrues from '../Images/charrues.jpg';
+import semoir from '../Images/semoir.jpg';
+import faucheuse from '../Images/faucheuse.jpg';
+import moissonneuse from '../Images/Moissonneuse-batteuse.jpg';
+import epandeur from '../Images/Epandeur.jpg';
+import arrosage from '../Images/arrosage.jpg';
 const App = () => {
   const { t } = useTranslation(); 
 
@@ -13,58 +19,58 @@ const App = () => {
     {
       id: 1,
       name: 'tracteur',
-      price: 250,
+      price: 25000,
       description: 'Utilisé pour labourer et cultiver le sol.', // French for "Used for plowing and cultivating soil."
-      image: 'https://via.placeholder.com/300',
+      image: tracteur ,
     },
     {
       id: 2,
       name: 'Souffleur',
-      price: 150,
+      price: 150000,
       description: 'Utilisé pour souffler les feuilles et les débris.', // French for "Used for blowing leaves and debris."
-      image: 'https://via.placeholder.com/300',
+      image: souffleur,
     },
     {
       id: 3,
       name: 'Charrues',
-      price: 200,
+      price: 20000,
       description: 'Utilisé pour retourner et casser le sol.', // French for "Used for turning and breaking up soil."
-      image: 'https://via.placeholder.com/300',
+      image: charrues ,
     },
     {
       id: 4,
       name: 'Semoir',
-      price: 300,
+      price: 30000,
       description: 'Utilisé pour semer des graines.', // French for "Used for sowing seeds."
-      image: 'https://via.placeholder.com/300',
+      image: semoir,
     },
     {
       id: 5,
       name: 'Faucheuse',
-      price: 200,
+      price: 200000,
       description: 'Utilisé pour couper lherbe ou les cultures.', // French for "Used for cutting grass or crops."
-      image: 'https://via.placeholder.com/300',
+      image: faucheuse ,
     },
     {
       id: 6,
       name: 'Moissonneuse-batteuse',
-      price: 250,
+      price: 25000,
       description: 'Utilisé pour récolter et battre les cultures.', // French for "Used for harvesting and threshing crops."
-      image: 'https://via.placeholder.com/300',
+      image: moissonneuse ,
     },
     {
       id: 7,
       name: 'Epandeur',
-      price: 200,
+      price: 20000,
       description: 'Utilisé pour répandre de lengrais ou des graines.', // French for "Used for spreading fertilizer or seeds."
-      image: 'https://via.placeholder.com/300',
+      image: epandeur ,
     },
     {
       id: 8,
-      name: 'Presse à balles',
-      price: 300,
+      name: 'Arrosage automatique',
+      price: 30000,
       description: 'Utilisé pour comprimer lherbe ou la paille en balles.', // French for "Used for compressing hay or straw into bales."
-      image: 'https://via.placeholder.com/300',
+      image: arrosage,
     },
   ]);
   const [cart, setCart] = useState([]);
