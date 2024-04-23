@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
 import Footer from "./footer";
-import apple from '../Images/apple.png'
+import Checkout from "./Checkout"; // Import the Checkout component
+import apple from '../Images/apple.png';
 import {
   MDBBtn,
   MDBCard,
@@ -14,7 +16,6 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import { useNavigate } from "react-router-dom";
 
 // Define the QuantityInput component separately
 const QuantityInput = ({ initialQuantity, onQuantityChange }) => {
@@ -161,6 +162,9 @@ export default function Panier() {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
+
+      {/* Render the Checkout component */}
+      <Checkout />
 
       {/* Subtotal */}
       <MDBContainer className="py-5">
