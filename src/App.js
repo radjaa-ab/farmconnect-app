@@ -14,7 +14,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import Home from './Pages/Home';
 import Account from './Pages/Account';
 import Maain from './Pages/Maain';
-
 import TermsAndConditions from './Components/Termes.js'; // Import your TermsAndConditions component
 import sections from './Dashboard/routes/sections.jsx';
 import Feed from './Pages/Feed.js';

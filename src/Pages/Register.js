@@ -6,7 +6,7 @@ import LoginComponent from "./Login";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
-
+import { db } from '../firebase';
 
 const wilayas = [
   "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar", 
@@ -64,67 +64,61 @@ function Register() {
     setShowFileInput(["commerçant", "agriculteur", "ingenieur"].includes(selectedProfession));
   };
 
-  const handleSignUp = (e) => {
+  
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Vérifier que tous les champs obligatoires sont remplis
-    if (!idUser || age <= 0 || !ville || !email || !passwordHash || !profession) {
-        setError("Veuillez remplir tous les champs obligatoires.");
-        return;
-    }
-    // Vérifier la profession et spécifier la spécialité si c'est un ingénieur
-    if (profession === "ingenieur" && !specialite) {
-        setError("Veuillez spécifier la spécialité.");
-        return;
-    }
-    
-    // Créer un objet FormData pour envoyer les données au script PHP
-    const formData = new FormData();
-    formData.append('idUser', idUser);
-    formData.append('age', age);
-    formData.append('ville', ville);
-    formData.append('email', email);
-    formData.append('password', passwordHash);
-    formData.append('profession', profession);
-    if (profession === "ingenieur") {
-        formData.append('specialite', specialite);
-    }
-    if (profession === "consommateur") {
-        formData.append('justificatif', justificatif);
-    }
 
-    // Envoyer les données au script PHP avec fetch
-    fetch('Register.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la requête au serveur.');
-        }
-        return response.text();
-    })
-    .then(data => {
-        // Afficher un message de succès ou d'erreur en fonction de la réponse du serveur
-        if (data.startsWith('Erreur')) {
-            setError(data);
-        } else {
-            setSuccessMessage(data);
-            // Réinitialiser les champs du formulaire après une inscription réussie
-            setidUser("");
-            setAge(0);
-            setVille("");
-            setEmail("");
-            setPasswordHash("");
-            setProfession("");
-            setSpecialite("");
-            setJustificatif(null);
-            setShowFileInput(false);
-        }
-    })
-    .catch(error => {
-        setError(error.message);
-    });
-};
+    try {
+      // Ajout de l'utilisateur dans la collection "users"
+      await db.collection('users').add({
+        idUser: idUser,
+        age: age,
+        ville: ville,
+        justificatif: justificatif,
+        email: email,
+        motDePasseHash: passwordHash,
+        profession: profession
+      });
+
+      // Ajout de l'utilisateur dans la collection spécifique en fonction de sa profession
+      if (profession === "agriculteur") {
+        await db.collection('agriculteurs').add({
+          idUser: idUser
+        });
+      } else if (profession === "ingenieur") {
+        await db.collection('ingenieurs').add({
+          idUser: idUser,
+          specialite: specialite
+        });
+      } else if (profession === "commerçant") {
+        await db.collection('commercants').add({
+          idUser: idUser
+        });
+      } else if (profession === "consomateur") {
+        await db.collection('consommateurs').add({
+          idUser: idUser,
+          justificatif: justificatif ? 'present' : 'none' // Vérifie si un justificatif est présent
+        });
+      }
+
+      // Réinitialisation des champs après l'inscription réussie
+      setidUser("");
+      setAge(16);
+      setVille("");
+      setJustificatif(null);
+      setEmail("");
+      setPasswordHash("");
+      setProfession("");
+      setSpecialite("");
+      setShowFileInput(false);
+      setSuccessMessage("Inscription réussie !");
+      setError(null);
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error);
+      setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+      setSuccessMessage("");
+    }
+  };
 
 
   return (
