@@ -14,60 +14,59 @@ const App = () => {
       id: 1,
       name: 'tracteur',
       price: 250,
-      description: 'location only',
+      description: 'Utilisé pour labourer et cultiver le sol.', // French for "Used for plowing and cultivating soil."
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 2,
       name: 'Souffleur',
       price: 150,
-      description: 'prix negociable',
+      description: 'Utilisé pour souffler les feuilles et les débris.', // French for "Used for blowing leaves and debris."
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 3,
-      name: 'Carrots',
+      name: 'Charrues',
       price: 200,
-      description: 'Crunchy and packed with vitamins.',
+      description: 'Utilisé pour retourner et casser le sol.', // French for "Used for turning and breaking up soil."
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 4,
-      name: 'Spinach',
+      name: 'Semoir',
       price: 300,
-      description: 'Nutrient-dense leafy green.',
+      description: 'Utilisé pour semer des graines.', // French for "Used for sowing seeds."
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 5,
-      name: 'Tomatoes',
+      name: 'Faucheuse',
       price: 200,
-      description: 'Juicy and bursting with flavor.',
+      description: 'Utilisé pour couper lherbe ou les cultures.', // French for "Used for cutting grass or crops."
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 6,
-      name: 'Blueberries',
+      name: 'Moissonneuse-batteuse',
       price: 250,
-      description: 'Sweet and antioxidant-rich.',
+      description: 'Utilisé pour récolter et battre les cultures.', // French for "Used for harvesting and threshing crops."
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 7,
-      name: 'Avocado',
+      name: 'Epandeur',
       price: 200,
-      description: 'Creamy and nutrient-dense.',
+      description: 'Utilisé pour répandre de lengrais ou des graines.', // French for "Used for spreading fertilizer or seeds."
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 8,
-      name: 'Kale',
+      name: 'Presse à balles',
       price: 300,
-      description: 'Nutrient-packed leafy green.',
+      description: 'Utilisé pour comprimer lherbe ou la paille en balles.', // French for "Used for compressing hay or straw into bales."
       image: 'https://via.placeholder.com/300',
     },
   ]);
-
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
@@ -116,7 +115,7 @@ const App = () => {
                   {t('Equipements')}
                 </h1>
                 <p className="text-green-700 dark:text-gray-400 text-center md:text-left">
-                  {t('shop.description')}
+                  {t('A louer et a vendre')}
                 </p>
               </div>
             </div>

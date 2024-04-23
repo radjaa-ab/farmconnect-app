@@ -12,58 +12,58 @@ const App = () => {
   const [products, setProducts] = useState([
     {
       id: 1,
-      name: 'Apples',
-      price: 250,
-      description: 'Crisp and juicy goodness.',
+      name: 'Laitue',
+      price: 50,
+      description: 'Base de salade fraîche et croquante.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 2,
-      name: 'Broccoli',
-      price: 150,
-      description: 'Nutrient-packed superfood.',
+      name: 'Concombres',
+      price: 75,
+      description: 'Ajout croquant et rafraîchissant aux salades et sandwichs.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 3,
-      name: 'Carrots',
-      price: 200,
-      description: 'Crunchy and packed with vitamins.',
+      name: 'Bananes',
+      price: 100,
+      description: 'En-cas pratique et sucré.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 4,
-      name: 'Spinach',
-      price: 300,
-      description: 'Nutrient-dense leafy green.',
+      name: 'Pommes de terre',
+      price: 150,
+      description: 'Légume racine polyvalent, idéal pour de nombreux plats.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 5,
-      name: 'Tomatoes',
-      price: 200,
-      description: 'Juicy and bursting with flavor.',
+      name: 'Oranges',
+      price: 120,
+      description: 'Fruit citrique riche en vitamine C et en saveur.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 6,
-      name: 'Blueberries',
-      price: 250,
-      description: 'Sweet and antioxidant-rich.',
+      name: 'Carottes',
+      price: 200,
+      description: 'Légume racine croquant et riche en nutriments.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 7,
-      name: 'Avocado',
-      price: 200,
-      description: 'Creamy and nutrient-dense.',
+      name: 'Pommes',
+      price: 250,
+      description: 'Délicieuses et juteuses.',
       image: 'https://via.placeholder.com/300',
     },
     {
       id: 8,
-      name: 'Kale',
-      price: 300,
-      description: 'Nutrient-packed leafy green.',
+      name: 'Brocoli',
+      price: 150,
+      description: 'Superaliment nutritif.',
       image: 'https://via.placeholder.com/300',
     },
   ]);
@@ -116,7 +116,7 @@ const App = () => {
                 {t('Fruits et Légumes')}
               </h1>
               <p className="text-gray-500 dark:text-gray-400 text-center md:text-left">
-                {t('shop.description')}
+                {t('Frais et sains')}
               </p>
             </div>
           </div>
