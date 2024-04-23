@@ -92,13 +92,20 @@ function Login({ initialValues, onChange }) {
     signInWithPopup(auth, provider)
       .then(() => {
         alert("Connecté");
-        navigate("/Products");
+        navigate("/Account");
+  
+        // Vérifier si les informations de profil doivent être mises à jour
+        const user = auth.currentUser;
+        if (user.displayName === null || user.photoURL === null) {
+          alert("Veuillez mettre à jour vos informations de profil sur la page du compte.");
+        }
       })
       .catch((error) => {
         console.log(error);
         alert("Erreur lors de la connexion avec Google : " + error.message);
       });
   };
+  
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
