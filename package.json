@@ -59,9 +59,11 @@
     "react-i18next": "^14.1.0",
     "react-icons": "^5.1.0",
     "react-password-strength-bar": "^0.4.1",
+    "react-redux": "^9.1.1",
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
     "react-settings-pane": "^0.1.4",
+    "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^10.0.5",
     "react-transition-group": "^4.4.5",
     "simplebar-react": "^3.2.4",
@@ -104,5 +106,23 @@
   "shop": {
     "title": "Shop Green Produce",
     "description": "Find the freshest fruits and vegetables for a healthy lifestyle."
+  },
+  
+    "FarmConnect": "FarmConnect",
+    "Système Rural de Produits Agricoles : Hub FarmConnect": "Rural System of Agricultural Products: FarmConnect Hub",
+    "Mon Compte": "My Account",
+    "Historique des Commandes": "Order History",
+    "Aide": "Help",
+    "Contact": "Contact",
+    "FAQs": "FAQs",
+    "Termes & Conditions": "Terms & Conditions",
+    "Politique de Confidentialité": "Privacy Policy",
+    "Proxy": "Proxy",
+    "À Propos": "About",
+    "Boutique": "Shop",
+    "Produit": "Product",
+    "FarmConnect © 2024. Tous Droits Réservés": "FarmConnect © 2024. All Rights Reserved",
+    "main d'oeuvre": "translation in Arabic for main d'oeuvre"
   }
-}
+  
+

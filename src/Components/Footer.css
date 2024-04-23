@@ -45,11 +45,13 @@
 
 .ecobazar2 {
   margin: 0;
+  text-align: left; /* Aligning the text to the left */
 }
 
 .morbi-cursus-porttitor {
   margin-bottom: 2rem;
   color: #999;
+  text-align: left;
 }
 
 .cta {
@@ -98,19 +100,14 @@
 .my-account2,
 .order-history,
 .shoping-cart,
-.wishlist,
 .contact2,
 .faqs,
 .terms-condition,
 .privacy-policy,
 .about,
 .shop,
-.product,
-.track-order,
-.fruit-vegetables,
-.meat-fish,
-.bread-bakery,
-.beauty-health {
+.product
+ {
   margin-bottom: 0.5rem;
   color: #fff;
   cursor: pointer;

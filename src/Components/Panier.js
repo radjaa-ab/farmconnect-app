@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
-import Footer from "./footer"; // Assuming the path is correct
+import Footer from "./footer";
+import Checkout from "./Checkout"; // Import the Checkout component
+import apple from '../Images/apple.png';
 import {
   MDBBtn,
   MDBCard,
@@ -10,29 +13,88 @@ import {
   MDBCol,
   MDBContainer,
   MDBIcon,
-  MDBInput,
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import i18n from '../i18n';
-import { useNavigate } from "react-router-dom";
+
+// Define the QuantityInput component separately
+const QuantityInput = ({ initialQuantity, onQuantityChange }) => {
+  const [quantity, setQuantity] = useState(initialQuantity); // Initialize quantity state
+
+  // Function to increment quantity
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  useEffect(() => {
+    onQuantityChange(quantity);
+  }, [quantity, onQuantityChange]);
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <input
+        type="number"
+        value={quantity}
+        min="1"
+        className="mb-0"
+        disabled
+        style={{ width: '50px', marginRight: '10px' }}
+      />
+      <button
+        onClick={incrementQuantity}
+        style={{
+          backgroundColor: '#2ecc71',
+          color: '#fff',
+          border: 'none',
+          padding: '5px 10px',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          marginRight: '10px' // Add some space between the button and the input
+        }}
+      >
+        Increment
+      </button>
+      <MDBIcon icon="shoppingCart" style={{ fontSize: '2rem', color: '#2ecc71' }} />
+    </div>
+  );
+};
 
 export default function Panier() {
   const { t } = useTranslation();
-
-
   const navigate = useNavigate();
-  
-  const handlecommander =  () => {
-    navigate("/Maain");
+
+  const handleCommander = () => {
+    navigate("/Products"); // Navigate to the Products page
   }
+
+  const [cart, setCart] = useState([
+    { id: 1, name: "Product 1", price: 25, quantity: 1 },
+    { id: 2, name: "Product 2", price: 30, quantity: 1 },
+    // Add more items to the cart as needed
+  ]);
+
+  // State to hold subtotal
+  const [subtotal, setSubtotal] = useState(0);
+
+  // Function to update quantity in cart
+  const handleQuantityChange = (productId, newQuantity) => {
+    setCart(cart.map(item => item.id === productId ? { ...item, quantity: newQuantity } : item));
+  };
+
+  // Function to navigate to Products page
+  const addProduct = () => {
+    navigate("/Products");
+  };
+
+  useEffect(() => {
+    // Calculate subtotal whenever cart changes
+    let newSubtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+    setSubtotal(newSubtotal);
+  }, [cart]);
 
   return (
     <div>
-      {/* Navigation Bar */}
       <Navigation />
-
-      {/* Content */}
       <MDBContainer className="py-5">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="7">
@@ -40,80 +102,56 @@ export default function Panier() {
               <MDBCardBody className="p-4">
                 <MDBRow>
                   <MDBCol>
-                    <MDBTypography tag="h5">
-                      <a href="#!" className="text-body text-decoration-none">
-                        <MDBIcon fas icon="long-arrow-alt-left me-2" /> {t("Continue shopping")}
-                      </a>
-                   </MDBTypography>
-
-                    <hr className="my-4" style={{ borderColor: "#fff" }} />
-
-                    <div className="d-flex justify-content-between align-items-center mb-4">
-                      <div>
-                        <p className="mb-1 text-white">{t("Shopping cart")}</p>
-                        <p className="mb-0 text-white">{t("You have 4 items in your cart")}</p>
-                      </div>
-                      <div>
-                        <p>
-                          <span className="text-muted">{t("Sort by:")}</span>
-                          <a href="#!" className="text-white">
-                            {t("price")}
-                            <MDBIcon fas icon="angle-down" className="ms-2" />
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Cart items */}
-                    <MDBRow>
-                      <MDBCol lg="5">
-                        <MDBCardImage className="rounded" src="https://via.placeholder.com/150" alt="Product 1" />
-                      </MDBCol>
-                      <MDBCol lg="7">
-                        <div className="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h5 className="mb-0">{t("Product 1")}</h5>
-                            <p className="mb-0 text-muted">{t("$25")}</p>
-                          </div>
-                          <div>
-                            <MDBInput
-                              type="number"
-                              value="1"
-                              min="1"
-                              className="mb-0"
-                              label={t("Quantity")}
-                              disabled
-                            />
-                          </div>
-                        </div>
-                      </MDBCol>
-                    </MDBRow>
-
-                    {/* Add more products */}
-                    <MDBRow className="mt-4">
-                      <MDBCol lg="6">
-                        <MDBTypography tag="h5">
-                          <a href="#!" className="text-body text-decoration-none">
-                            <MDBIcon fas icon="long-arrow-alt-left me-2" /> {t("Add more products")}
-                          </a>
-                        </MDBTypography>
-                      </MDBCol>
-                      <MDBCol lg="6">
-                      <MDBBtn
-                        className="mb-4"
-                        color="success"
-                        size="md"
-                        waves="light"
-                        hover
-                        wavesEffect="on-hover"
-                        onClick={handlecommander} // Retirez les parenthèses
-                      >
-                        {t("Commander")}
-                      </MDBBtn>
-
-
-                      </MDBCol>
-                    </MDBRow>
+                  <MDBTypography tag="h5">
+                    <a href="/Products" className="text-body" style={{ textDecoration: 'none', color: '#2ecc71' }}>
+                      <MDBIcon fas icon="long-arrow-alt-left me-2" />
+                      Retour à la liste des produits
+                    </a>
+                  </MDBTypography>
+                  </MDBCol>
+                </MDBRow>
+                <hr className="my-4" />
+                <MDBRow className="my-4">
+                  {cart.map(item => (
+                    <MDBCol key={item.id} lg="12">
+                      <MDBRow className="my-3">
+                        <MDBCol lg="2">
+                          <MDBCardImage
+                            src={apple}
+                            alt="..."
+                            className="rounded"
+                            style={{ height: "60px", width: "60px" }}
+                          />
+                        </MDBCol>
+                        <MDBCol lg="7">
+                          <h5 className="mb-0">{item.name}</h5>
+                          <p className="mb-0">
+                            <small>Price: {item.price} Da</small>
+                          </p>
+                        </MDBCol>
+                        <MDBCol lg="3">
+                          <QuantityInput initialQuantity={item.quantity} onQuantityChange={(newQuantity) => handleQuantityChange(item.id, newQuantity)} />
+                        </MDBCol>
+                      </MDBRow>
+                    </MDBCol>
+                  ))}
+                </MDBRow>
+                <hr className="my-4" />
+                <MDBRow className="my-4">
+                  <MDBCol>
+                    <p className="mb-0">Subtotal: {subtotal} Da</p>
+                  </MDBCol>
+                </MDBRow>
+                <hr className="my-4" />
+                <MDBRow className="my-4">
+                  <MDBCol>
+                    <MDBBtn
+                      onClick={handleCommander}
+                      className="btn-lg w-100"
+                      style={{ backgroundColor: "#2ecc71", color: "#fff" }}
+                    >
+                      Commander
+                    </MDBBtn>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
@@ -121,25 +159,8 @@ export default function Panier() {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
-
-      {/* Subtotal */}
-      <MDBContainer className="py-5">
-        <MDBRow>
-          <MDBCol md="6">
-            <MDBTypography tag="h5" className="fw-bold mb-3" style={{ color: "#2ecc71" }}>
-              {t("Subtotal")}
-            </MDBTypography>
-            <MDBTypography tag="h5" className="fw-normal mb-0">
-              {t("price")}
-            </MDBTypography>
-          </MDBCol>
-          <MDBCol md="6">
-            
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-
-      {/* Footer */}
+      {/* Render the Checkout component */}
+      <Checkout />
       <Footer />
     </div>
   );
