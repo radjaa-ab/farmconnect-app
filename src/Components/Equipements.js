@@ -12,9 +12,9 @@ const App = () => {
   const [products, setProducts] = useState([
     {
       id: 1,
-      name: 'Apples',
+      name: 'tracteur',
       price: 250,
-      description: 'Crisp and juicy goodness.',
+      description: 'locnation only',
       image: 'https://via.placeholder.com/300',
     },
     {
