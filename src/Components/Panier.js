@@ -64,7 +64,7 @@ export default function Panier() {
   const navigate = useNavigate();
 
   const handleCommander = () => {
-    navigate("/Maain");
+    navigate("/Products"); // Navigate to the Products page
   }
 
   const [cart, setCart] = useState([
@@ -102,12 +102,12 @@ export default function Panier() {
               <MDBCardBody className="p-4">
                 <MDBRow>
                   <MDBCol>
-                    <MDBTypography tag="h5">
-                      <a href="#!" className="text-body text-decoration-none">
-                        <MDBIcon fas icon="long-arrow-alt-left me-2" />
-                        Retour à la liste des produits
-                      </a>
-                    </MDBTypography>
+                  <MDBTypography tag="h5">
+                    <a href="/Products" className="text-body" style={{ textDecoration: 'none', color: '#2ecc71' }}>
+                      <MDBIcon fas icon="long-arrow-alt-left me-2" />
+                      Retour à la liste des produits
+                    </a>
+                  </MDBTypography>
                   </MDBCol>
                 </MDBRow>
                 <hr className="my-4" />
