@@ -17,7 +17,7 @@ const Footer = () => {
             <div className="company">
               <h1 className="ecobazar2">{t('FarmConnect')}</h1>
               <div className="morbi-cursus-porttitor">
-                {t('Système Rural de Produits Agricoles : Hub FarmConnect')}
+                {t('Produits vegetales et Produits Agricoles')}
               </div>
             </div>
           </div>
