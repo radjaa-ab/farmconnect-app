@@ -76,7 +76,7 @@ function Feed() {
   <input
     className="somethingElse"
     style={{width:'720px', marginBottom:'20px', marginTop:'30px', height:'50px', marginLeft:'30px',borderRadius:'4px', border:'solid 2px green', background:'#d3f8d3'}}
-    placeholder="  Nouveau astuce ?"
+    placeholder="  Nouvelle astuce ?"
     aria-label="Créer une publication"
     type="text"
   />
