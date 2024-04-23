@@ -38,6 +38,10 @@ function Navigation() {
     navigate('/Account');
   };
 
+  const handlePanierClick = () => {
+    navigate('/Panier'); // Navigate to the correct route '/Panier'
+  };
+
   const handleCallClick = () => {
     window.location.href = 'tel:0657783698';
   };
@@ -62,7 +66,7 @@ function Navigation() {
             <Nav.Link onClick={handleAccountClick}>
               <FontAwesomeIcon icon={faUser} style={{ fontSize: '20px', marginRight: '10px' }} />
             </Nav.Link>
-            <Nav.Link onClick={handlePClick}>
+            <Nav.Link onClick={handlePanierClick}> {/* Attach handlePanierClick function to onClick event */}
               <img src={Cart} alt={t("cart")} style={{ width: '25px', marginRight: '10px' }} />
             </Nav.Link>
             <Nav.Link onClick={handleCallClick}>
