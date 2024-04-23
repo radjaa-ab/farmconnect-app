@@ -5,7 +5,10 @@ const Post = ({ post }) => {
   const { avatar, author, date, content, media } = post;
 
   return (
-    <Card className="mb-3">
+    <Card className="mb-3" 
+    style={{
+      border:'solid 2px green'
+    }}>
       <Card.Header style={{ width: '800px', display: 'flex', alignItems: 'center' }}>
        <img src={avatar} alt="Avatar" className="avatar mr-3" style={{marginRight:'10px', marginTop:'-1px', height:'50px', width:'50px'}} />
        <div>
@@ -28,11 +31,12 @@ const Post = ({ post }) => {
         )}
         {/* Add more interactive features like comments, likes, etc. */}
         {/* For now, just a simple button for demonstration */}
-        <Button variant="success" className="mr-2">Like</Button>
+        <Button variant="success" style={{ marginRight:'40px'}}>Like</Button>
         <Button variant="success">Comment</Button>
       </Card.Body>
     </Card>
   );
 };
+
 
 export default Post;
