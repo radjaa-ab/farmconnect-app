@@ -11,7 +11,7 @@ import brocoli from '../Images/brocoli.jpg';
 import pomme from '../Images/toufa7.jpg';
 import carotte from '../Images/carotte.jpg';
 import patates from '../Images/patates.png';
-c
+import orange from '../Images/orange.png';
 
 const App = () => {
   const { t } = useTranslation(); 
