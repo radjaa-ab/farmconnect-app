@@ -110,16 +110,16 @@ const App = () => {
       <Navigation />
       <section className="w-full py-12">
         <div className="container">
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 bg-green-100 p-8 rounded-lg">
-            <div className="grid gap-1">
-              <h1 className="text-2xl font-bold tracking-tight text-center md:text-left text-green-800">
-                {t('Equipements')}
-              </h1>
-              <p className="text-green-700 dark:text-gray-400 text-center md:text-left">
-                {t('shop.description')}
-              </p>
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 bg-green-100 p-8 rounded-lg">
+              <div className="grid gap-1">
+                <h1 className="text-2xl font-bold tracking-tight text-center md:text-left text-green-800">
+                  {t('Equipements')}
+                </h1>
+                <p className="text-green-700 dark:text-gray-400 text-center md:text-left">
+                  {t('shop.description')}
+                </p>
+              </div>
             </div>
-          </div>
 
           <div className="mt-8">
             {renderProducts()}

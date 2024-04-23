@@ -113,7 +113,7 @@ const App = () => {
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
             <div className="grid gap-1">
               <h1 className="text-2xl font-bold tracking-tight text-center md:text-left">
-                {t('shop.title')}
+                {t('Fruits et Légumes')}
               </h1>
               <p className="text-gray-500 dark:text-gray-400 text-center md:text-left">
                 {t('shop.description')}
