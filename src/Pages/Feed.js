@@ -8,7 +8,25 @@ import Footer from '../Components/footer'; // Make sure the path is correct
 import avatar from '../Components/avatar.png';
 
 function Feed() {
+  const [hoveringButton, setHoveringButton] = useState(null);
   const { t } = useTranslation();
+  const [hoveringButtonDirect, setHoveringButtonDirect] = useState(false);
+  const [hoveringButtonPoster, setHoveringButtonPoster] = useState(false);
+
+  const handleMouseEnterDirect = () => {
+    setHoveringButtonDirect(true);
+  };
+
+  const handleMouseLeaveDirect = () => {
+    setHoveringButtonDirect(false);
+  };
+
+  const handleMouseEnterPoster = () => {
+    setHoveringButtonPoster(true);
+  };
+
+  const handleMouseLeavePoster = () => {
+    setHoveringButtonPoster(false); };
 
   // Dummy data for posts (you can replace it with actual data from a database)
   const [posts, setPosts] = useState([
@@ -57,104 +75,33 @@ function Feed() {
   <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"></span>
   <input
     className="somethingElse"
-    style={{width:'720px', marginBottom:'20px', marginTop:'30px', height:'50px', marginLeft:'30px',borderRadius:'4px', border:'solid 2px green', background:'#c6fbc6'}}
+    style={{width:'720px', marginBottom:'20px', marginTop:'30px', height:'50px', marginLeft:'30px',borderRadius:'4px', border:'solid 2px green', background:'#d3f8d3'}}
     placeholder="  Nouveau astuce ?"
     aria-label="Créer une publication"
     type="text"
   />
   <div className="buttons" 
-  style={{marginLeft:'125px', marginBottom:'15px'}}>
+  style={{marginLeft:'400px', marginBottom:'15px'}}>
     <button onClick={() => document.getElementById('direct').click()}
-    style={
-      {
-        marginRight:'20px',
-        borderRadius:'8px',
-        border:'none',
-        background:'#099009',
-        color:'white',
-        width:'160px',
-        height:'35px'
-      }
-    }>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-red-500"
+     style={{
+      ...(hoveringButtonDirect ? Styles.buttonHover : Styles.Button),
+    }}
+    onMouseEnter={handleMouseEnterDirect}
+    onMouseLeave={handleMouseLeaveDirect}
       >
-        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
-        <circle cx="12" cy="13" r="3"></circle>
-      </svg>
-      <span>En direct</span>
+      <span>Photo/Video</span>
       <input type="file" id="direct" style={{ display: 'none' }} />
     </button>
-    <button onClick={() => document.getElementById('media').click()} className="media"
-    style={
-      {
-        marginRight:'20px',
-        borderRadius:'8px',
-        border:'none',
-        background:'#099009',
-        color:'white',
-        padding:'5px 10px',
-        width:'160px',
-        height:'35px'
-      }
-    }>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-green-500"
+    
+    <button onClick={() => document.getElementById('poster').click()}
+    type='submit'
+     style={{
+       ...(hoveringButtonPoster ? Styles.buttonHover : Styles.Button),
+     }}
+     onMouseEnter={handleMouseEnterPoster}
+     onMouseLeave={handleMouseLeavePoster}
       >
-        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
-        <circle cx="12" cy="13" r="3"></circle>
-      </svg>
-      <span>Photo / vidéo</span>
-      <input type="file" id="media" style={{ display: 'none' }} />
-    </button>
-    <button style={
-      {
-        marginRight:'20px',
-        borderRadius:'8px',
-        border:'none',
-        background:'#099009',
-        color:'white',
-        padding:'5px 10px',
-        width:'160px',
-        height:'35px'
-      }
-    }>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="text-yellow-500"
-      >
-        <circle cx="12" cy="12" r="10"></circle>
-        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-        <line x1="9" x2="9.01" y1="9" y2="9"></line>
-        <line x1="15" x2="15.01" y1="9" y2="9"></line>
-      </svg>
-      <span>Humeur / activité</span>
+      <span>Publier</span>
     </button>
   </div>
 </div>
@@ -189,12 +136,13 @@ const Styles = {
     marginBottom: '20px',
   },
   Button: {
-    marginLeft: '600px',
-    color: 'white',
-    backgroundColor: 'green',
-    width: '180px',
-    marginBottom: '30px',
-    marginTop: '20px',
+    marginRight:'20px',
+    borderRadius:'8px',
+    border:'none',
+    background:'#5bb35b',
+    color:'white',
+    width:'160px',
+    height:'35px',
   },
   newPost: {
     width: '780px',
@@ -203,6 +151,15 @@ const Styles = {
     borderRadius: '5px',
     fontSize: '16px',
     marginTop: '50px',
+  },
+  buttonHover: {
+    marginRight:'20px',
+    borderRadius:'8px',
+    border:'none',
+    backgroundColor: '#285728',
+    color: '#ffffff',
+    width:'160px',
+    height:'35px',
   },
 
   
