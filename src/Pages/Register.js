@@ -73,68 +73,17 @@ function Register() {
   
   const auth = getAuth(); // Récupère l'objet d'authentification Firebase
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // Créer l'utilisateur
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-
-      // Envoyer la vérification par e-mail
-      await sendEmailVerification(auth.currentUser);
-
-      // Créer un nom d'image unique
-      const date = new Date().getTime();
-      const storageRef = ref(storage, `${displayName + date}`);
-
-      // Télécharger l'image vers le stockage
-      await uploadBytesResumable(storageRef, userDetails.proof).then(() => {
-        // Obtenir l'URL de téléchargement de l'image
-        getDownloadURL(storageRef).then(async (downloadURL) => {
-          try {
-            // Mettre à jour le profil de l'utilisateur
-            await updateProfile(res.user, {
-              displayName,
-              photoURL: downloadURL,
-            });
-
-            // Créer l'utilisateur dans Firestore
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              displayName,
-              email,
-              photoURL: downloadURL,
-            });
-
-            // Créer des conversations utilisateur vides dans Firestore
-            await setDoc(doc(db, "userChats", res.user.uid), {});
-
-            // Naviguer vers "/"
-            navigate("/");
-
-            // Afficher le composant de connexion après une inscription réussie
-            setShowLoginForm(true);
-          } catch (err) {
-            console.error(err);
-            setErr(true);
-            setLoading(false);
-          }
-        });
-      });
-    } catch (err) {
-      console.error(err);
-      setErr(true);
-      setLoading(false);
-    }
-  };
-
 const handleSignUp = async (e) => {
   e.preventDefault();
 
   try {
-    // Ajout de l'utilisateur dans la collection "users"
-    await db.collection('users').add({
+
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    await sendEmailVerification(auth.currentUser);
+    const date = new Date().getTime();
+    const storageRef = ref(storage, `${displayName + date}`);
+    await setDoc(doc(db, "users", res.user.uid), {
+      uid: res.user.uid,
       idUser: idUser,
       age: age,
       ville: ville,
@@ -144,6 +93,12 @@ const handleSignUp = async (e) => {
       profession: profession
     });
 
+    await setDoc(doc(db, "userChats", res.user.uid), {});
+    navigate("/Products");
+    setShowLoginForm(true);
+
+
+    // Ajout de l'utilisateur dans la collection "users"
     // Connexion de l'utilisateur après l'inscription réussie
     await signInWithEmailAndPassword(auth, email, password);
 
@@ -167,19 +122,6 @@ const handleSignUp = async (e) => {
         justificatif: justificatif ? 'present' : 'none' // Vérifie si un justificatif est présent
       });
     }
-
-    // Réinitialisation des champs après l'inscription réussie
-    setidUser("");
-    setAge(16);
-    setVille("");
-    setJustificatif(null);
-    setEmail("");
-    setpassword("");
-    setProfession("");
-    setSpecialite("");
-    setShowFileInput(false);
-    setSuccessMessage("Inscription réussie !");
-    setError(null);
   } catch (error) {
     console.error("Erreur lors de l'inscription :", error);
     setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
@@ -198,7 +140,7 @@ const handleSignUp = async (e) => {
           <span className="logo">{t("registration")}</span>
           {error && <div className="error">{error}</div>}
           {successMessage && <div className="success">{successMessage}</div>}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSignUp}>
             <input type="text" value={idUser} onChange={(e) => setidUser(e.target.value)} placeholder={t("username")} required />
             <input 
               type="number" 
