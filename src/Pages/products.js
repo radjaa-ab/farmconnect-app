@@ -19,58 +19,58 @@ const App = () => {
   const [products, setProducts] = useState([
     {
       id: 1,
-      name: 'Laitue',
+      name: t("Laitue"),
       price: 50,
-      description: 'Base de salade fraîche et croquante.',
+      description: t("Base de salade fraîche et croquante."),
       image: laitue,
     },
     {
       id: 2,
-      name: 'Concombres',
+      name: t("Concombres"),
       price: 75,
-      description: 'Ajout croquant et rafraîchissant aux salades et sandwichs.',
+      description: t("Ajout croquant et rafraîchissant aux salades et sandwichs."),
       image: concombre,
     },
     {
       id: 3,
-      name: 'Bananes',
+      name: t("Concombres"),
       price: 100,
-      description: 'En-cas pratique et sucré.',
+      description: t("En-cas pratique et sucré."),
       image: banane,
     },
     {
       id: 4,
-      name: 'Pommes de terre',
+      name: t("Pommes de terre"),
       price: 150,
-      description: 'Légume racine polyvalent, idéal pour de nombreux plats.',
+      description: t("Légume racine polyvalent, idéal pour de nombreux plats."),
       image: patates,
     },
     {
       id: 5,
-      name: 'Oranges',
+      name: t("Oranges"),
       price: 120,
-      description: 'Fruit citrique riche en vitamine C et en saveur.',
+      description: t("Fruit citrique riche en vitamine C et en saveur."),
       image: orange,
     },
     {
       id: 6,
-      name: 'Carottes',
+      name: t("Carottes"),
       price: 200,
-      description: 'Légume racine croquant et riche en nutriments.',
+      description: t("Légume racine croquant et riche en nutriments."),
       image: carotte,
     },
     {
       id: 7,
-      name: 'Pommes',
+      name: ("Pommes"),
       price: 250,
-      description: 'Délicieuses et juteuses.',
+      description: t("Délicieuses et juteuses."),
       image: pomme,
     },
     {
       id: 8,
-      name: 'Brocoli',
+      name: t("Brocoli"),
       price: 150,
-      description: 'Superaliment nutritif.',
+      description: t("Superaliment nutritif."),
       image: brocoli,
     },
   ]);
@@ -95,13 +95,13 @@ const App = () => {
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">{product.description}</p>
-                <p className="card-text">Price: {product.price} Da</p> {/* Displaying the price */}
+                <p className="card-text">{t("price")}:{product.price} {t("Da")}</p> {/* Displaying the price */}
                 <div className="d-flex justify-content-end align-items-center">
                   <button
                     onClick={() => addToCart(product)}
                     className="btn btn-success"
                   >
-                    Add to Cart
+                    {t("Add to Cart")}
                   </button>
                 </div>
               </div>
@@ -120,7 +120,7 @@ const App = () => {
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
             <div className="grid gap-1">
               <h1 className="text-2xl font-bold tracking-tight text-center md:text-left">
-                {t('Fruits et Légumes')}
+                 {t('Fruits et Légumes')}
               </h1>
               <p className="text-gray-500 dark:text-gray-400 text-center md:text-left">
                 {t('Frais et sains')}
