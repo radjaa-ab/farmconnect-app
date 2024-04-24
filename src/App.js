@@ -73,6 +73,7 @@ function App() {
           <Route path="/termes" element={<TermsAndConditions />} />
           <Route path="/Equipements" element={<Equipements />} />
           <Route path="/sections" element={<sections />} />
+          <Route path="/maindoeuvre" element={<maindoeuvre />} />
           <Route path="/Feed" element={<Feed />} />
         </Routes>
       </Router>

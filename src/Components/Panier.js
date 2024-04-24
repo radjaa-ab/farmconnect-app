@@ -64,7 +64,7 @@ export default function Panier() {
   const navigate = useNavigate();
 
   const handleCommander = () => {
-    navigate("/Products"); // Navigate to the Products page
+    navigate("/Maain"); // Navigate to the Products page
   }
 
   const [cart, setCart] = useState([
@@ -83,7 +83,7 @@ export default function Panier() {
 
   // Function to navigate to Products page
   const addProduct = () => {
-    navigate("/Products");
+    navigate("/Maain");
   };
 
   useEffect(() => {
