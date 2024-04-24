@@ -22,29 +22,33 @@ function Navigation() {
     i18n.changeLanguage(lng);
   };
 
-  const ProductsPlaceholder = t("search for products");
-
   const navigate = useNavigate();
-
-  const handlePClick = () => {
-    navigate('/Products');
+  
+  const handleMaindoeuvreClick = () => {
+    navigate('/workforce');
   };
 
-  const handleEClick = () => {
-    navigate('/Equipements');
+  const handleProductsClick = () => {
+    navigate('/products');
+  };
+
+  const handleEquipementsClick = () => {
+    navigate('/equipements');
   };
 
   const handleAccountClick = () => {
-    navigate('/Account');
+    navigate('/account');
   };
 
   const handlePanierClick = () => {
-    navigate('/Panier'); // Navigate to the correct route '/Panier'
+    navigate('/panier');
   };
 
   const handleCallClick = () => {
-    window.location.href = 'tel:0657783698';
+    navigate('/ContactUs'); // Navigate to the correct route '/ContactUs'
   };
+
+  const ProductsPlaceholder = t("search for products");
 
   return (
     <Navbar expand="lg" className='bg-body-tertiary'>
@@ -56,9 +60,9 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
-            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handlePClick}>{t("main d'oeuvre")}</Nav.Link>
-            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handlePClick}>{t("products")}</Nav.Link>
-            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleEClick}>{t("equipements")}</Nav.Link>
+            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleMaindoeuvreClick}>{t("workforce")}</Nav.Link>
+            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleProductsClick}>{t("products")}</Nav.Link>
+            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleEquipementsClick}>{t("equipements")}</Nav.Link>
             <SearchBar placeholderText={ProductsPlaceholder} />
             <div style={{ padding: '7px'}}>
               <LanguageSelector />
@@ -66,11 +70,11 @@ function Navigation() {
             <Nav.Link onClick={handleAccountClick}>
               <FontAwesomeIcon icon={faUser} style={{ fontSize: '20px', marginRight: '10px' }} />
             </Nav.Link>
-            <Nav.Link onClick={handlePanierClick}> {/* Attach handlePanierClick function to onClick event */}
+            <Nav.Link onClick={handlePanierClick}>
               <img src={Cart} alt={t("cart")} style={{ width: '25px', marginRight: '10px' }} />
             </Nav.Link>
             <Nav.Link onClick={handleCallClick}>
-              <img src={Call} alt="email us" style={{ width: '25px' }} />
+              <img src={Call} alt="contact us" style={{ width: '25px' }} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
