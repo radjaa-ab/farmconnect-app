@@ -26,19 +26,40 @@ const QuantityInput = ({ initialQuantity, onQuantityChange }) => {
     setQuantity(quantity + 1);
   };
 
+  // Function to decrement quantity
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   useEffect(() => {
     onQuantityChange(quantity);
   }, [quantity, onQuantityChange]);
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
+      <button
+        onClick={decrementQuantity}
+        style={{
+          backgroundColor: '#e74c3c',
+          color: '#fff',
+          border: 'none',
+          padding: '8px', // Adjusted padding
+          borderRadius: '50%',
+          cursor: 'pointer',
+          marginRight: '10px'
+        }}
+      >
+        -
+      </button>
       <input
         type="number"
         value={quantity}
         min="1"
         className="mb-0"
         disabled
-        style={{ width: '50px', marginRight: '10px' }}
+        style={{ width: '50px', textAlign: 'center', marginRight: '10px' }}
       />
       <button
         onClick={incrementQuantity}
@@ -46,13 +67,13 @@ const QuantityInput = ({ initialQuantity, onQuantityChange }) => {
           backgroundColor: '#2ecc71',
           color: '#fff',
           border: 'none',
-          padding: '5px 10px',
-          borderRadius: '5px',
+          padding: '8px', // Adjusted padding
+          borderRadius: '50%',
           cursor: 'pointer',
-          marginRight: '10px' // Add some space between the button and the input
+          marginRight: '10px'
         }}
       >
-        Increment
+        +
       </button>
       <MDBIcon icon="shoppingCart" style={{ fontSize: '2rem', color: '#2ecc71' }} />
     </div>

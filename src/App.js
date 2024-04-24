@@ -79,7 +79,7 @@ function App() {
           <Route path="/sections" element={<sections />} />
           <Route path="/workforce" element={<Workforce />} />
           <Route path="/Feed" element={<Feed />} />
-          <Route path="/contactus" element={<ContactUs />} /> {/* Add ContactUs route */}
+          <Route path="/contactus" element={<ContactUs />} /> 
         </Routes>
       </Router>
     </HelmetProvider>

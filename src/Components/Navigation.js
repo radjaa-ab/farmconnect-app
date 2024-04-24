@@ -23,6 +23,7 @@ function Navigation() {
   };
 
   const navigate = useNavigate();
+  
   const handleMaindoeuvreClick = () => {
     navigate('/workforce');
   };
@@ -44,7 +45,7 @@ function Navigation() {
   };
 
   const handleCallClick = () => {
-    window.location.href = 'tel:0657783698';
+    navigate('/ContactUs'); // Navigate to the correct route '/ContactUs'
   };
 
   const ProductsPlaceholder = t("search for products");
@@ -65,7 +66,7 @@ function Navigation() {
             <SearchBar placeholderText={ProductsPlaceholder} />
             <div style={{ padding: '7px'}}>
               <LanguageSelector />
-           </div>
+            </div>
             <Nav.Link onClick={handleAccountClick}>
               <FontAwesomeIcon icon={faUser} style={{ fontSize: '20px', marginRight: '10px' }} />
             </Nav.Link>
@@ -73,7 +74,7 @@ function Navigation() {
               <img src={Cart} alt={t("cart")} style={{ width: '25px', marginRight: '10px' }} />
             </Nav.Link>
             <Nav.Link onClick={handleCallClick}>
-              <img src={Call} alt="email us" style={{ width: '25px' }} />
+              <img src={Call} alt="contact us" style={{ width: '25px' }} />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
