@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
@@ -14,9 +16,11 @@ import { HelmetProvider } from 'react-helmet-async';
 import Home from './Pages/Home';
 import Account from './Pages/Account';
 import Maain from './Pages/Maain';
+import Workforce from './Pages/workforce';
 import TermsAndConditions from './Components/Termes.js'; // Import your TermsAndConditions component
 import sections from './Dashboard/routes/sections.jsx';
 import Feed from './Pages/Feed.js';
+import ContactUs from './Components/ContactUs';
 
 async function requestPermission() {
   const permission = await Notification.requestPermission();
@@ -73,8 +77,9 @@ function App() {
           <Route path="/termes" element={<TermsAndConditions />} />
           <Route path="/Equipements" element={<Equipements />} />
           <Route path="/sections" element={<sections />} />
-          <Route path="/maindoeuvre" element={<maindoeuvre />} />
+          <Route path="/workforce" element={<Workforce />} />
           <Route path="/Feed" element={<Feed />} />
+          <Route path="/contactus" element={<ContactUs />} /> {/* Add ContactUs route */}
         </Routes>
       </Router>
     </HelmetProvider>

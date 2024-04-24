@@ -126,7 +126,7 @@ const App = () => {
             </div>
           </div>
           <div className="mt-8">
-            {renderEmployee()}
+            {renderEmployees()}
           </div>
         </div>
       </section>
