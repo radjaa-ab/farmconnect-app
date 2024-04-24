@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import Offline from '../Pages/Offline';
 import LoginComponent from "./Login";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
+import { auth, db, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
 
 const wilayas = [
   "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar", 
@@ -32,14 +35,17 @@ function Register() {
   const [ville, setVille] = useState(""); // Utilisez la liste des wilayas
   const [justificatif, setJustificatif] = useState(null); // Les données Blob peuvent être nulles initialement
   const [email, setEmail] = useState("");
-  const [passwordHash, setPasswordHash] = useState(""); // Ne pas stocker les mots de passe en texte brut
+  const [password, setpassword] = useState(""); // Ne pas stocker les mots de passe en texte brut
   const [error, setError] = useState(null); // État pour gérer les erreurs lors de l'inscription
   const [successMessage, setSuccessMessage] = useState(""); // État pour gérer le message de réussite
   const [showFileInput, setShowFileInput] = useState(false); // État initial pour la visibilité de l'entrée de fichier
   const [profession, setProfession] = useState(""); // État pour stocker la profession
   const [specialite, setSpecialite] = useState(""); // État pour stocker la spécialité de l'ingénieur
   const [showLoginForm, setShowLoginForm] = useState(false); // État pour afficher le formulaire de connexion
-
+  const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+  const [userDetails, setUserDetails] = useState({ profession: "", proof: null });
   useEffect(() => {
     const handleOnlineStatusChange = () => {
       setIsOnline(navigator.onLine);
@@ -64,68 +70,71 @@ function Register() {
     setShowFileInput(["commerçant", "agriculteur", "ingenieur"].includes(selectedProfession));
   };
 
-  const handleSignUp = (e) => {
+  
+  const auth = getAuth(); // Récupère l'objet d'authentification Firebase
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    // Vérifier que tous les champs obligatoires sont remplis
-    if (!idUser || age <= 0 || !ville || !email || !passwordHash || !profession) {
-        setError("Veuillez remplir tous les champs obligatoires.");
-        return;
+  
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(auth.currentUser);
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`);
+      
+      // Enregistrement dans la collection "users"
+      await setDoc(doc(db, "users", res.user.uid), {
+        uid: res.user.uid,
+        idUser: idUser,
+        age: age,
+        ville: ville,
+        justificatif: justificatif,
+        email: email,
+        motDePasseHash: password,
+        profession: profession
+      });
+  
+      // Sélection de la collection appropriée en fonction de la profession
+      let collectionName = '';
+      switch (profession) {
+        case 'Agriculteur':
+          collectionName = 'agriculteurs';
+          break;
+        case 'Ingenieur':
+          collectionName = 'ingenieurs';
+          break;
+        case 'Commercant':
+          collectionName = 'commercants';
+          break;
+        case 'Consommateur':
+          collectionName = 'consommateurs';
+          break;
+        default:
+          // Cas par défaut si la profession n'est pas reconnue
+          collectionName = 'consommateurs';
+          break;
+      }
+  
+      // Enregistrement dans la collection appropriée
+      await setDoc(doc(db, collectionName, res.user.uid), {
+        idUser: res.user.uid,
+        // Ajoutez d'autres champs spécifiques à chaque collection si nécessaire
+        ...(profession === 'Ingenieur' && { specialite: specialite }),
+        ...(profession === 'Consommateur' && { justificatif: 'none' })
+      });
+  
+      await setDoc(doc(db, "userChats", res.user.uid), {});
+      navigate("/Products");
+      setShowLoginForm(true);
+  
+      // Connexion de l'utilisateur après l'inscription réussie
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error);
+      setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+      setSuccessMessage("");
     }
-    // Vérifier la profession et spécifier la spécialité si c'est un ingénieur
-    if (profession === "ingenieur" && !specialite) {
-        setError("Veuillez spécifier la spécialité.");
-        return;
-    }
-    
-    // Créer un objet FormData pour envoyer les données au script PHP
-    const formData = new FormData();
-    formData.append('idUser', idUser);
-    formData.append('age', age);
-    formData.append('ville', ville);
-    formData.append('email', email);
-    formData.append('password', passwordHash);
-    formData.append('profession', profession);
-    if (profession === "ingenieur") {
-        formData.append('specialite', specialite);
-    }
-    if (profession === "consommateur") {
-        formData.append('justificatif', justificatif);
-    }
-
-    // Envoyer les données au script PHP avec fetch
-    fetch('Register.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la requête au serveur.');
-        }
-        return response.text();
-    })
-    .then(data => {
-        // Afficher un message de succès ou d'erreur en fonction de la réponse du serveur
-        if (data.startsWith('Erreur')) {
-            setError(data);
-        } else {
-            setSuccessMessage(data);
-            // Réinitialiser les champs du formulaire après une inscription réussie
-            setidUser("");
-            setAge(0);
-            setVille("");
-            setEmail("");
-            setPasswordHash("");
-            setProfession("");
-            setSpecialite("");
-            setJustificatif(null);
-            setShowFileInput(false);
-        }
-    })
-    .catch(error => {
-        setError(error.message);
-    });
-};
-
+  };
+  
 
   return (
     <>
@@ -169,8 +178,8 @@ function Register() {
             </div>
 
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t("email")} required />
-            <input type="password" value={passwordHash} onChange={(e) => setPasswordHash(e.target.value)} placeholder={t("password")} required />
-            <PasswordStrengthBar password={passwordHash} />
+            <input type="password" value={password} onChange={(e) => setpassword(e.target.value)} placeholder={t("password")} required />
+            <PasswordStrengthBar password={password} />
             <select value={profession} onChange={handleProfessionChange} required>
               <option value="">{t("Select a profession")}</option>
               <option value="commerçant">{t("merchant")}</option>

@@ -20,56 +20,57 @@ const App = () => {
       id: 1,
       name: 'tracteur',
       price: 25000,
-      description: 'Utilisé pour labourer et cultiver le sol.', // French for "Used for plowing and cultivating soil."
-      image: tracteur ,
+      description: t("Used for plowing and cultivating soil."), // French for "Used for plowing and cultivating soil."
+      image: tracteur,
     },
+    
     {
       id: 2,
       name: 'Souffleur',
       price: 150000,
-      description: 'Utilisé pour souffler les feuilles et les débris.', // French for "Used for blowing leaves and debris."
+      description: t("Used for blowing leaves and debris."), // French for "Used for blowing leaves and debris."
       image: souffleur,
     },
     {
       id: 3,
       name: 'Charrues',
       price: 20000,
-      description: 'Utilisé pour retourner et casser le sol.', // French for "Used for turning and breaking up soil."
+      description: t("Used for turning and breaking up soil."), // French for "Used for turning and breaking up soil."
       image: charrues ,
     },
     {
       id: 4,
       name: 'Semoir',
       price: 30000,
-      description: 'Utilisé pour semer des graines.', // French for "Used for sowing seeds."
+      description: t("Used for sowing seeds."), // French for "Used for sowing seeds."
       image: semoir,
     },
     {
       id: 5,
       name: 'Faucheuse',
       price: 200000,
-      description: 'Utilisé pour couper lherbe ou les cultures.', // French for "Used for cutting grass or crops."
+      description: t("Used for cutting grass or crops."), // French for "Used for cutting grass or crops."
       image: faucheuse ,
     },
     {
       id: 6,
       name: 'Moissonneuse-batteuse',
       price: 25000,
-      description: 'Utilisé pour récolter et battre les cultures.', // French for "Used for harvesting and threshing crops."
+      description: t("Used for harvesting and threshing crops."), // French for "Used for harvesting and threshing crops."
       image: moissonneuse ,
     },
     {
       id: 7,
       name: 'Epandeur',
       price: 20000,
-      description: 'Utilisé pour répandre de lengrais ou des graines.', // French for "Used for spreading fertilizer or seeds."
+      description: t("Used for spreading fertilizer or seeds."), // French for "Used for spreading fertilizer or seeds."
       image: epandeur ,
     },
     {
       id: 8,
       name: 'Arrosage automatique',
       price: 30000,
-      description: 'Utilisé pour comprimer lherbe ou la paille en balles.', // French for "Used for compressing hay or straw into bales."
+      description: t("Used for compressing hay or straw into bales."), // French for "Used for compressing hay or straw into bales."
       image: arrosage,
     },
   ]);
@@ -91,15 +92,15 @@ const App = () => {
                 src={product.image}
               />
               <div className="card-body">
-                <h5 className="card-title">{product.name}</h5>
+                <h5 className="card-title">{(product.name)}</h5>
                 <p className="card-text">{product.description}</p>
-                <p className="card-text">Price:{product.price} Da</p> {/* Displaying the price */}
+                <p className="card-text">{t("price")}:{product.price} {("Da")}</p> {/* Displaying the price */}
                 <div className="d-flex justify-content-end align-items-center">
                   <button
                     onClick={() => addToCart(product)}
                     className="btn btn-success"
                   >
-                    Add to Cart
+                    {t("Add to Cart")}
                   </button>
                 </div>
               </div>
@@ -118,7 +119,7 @@ const App = () => {
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 bg-green-100 p-8 rounded-lg">
               <div className="grid gap-1">
                 <h1 className="text-2xl font-bold tracking-tight text-center md:text-left text-green-800">
-                  {t('Equipements')}
+                  {t('equipements')}
                 </h1>
                 <p className="text-green-700 dark:text-gray-400 text-center md:text-left">
                   {t('A louer et a vendre')}

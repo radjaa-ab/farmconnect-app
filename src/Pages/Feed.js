@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Button, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import Post from '../Components/Post';
-import téléchargement from '../Components/téléchargement.jpg';
+import téléchargement from '../Components/tuto1.jpg';
 import Navigation from '../Components/Navigation';
 import Footer from '../Components/footer'; // Make sure the path is correct
 import avatar from '../Components/avatar.png';
+import avatar1 from '../Components/avatar2.png';
+import tuto from '../Components/tuto1.mp4';
+import avatar2 from '../Components/avatar1.jpg';
+import tuto1 from '../Components/tuto2.jpg'
 
 function Feed() {
   const [hoveringButton, setHoveringButton] = useState(null);
@@ -30,6 +34,7 @@ function Feed() {
 
   // Dummy data for posts (you can replace it with actual data from a database)
   const [posts, setPosts] = useState([
+    
     {
       id: 1,
       avatar: avatar,
@@ -37,6 +42,22 @@ function Feed() {
       date: 'April 19, 2024',
       content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       media: téléchargement, // Assuming téléchargement is the correct path to the image
+    },
+    {
+      id: 2,
+      avatar: avatar1,
+      author: 'Amr korso',
+      date: '23 Avril 2024',
+      content: 'Un tuto pour bien arroser des fleurs',
+      media: tuto, // Assuming téléchargement is the correct path to the image
+    },
+    {
+      id: 3,
+      avatar:avatar2,
+      author: 'John Doe',
+      date: '22 Mars 2024',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      media: tuto1,
     },
     // Add more posts as needed
   ]);

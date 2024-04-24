@@ -9,7 +9,7 @@ const Post = ({ post }) => {
     style={{
       border:'solid 2px green'
     }}>
-      <Card.Header style={{ width: '800px', display: 'flex', alignItems: 'center' }}>
+      <Card.Header style={{ width: '773px', display: 'flex', alignItems: 'center' }}>
        <img src={avatar} alt="Avatar" className="avatar mr-3" style={{marginRight:'10px', marginTop:'-1px', height:'50px', width:'50px'}} />
        <div>
          <h6 className="mb-0">{author}</h6>
@@ -31,8 +31,14 @@ const Post = ({ post }) => {
         )}
         {/* Add more interactive features like comments, likes, etc. */}
         {/* For now, just a simple button for demonstration */}
-        <Button variant="success" style={{ marginRight:'40px'}}>Like</Button>
-        <Button variant="success">Comment</Button>
+        <a href="mailto:nardjes.mzr@gmail.com" style={{textDecoration:'none'}}>
+        <Button 
+        style={{
+        display:'flex',
+        justifyContent:'center',
+        marginLeft:'255px',
+        }}
+        variant="success">Ask for more informations</Button> </a>
       </Card.Body>
     </Card>
   );
