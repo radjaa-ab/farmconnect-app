@@ -59,7 +59,7 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
-            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleMaindoeuvreClick}>{t("maindoeuvre")}</Nav.Link>
+            <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleMaindoeuvreClick}>{t("workforce")}</Nav.Link>
             <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleProductsClick}>{t("products")}</Nav.Link>
             <Nav.Link className="ms-3" style={{ marginRight: '1rem' }} onClick={handleEquipementsClick}>{t("equipements")}</Nav.Link>
             <SearchBar placeholderText={ProductsPlaceholder} />
