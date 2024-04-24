@@ -72,63 +72,69 @@ function Register() {
 
   
   const auth = getAuth(); // Récupère l'objet d'authentification Firebase
-
-const handleSignUp = async (e) => {
-  e.preventDefault();
-
-  try {
-
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    await sendEmailVerification(auth.currentUser);
-    const date = new Date().getTime();
-    const storageRef = ref(storage, `${displayName + date}`);
-    await setDoc(doc(db, "users", res.user.uid), {
-      uid: res.user.uid,
-      idUser: idUser,
-      age: age,
-      ville: ville,
-      justificatif: justificatif,
-      email: email,
-      motDePasseHash: password,
-      profession: profession
-    });
-
-    await setDoc(doc(db, "userChats", res.user.uid), {});
-    navigate("/Products");
-    setShowLoginForm(true);
-
-
-    // Ajout de l'utilisateur dans la collection "users"
-    // Connexion de l'utilisateur après l'inscription réussie
-    await signInWithEmailAndPassword(auth, email, password);
-
-    // Ajout de l'utilisateur dans la collection spécifique en fonction de sa profession
-    if (profession === "agriculteur") {
-      await db.collection('agriculteurs').add({
-        idUser: idUser
-      });
-    } else if (profession === "ingenieur") {
-      await db.collection('ingenieurs').add({
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(auth.currentUser);
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`);
+      
+      // Enregistrement dans la collection "users"
+      await setDoc(doc(db, "users", res.user.uid), {
+        uid: res.user.uid,
         idUser: idUser,
-        specialite: specialite
+        age: age,
+        ville: ville,
+        justificatif: justificatif,
+        email: email,
+        motDePasseHash: password,
+        profession: profession
       });
-    } else if (profession === "commerçant") {
-      await db.collection('commercants').add({
-        idUser: idUser
+  
+      // Sélection de la collection appropriée en fonction de la profession
+      let collectionName = '';
+      switch (profession) {
+        case 'Agriculteur':
+          collectionName = 'agriculteurs';
+          break;
+        case 'Ingenieur':
+          collectionName = 'ingenieurs';
+          break;
+        case 'Commercant':
+          collectionName = 'commercants';
+          break;
+        case 'Consommateur':
+          collectionName = 'consommateurs';
+          break;
+        default:
+          // Cas par défaut si la profession n'est pas reconnue
+          collectionName = 'consommateurs';
+          break;
+      }
+  
+      // Enregistrement dans la collection appropriée
+      await setDoc(doc(db, collectionName, res.user.uid), {
+        idUser: res.user.uid,
+        // Ajoutez d'autres champs spécifiques à chaque collection si nécessaire
+        ...(profession === 'Ingenieur' && { specialite: specialite }),
+        ...(profession === 'Consommateur' && { justificatif: 'none' })
       });
-    } else if (profession === "consomateur") {
-      await db.collection('consommateurs').add({
-        idUser: idUser,
-        justificatif: justificatif ? 'present' : 'none' // Vérifie si un justificatif est présent
-      });
+  
+      await setDoc(doc(db, "userChats", res.user.uid), {});
+      navigate("/Products");
+      setShowLoginForm(true);
+  
+      // Connexion de l'utilisateur après l'inscription réussie
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error);
+      setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+      setSuccessMessage("");
     }
-  } catch (error) {
-    console.error("Erreur lors de l'inscription :", error);
-    setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
-    setSuccessMessage("");
-  }
-};
-
+  };
+  
 
   return (
     <>
