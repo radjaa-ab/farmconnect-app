@@ -24,7 +24,7 @@ function Navigation() {
 
   const navigate = useNavigate();
   const handleMaindoeuvreClick = () => {
-    navigate('/maindoeuvre');
+    navigate('/workforce');
   };
 
   const handleProductsClick = () => {
