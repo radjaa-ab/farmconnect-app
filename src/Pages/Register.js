@@ -60,9 +60,17 @@ function Register() {
     };
   }, []);
 
+  
   const handleFileChange = (e) => {
-    setJustificatif(e.target.files[0]);
+    const { name, value, files } = e.target;
+    setJustificatif(files[0]);
+    setUserDetails((prevState) => ({
+      ...prevState,
+      [name]: name === "proof" ? files[0] : value,
+    }));
   };
+  
+  
 
   const handleProfessionChange = (e) => {
     const selectedProfession = e.target.value;
@@ -190,7 +198,7 @@ function Register() {
             {showFileInput && (
               <div>
                 <label >{t("Insert your file : ")}
-                  <input type="file" onChange={handleFileChange} required  />
+                <input type="file" name="proof" onChange={handleFileChange} required  />
                 </label>
               </div>
             )}
