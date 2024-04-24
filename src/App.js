@@ -14,7 +14,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Home from './Pages/Home';
 import Account from './Pages/Account';
 import Maain from './Pages/Maain';
-import workforce from './Pages/workforce';
+import Workforce from './Pages/workforce';
 import TermsAndConditions from './Components/Termes.js'; // Import your TermsAndConditions component
 import sections from './Dashboard/routes/sections.jsx';
 import Feed from './Pages/Feed.js';
@@ -74,7 +74,7 @@ function App() {
           <Route path="/termes" element={<TermsAndConditions />} />
           <Route path="/Equipements" element={<Equipements />} />
           <Route path="/sections" element={<sections />} />
-          <Route path="/workforce" element={<workforce />} />
+          <Route path="/workforce" element={<Workforce />} />
           <Route path="/Feed" element={<Feed />} />
         </Routes>
       </Router>
