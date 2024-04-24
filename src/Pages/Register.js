@@ -46,6 +46,7 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [userDetails, setUserDetails] = useState({ profession: "", proof: null });
+  
   useEffect(() => {
     const handleOnlineStatusChange = () => {
       setIsOnline(navigator.onLine);
@@ -60,7 +61,6 @@ function Register() {
     };
   }, []);
 
-  
   const handleFileChange = (e) => {
     const { name, value, files } = e.target;
     setJustificatif(files[0]);
@@ -69,8 +69,6 @@ function Register() {
       [name]: name === "proof" ? files[0] : value,
     }));
   };
-  
-  
 
   const handleProfessionChange = (e) => {
     const selectedProfession = e.target.value;
@@ -78,7 +76,6 @@ function Register() {
     setShowFileInput(["commerçant", "agriculteur", "ingenieur"].includes(selectedProfession));
   };
 
-  
   const auth = getAuth(); // Récupère l'objet d'authentification Firebase
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -142,7 +139,6 @@ function Register() {
       setSuccessMessage("");
     }
   };
-  
 
   return (
     <>
@@ -197,8 +193,8 @@ function Register() {
             </select>
             {showFileInput && (
               <div>
-                <label >{t("Insert your file : ")}
-                <input type="file" name="proof" onChange={handleFileChange} required  />
+                <label>{t("Insert your file : ")}
+                  <input type="file" name="proof" onChange={handleFileChange} required />
                 </label>
               </div>
             )}
