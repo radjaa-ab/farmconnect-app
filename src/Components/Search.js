@@ -31,7 +31,12 @@ const Search = () => {
 
       try {
         const querySnapshot = await getDocs(q);
-        const users = querySnapshot.docs.map((doc) => doc.data().displayName);
+        const users = querySnapshot.docs
+          .map((doc) => doc.data().displayName)
+          .filter((displayName) =>
+            displayName.toLowerCase().includes(username.toLowerCase())
+          ); // Filter results based on username match
+
         setSuggestions(users);
       } catch (error) {
         console.error("Error fetching suggestions: ", error);
