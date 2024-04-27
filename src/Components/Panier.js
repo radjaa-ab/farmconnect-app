@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 import Footer from "./footer";
 import Checkout from "./Checkout"; // Import the Checkout component
 import apple from '../Images/apple.png';
+import { db } from '../firebase'; // Import Firebase
 import {
   MDBBtn,
   MDBCard,
@@ -88,11 +89,7 @@ export default function Panier() {
     navigate("/Maain"); // Navigate to the Products page
   }
 
-  const [cart, setCart] = useState([
-    { id: 1, name: "Product 1", price: 25, quantity: 1 },
-    { id: 2, name: "Product 2", price: 30, quantity: 1 },
-    // Add more items to the cart as needed
-  ]);
+  const [cart, setCart] = useState([]);
 
   // State to hold subtotal
   const [subtotal, setSubtotal] = useState(0);
@@ -100,15 +97,37 @@ export default function Panier() {
   // Function to update quantity in cart
   const handleQuantityChange = (productId, newQuantity) => {
     setCart(cart.map(item => item.id === productId ? { ...item, quantity: newQuantity } : item));
+    updateCartItemQuantityFirestore(productId, newQuantity); // Update quantity in Firestore
   };
 
-  // Function to navigate to Products page
-  const addProduct = () => {
-    navigate("/Maain");
+  // Function to add an item to the cart in Firestore
+  const addToCartFirestore = (item) => {
+    db.collection("cart").add(item);
   };
 
+  // Function to fetch cart items from Firestore
+  const fetchCartItemsFirestore = async () => {
+    const snapshot = await db.collection("cart").get();
+    const cartItems = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    return cartItems;
+  };
+
+  // Function to update cart item quantity in Firestore
+  const updateCartItemQuantityFirestore = (cartItemId, newQuantity) => {
+    db.collection("cart").doc(cartItemId).update({ quantity: newQuantity });
+  };
+
+  // Fetch cart items when the component mounts
   useEffect(() => {
-    // Calculate subtotal whenever cart changes
+    const fetchCartItems = async () => {
+      const cartItems = await fetchCartItemsFirestore();
+      setCart(cartItems);
+    };
+    fetchCartItems();
+  }, []);
+
+  // Calculate subtotal whenever cart changes
+  useEffect(() => {
     let newSubtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
     setSubtotal(newSubtotal);
   }, [cart]);
@@ -126,7 +145,7 @@ export default function Panier() {
                   <MDBTypography tag="h5">
                     <a href="/Products" className="text-body" style={{ textDecoration: 'none', color: '#2ecc71' }}>
                       <MDBIcon fas icon="long-arrow-alt-left me-2" />
-                      Retour à la liste des produits
+                      {t('Back to Product List')}
                     </a>
                   </MDBTypography>
                   </MDBCol>
@@ -147,7 +166,7 @@ export default function Panier() {
                         <MDBCol lg="7">
                           <h5 className="mb-0">{item.name}</h5>
                           <p className="mb-0">
-                            <small>Price: {item.price} Da</small>
+                            <small>{t('Price')}: {item.price} Da</small>
                           </p>
                         </MDBCol>
                         <MDBCol lg="3">
@@ -160,7 +179,7 @@ export default function Panier() {
                 <hr className="my-4" />
                 <MDBRow className="my-4">
                   <MDBCol>
-                    <p className="mb-0">Subtotal: {subtotal} Da</p>
+                    <p className="mb-0">{t('Subtotal')}: {subtotal} Da</p>
                   </MDBCol>
                 </MDBRow>
                 <hr className="my-4" />
@@ -171,7 +190,7 @@ export default function Panier() {
                       className="btn-lg w-100"
                       style={{ backgroundColor: "#2ecc71", color: "#fff" }}
                     >
-                      Commander
+                      {t('Checkout')}
                     </MDBBtn>
                   </MDBCol>
                 </MDBRow>

@@ -1,9 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';// Import Link from react-router-dom
-import { useState } from "react"; 
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; 
+import { db } from '../firebase'; // Import Firebase
+
 import Navigation from '../Components/Navigation';
-import Footer from '../Components/footer';
-import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import Footer from '../Components/footer'; // Corrected import statement
+
 import laitue from '../Images/laitue.jpg';
 import banane from '../Images/banane.jpg';
 import concombre from '../Images/concombre.jpg';
@@ -61,7 +63,7 @@ const App = () => {
     },
     {
       id: 7,
-      name: ("Pommes"),
+      name: t("Pommes"),
       price: 250,
       description: t("Délicieuses et juteuses."),
       image: pomme,
@@ -75,10 +77,20 @@ const App = () => {
     },
   ]);
 
-  const [cart, setCart] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      const snapshot = await db.collection("cart").get();
+      const items = snapshot.docs.map((doc) => doc.data());
+      setCartItems(items);
+    };
+
+    fetchCartItems();
+  }, []);
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    db.collection("cart").add(product);
   };
 
   const renderProducts = () => {
@@ -87,7 +99,7 @@ const App = () => {
         {products.map((product, index) => (
           <div key={index} className="col-lg-4 col-md-6 mb-4">
             <div className="card">
-            <img
+              <img
                 alt={product.name}
                 className="card-img-top"
                 src={product.image}
@@ -95,7 +107,7 @@ const App = () => {
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">{product.description}</p>
-                <p className="card-text">{t("price")}:{product.price} {t("Da")}</p> {/* Displaying the price */}
+                <p className="card-text">{t("price")}:{product.price} {t("Da")}</p>
                 <div className="d-flex justify-content-end align-items-center">
                   <button
                     onClick={() => addToCart(product)}
@@ -111,7 +123,19 @@ const App = () => {
       </div>
     );
   };
-  
+
+  const renderCartItems = () => {
+    return (
+      <div>
+        {cartItems.map((item, index) => (
+          <div key={index}>
+            <p>{item.name} - {item.price}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -129,6 +153,10 @@ const App = () => {
           </div>
           <div className="mt-8">
             {renderProducts()}
+          </div>
+          <div className="mt-8">
+            <h2>{t('Cart')}</h2>
+            {renderCartItems()}
           </div>
         </div>
       </section>
